@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кузница персонажей Dolmenwood</title>
+<meta name="description" content="Генератор персонажей Dolmenwood по правилам Player's Book: честные броски, каталог персонажей, JSON для гейм-мастера и шпаргалка для новичка.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍄</text></svg>">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <b>🍄 Кузница персонажей</b>
+    <span>Dolmenwood · Player’s Book</span>
+  </div>
+  <nav class="nav">
+    <a href="#/generate" data-view="generate">Генератор</a>
+    <a href="#/catalog" data-view="catalog">Каталог</a>
+    <a href="#/rules" data-view="rules">Справочник</a>
+    <a href="#" id="btn-theme" title="Светлая / тёмная тема">◐</a>
+  </nav>
+</header>
+
+<main class="app" id="view"></main>
+
+<!-- Данные -->
+<script src="js/data/util.js"></script>
+<script src="js/data/glossary.js"></script>
+<script src="js/data/kindred-breggle.js"></script>
+<script src="js/data/kindred-elf.js"></script>
+<script src="js/data/kindred-grimalkin.js"></script>
+<script src="js/data/kindred-human.js"></script>
+<script src="js/data/kindred-mossling.js"></script>
+<script src="js/data/kindred-woodgrue.js"></script>
+<script src="js/data/classes.js"></script>
+<script src="js/data/magic.js"></script>
+<script src="js/data/equipment.js"></script>
+<script src="js/data/moon.js"></script>
+
+<!-- Логика -->
+<script src="js/dice.js"></script>
+<script src="js/portrait.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/storage.js"></script>
+
+<!-- Интерфейс -->
+<script src="js/ui/tooltips.js"></script>
+<script src="js/ui/dice-anim.js"></script>
+<script src="js/ui/view-generator.js"></script>
+<script src="js/ui/view-catalog.js"></script>
+<script src="js/ui/view-character.js"></script>
+<script src="js/ui/view-rules.js"></script>
+<script src="js/ui/app.js"></script>
+
+</body>
+</html>
