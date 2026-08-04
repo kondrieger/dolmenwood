@@ -1,0 +1,995 @@
+{
+  "schema": "dolmenwood-character/1",
+  "generatedAt": "2026-08-04T14:30:21.489Z",
+  "id": "dw_mser97ox_g893",
+  "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
+  "options": {
+    "mode": "kindredclass",
+    "abilityMethod": "3d6-in-order",
+    "moonSignRule": true,
+    "gender": "male"
+  },
+  "level": 1,
+  "xp": 0,
+  "status": "alive",
+  "abilities": {
+    "STR": 14,
+    "INT": 15,
+    "WIS": 13,
+    "DEX": 13,
+    "CON": 13,
+    "CHA": 12
+  },
+  "abilitiesRolled": {
+    "STR": 14,
+    "INT": 15,
+    "WIS": 13,
+    "DEX": 13,
+    "CON": 13,
+    "CHA": 12
+  },
+  "subPar": false,
+  "kindred": {
+    "id": "mossling",
+    "ru": "мослинг",
+    "en": "Mossling",
+    "type": "mortal",
+    "typeRu": "Смертный",
+    "size": "Small",
+    "sizeRu": "Малый",
+    "page": 48
+  },
+  "profile": {
+    "mode": "kindredclass",
+    "id": "mossling_kc",
+    "ru": "мослинг (род-класс)",
+    "en": "Mossling Kindred-Class",
+    "primeAbilities": [
+      "WIS",
+      "CON"
+    ],
+    "primeRu": "Телосложение и Мудрость",
+    "hitDie": "d6",
+    "aptitude": "semi-martial",
+    "aptitudeRu": "Полувоинская",
+    "armour": "Любая, включая щиты",
+    "weapons": "Малое и Среднее",
+    "page": 186
+  },
+  "mods": {
+    "STR": 1,
+    "INT": 1,
+    "WIS": 1,
+    "DEX": 1,
+    "CON": 1,
+    "CHA": 0
+  },
+  "xpModifier": 5,
+  "xpModifierBreakdown": {
+    "prime": 5,
+    "primeAbility": "Телосложение и Мудрость",
+    "lowestPrimeScore": 13,
+    "kindred": 0,
+    "total": 5
+  },
+  "magicResistance": 1,
+  "attack": 0,
+  "saves": {
+    "doom": 8,
+    "ray": 9,
+    "hold": 10,
+    "blast": 13,
+    "spell": 12
+  },
+  "xpForNextLevel": 2200,
+  "skills": {
+    "basic": {
+      "listen": 6,
+      "search": 6,
+      "survival": 6,
+      "survivalForaging": 5
+    },
+    "class": []
+  },
+  "languages": [
+    {
+      "ru": "Волдийский",
+      "en": "Woldish"
+    },
+    {
+      "ru": "Мульч",
+      "en": "Mulch"
+    },
+    {
+      "ru": "Каприс",
+      "en": "Caprice"
+    }
+  ],
+  "traits": {
+    "kindred": [],
+    "class": [
+      {
+        "ru": "Броня",
+        "en": "Armour",
+        "d": "Броню нужно подгонять под малый размер. мослинги предпочитают неметаллическую броню — из закалённой коры и сосновых шишек."
+      },
+      {
+        "ru": "Навыки мослинга",
+        "en": "Mossling Skills",
+        "d": "Выживание при собирательстве — цель 5."
+      },
+      {
+        "ru": "Сноровки",
+        "en": "Knacks",
+        "d": "Одна сноровка, выбранная или выброшенная при создании. Даёт новые умения на 1, 3, 5 и 7 уровнях."
+      },
+      {
+        "ru": "Стойкость",
+        "en": "Resilience",
+        "d": "Спасброски род-класса уже очень хороши; вдобавок +2 к спасброскам против грибных спор и ядов."
+      },
+      {
+        "ru": "Симбиотическая плоть",
+        "en": "Symbiotic Flesh",
+        "d": "На каждом уровне (включая 1-й) — случайная черта из таблицы Симбиотической плоти."
+      },
+      {
+        "ru": "Грибной симбиоз (с 4 ур.)",
+        "en": "Fungal Symbiosis (from Level 4)",
+        "d": "С 4 уровня мослинг может за 1 ход попытаться заключить симбиоз с невраждебным чудовищным грибом (уровнем минимум на 3 ниже своего), получив возможность применять его особые силы."
+      }
+    ]
+  },
+  "magic": {
+    "knack": {
+      "n": 5,
+      "ru": "Древознание",
+      "en": "Wood Kenning",
+      "d": "Пальцы мослинга чувствительны к тонким вибрациям дерева. Потратив 1 ход на касание деревянного предмета или ствола, мослинг может извлечь знание.",
+      "levels": [
+        {
+          "lv": 1,
+          "ru": "Чувство истории",
+          "en": "Sense history",
+          "d": "мослинг узнаёт имя создателя деревянного предмета или имя того, кто касался его последним."
+        },
+        {
+          "lv": 3,
+          "ru": "Чувство эмоций",
+          "en": "Sense emotions",
+          "d": "мослинг распознаёт последнюю сильную эмоцию, которую дерево впитало от разумного существа."
+        },
+        {
+          "lv": 5,
+          "ru": "Взгляд насквозь",
+          "en": "See beyond",
+          "d": "мослинг получает мгновенный образ того, что находится по ту сторону деревянной преграды (двери или стены)."
+        },
+        {
+          "lv": 7,
+          "ru": "Истинное имя",
+          "en": "True name",
+          "d": "мослинг узнаёт истинное имя дерева. Раз в день он может воззвать к одному дереву, чьё истинное имя знает, и увидеть его окрестности. Воззвание к погибшему дереву вызывает диковинное видение растительной загробной жизни."
+        }
+      ]
+    },
+    "symbioticFlesh": [
+      {
+        "ru": "Буйная поросль папоротника в паху.",
+        "en": "Radical fern growth around groin."
+      }
+    ]
+  },
+  "hp": {
+    "max": 5,
+    "current": 5,
+    "die": "d6",
+    "roll": 4,
+    "conMod": 1
+  },
+  "equipment": {
+    "armour": {
+      "id": "pinecone",
+      "kind": "armour",
+      "ru": "Шишечный доспех",
+      "en": "Pinecone",
+      "ac": 15,
+      "bulk": "medium",
+      "bulkRu": "Средняя",
+      "slots": 2,
+      "weight": 400,
+      "cost": 50
+    },
+    "shield": {
+      "id": "shield",
+      "ru": "Щит",
+      "en": "Shield",
+      "acBonus": 1,
+      "slots": 1,
+      "weight": 100,
+      "cost": 10
+    },
+    "weapons": [
+      {
+        "id": "club",
+        "kind": "weapon",
+        "ru": "Дубина",
+        "en": "Club",
+        "dmg": "1d4",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 3,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      },
+      {
+        "id": "shortsword",
+        "kind": "weapon",
+        "ru": "Короткий меч",
+        "en": "Shortsword",
+        "dmg": "1d6",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 7,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      }
+    ],
+    "equipped": [
+      {
+        "id": "clothes",
+        "ru": "Одежда, обычная",
+        "en": "Clothes, common",
+        "qty": 1,
+        "slots": 0,
+        "weight": 30,
+        "cost": 1,
+        "cat": "clothing",
+        "d": "Полный комплект одежды: шоссы, туника, рубаха, пояс, платье и т.п."
+      },
+      {
+        "id": "beltpouch",
+        "ru": "Поясной кошель",
+        "en": "Belt pouch",
+        "qty": 1,
+        "slots": 0,
+        "weight": 10,
+        "cost": 1,
+        "cat": "container",
+        "d": "Кожаный кошель, вмещает до 50 монет."
+      },
+      {
+        "id": "sack",
+        "ru": "Мешок",
+        "en": "Sack",
+        "qty": 1,
+        "slots": 0,
+        "weight": 5,
+        "cost": 1,
+        "cat": "container",
+        "d": "Большой мешковинный мешок, вмещает 600 монет / 10 слотов."
+      }
+    ],
+    "stowed": [
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "waterskin",
+        "ru": "Бурдюк",
+        "en": "Waterskin",
+        "qty": 1,
+        "slots": 1,
+        "weight": 50,
+        "cost": 1,
+        "cat": "container",
+        "d": "Кожаный сосуд на 2 пинты. Пустой весит 5 монет."
+      },
+      {
+        "id": "tinderbox",
+        "ru": "Огниво",
+        "en": "Tinder box",
+        "qty": 1,
+        "slots": 1,
+        "weight": 10,
+        "cost": 3,
+        "cat": "light",
+        "d": "Для разжигания огня, включая факелы. В опасной обстановке шанс 2 из 6 разжечь за раунд."
+      },
+      {
+        "id": "lantern",
+        "ru": "Фонарь (закрытый)",
+        "en": "Lantern (hooded)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 5,
+        "cat": "light",
+        "d": "Заслонки позволяют скрыть свет и защитить пламя. Сжигает флакон масла за 4 часа (24 хода). Свет в радиусе 30 футов."
+      },
+      {
+        "id": "twine",
+        "ru": "Бечёвка (клубок 100 футов)",
+        "en": "Twine (100' ball)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 10,
+        "cost": 1,
+        "cat": "tools",
+        "d": "Выдерживает до 300 монет веса."
+      },
+      {
+        "id": "ironspikes",
+        "ru": "Железные клинья (12)",
+        "en": "Iron spikes (12)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 60,
+        "cost": 1,
+        "cat": "tools",
+        "d": "Можно заклинить дверь открытой или закрытой, закрепить верёвку и т.д."
+      }
+    ],
+    "container": {
+      "id": "backpack",
+      "ru": "Рюкзак",
+      "en": "Backpack",
+      "qty": 1,
+      "slots": 0,
+      "weight": 50,
+      "cost": 4,
+      "cat": "container",
+      "d": "Кожаная сумка с лямками. Вмещает до 400 монет / 10 слотов."
+    },
+    "adventuringItems": [
+      "sack",
+      "lantern",
+      "twine",
+      "ironspikes"
+    ]
+  },
+  "gold": 7,
+  "trinket": {
+    "ru": "Лист, меняющийся с временами года: к зиме умирает, весной возрождается.",
+    "en": "A leaf that changes with the seasons, dying by winter only to rejuvenate in spring.",
+    "roll": 44
+  },
+  "ac": {
+    "value": 17,
+    "breakdown": [
+      "Шишечный доспех: базовый КБ 15",
+      "Щит: +1",
+      "Ловкость: +1"
+    ],
+    "situational": []
+  },
+  "speed": {
+    "value": 10,
+    "load": 802,
+    "maxLoad": 1600,
+    "overloaded": false,
+    "loadParts": [
+      "Шишечный доспех 400",
+      "Щит 100",
+      "Дубина 20",
+      "Короткий меч 20",
+      "Мешок 5",
+      "Рационы (сушёные, 1 день) 20",
+      "Рационы (сушёные, 1 день) 20",
+      "Бурдюк 50",
+      "Огниво 10",
+      "Фонарь (закрытый) 20",
+      "Бечёвка (клубок 100 футов) 10",
+      "Железные клинья (12) 60",
+      "Рюкзак 50",
+      "Монеты (7 зм) 7",
+      "Безделушка 10"
+    ],
+    "equipped": 5,
+    "stowed": 7
+  },
+  "alignment": {
+    "ru": "Закон",
+    "en": "Lawful",
+    "d": "Заслуживают доверия, верят в защиту других и действуют на благо группы. Соблюдают законы общества, стремятся к справедливости.",
+    "rolled": true,
+    "dice": {
+      "sides": 6,
+      "results": [
+        1
+      ],
+      "label": "мировоззрение",
+      "value": 1
+    }
+  },
+  "name": {
+    "ru": "Умбертоп Оддполип",
+    "en": "Umbertop Oddpolyp",
+    "first": {
+      "ru": "Умбертоп",
+      "en": "Umbertop"
+    },
+    "surname": {
+      "ru": "Оддполип",
+      "en": "Oddpolyp"
+    },
+    "style": null
+  },
+  "gender": "male",
+  "background": {
+    "ru": "Трактирщик",
+    "en": "Tavernkeep"
+  },
+  "details": {
+    "head": {
+      "label": "Голова",
+      "labelEn": "Head",
+      "ru": "Длинные сальные волосы",
+      "en": "Long greasy hair"
+    },
+    "face": {
+      "label": "Лицо",
+      "labelEn": "Face",
+      "ru": "Рот в дрожжевой пене",
+      "en": "Mouth foaming with yeast"
+    },
+    "body": {
+      "label": "Тело",
+      "labelEn": "Body",
+      "ru": "Дряблое",
+      "en": "Blubbery"
+    },
+    "speech": {
+      "label": "Речь",
+      "labelEn": "Speech",
+      "ru": "Чавкающая",
+      "en": "Squelchy"
+    },
+    "demeanour": {
+      "label": "Нрав",
+      "labelEn": "Demeanour",
+      "ru": "Суетливый",
+      "en": "Flustered"
+    },
+    "dress": {
+      "label": "Одежда",
+      "labelEn": "Dress",
+      "ru": "Свиная замша",
+      "en": "Pig suede"
+    },
+    "desires": {
+      "label": "Желание",
+      "labelEn": "Desires",
+      "ru": "Основать подземное царство",
+      "en": "Found underground realm"
+    },
+    "beliefs": {
+      "label": "Убеждение",
+      "labelEn": "Beliefs",
+      "ru": "Эль необходим для жизни",
+      "en": "Ale is essential for life"
+    }
+  },
+  "physical": {
+    "age": 62,
+    "lifespan": 480,
+    "heightInches": 48,
+    "heightCm": 122,
+    "heightImperial": "4'0\"",
+    "weightLbs": 169,
+    "weightKg": 77
+  },
+  "moonSign": {
+    "moon": "Рыцарская",
+    "phase": "растущая",
+    "en": "Knight's (W)",
+    "d": "+2 к Харизме (максимум 18) при взаимодействии со знатью."
+  },
+  "birthday": {
+    "month": "Харчмент",
+    "monthEn": "Harchment",
+    "monthN": 5,
+    "day": 6
+  },
+  "log": [
+    {
+      "i": 1,
+      "step": "abilities",
+      "label": "Сила (Strength)",
+      "notation": "3d6",
+      "dice": [
+        6,
+        6,
+        2
+      ],
+      "total": 14,
+      "result": "14",
+      "value": 14
+    },
+    {
+      "i": 2,
+      "step": "abilities",
+      "label": "Интеллект (Intelligence)",
+      "notation": "3d6",
+      "dice": [
+        5,
+        6,
+        4
+      ],
+      "total": 15,
+      "result": "15",
+      "value": 15
+    },
+    {
+      "i": 3,
+      "step": "abilities",
+      "label": "Мудрость (Wisdom)",
+      "notation": "3d6",
+      "dice": [
+        5,
+        2,
+        6
+      ],
+      "total": 13,
+      "result": "13",
+      "value": 13
+    },
+    {
+      "i": 4,
+      "step": "abilities",
+      "label": "Ловкость (Dexterity)",
+      "notation": "3d6",
+      "dice": [
+        4,
+        3,
+        6
+      ],
+      "total": 13,
+      "result": "13",
+      "value": 13
+    },
+    {
+      "i": 5,
+      "step": "abilities",
+      "label": "Телосложение (Constitution)",
+      "notation": "3d6",
+      "dice": [
+        3,
+        6,
+        4
+      ],
+      "total": 13,
+      "result": "13",
+      "value": 13
+    },
+    {
+      "i": 6,
+      "step": "abilities",
+      "label": "Харизма (Charisma)",
+      "notation": "3d6",
+      "dice": [
+        6,
+        3,
+        3
+      ],
+      "total": 12,
+      "result": "12",
+      "value": 12
+    },
+    {
+      "i": 7,
+      "step": "kindred",
+      "label": "Род",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "result": "мослинг (Mossling) — выбран игроком",
+      "manual": true
+    },
+    {
+      "i": 8,
+      "step": "class",
+      "label": "Род-класс",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "result": "мослинг (род-класс) (Mossling Kindred-Class) — выбран игроком",
+      "manual": true
+    },
+    {
+      "i": 9,
+      "step": "languages",
+      "label": "Дополнительный язык (за высокий Интеллект)",
+      "notation": "1d6",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Каприс"
+    },
+    {
+      "i": 10,
+      "step": "knack",
+      "label": "Сноровка мослинга (d6, стр. 112)",
+      "notation": "1d6",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Древознание"
+    },
+    {
+      "i": 11,
+      "step": "symbiotic",
+      "label": "Симбиотическая плоть (d20, стр. 49)",
+      "notation": "1d20",
+      "dice": [
+        14
+      ],
+      "total": 14,
+      "result": "Буйная поросль папоротника в паху."
+    },
+    {
+      "i": 12,
+      "step": "hp",
+      "label": "Хиты (1d6 + модификатор Телосложения)",
+      "notation": "1d6",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "4 +1 = 5 хитов"
+    },
+    {
+      "i": 13,
+      "step": "equipment",
+      "label": "Броня (d6)",
+      "notation": "1d6",
+      "dice": [
+        6
+      ],
+      "total": 6,
+      "result": "Шишечный доспех + Щит"
+    },
+    {
+      "i": 14,
+      "step": "equipment",
+      "label": "Оружие, бросок 1 (d6)",
+      "notation": "1d6",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Дубина"
+    },
+    {
+      "i": 15,
+      "step": "equipment",
+      "label": "Оружие, бросок 2 (d6)",
+      "notation": "1d6",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Короткий меч"
+    },
+    {
+      "i": 16,
+      "step": "equipment",
+      "label": "Приключенческий предмет 1 (d20)",
+      "notation": "1d20",
+      "dice": [
+        14
+      ],
+      "total": 14,
+      "result": "Мешок"
+    },
+    {
+      "i": 17,
+      "step": "equipment",
+      "label": "Приключенческий предмет 2 (d20)",
+      "notation": "1d20",
+      "dice": [
+        10
+      ],
+      "total": 10,
+      "result": "Фонарь (закрытый)"
+    },
+    {
+      "i": 18,
+      "step": "equipment",
+      "label": "Приключенческий предмет 3 (d20)",
+      "notation": "1d20",
+      "dice": [
+        14
+      ],
+      "total": 14,
+      "result": "Мешок — уже есть, перебрасываем"
+    },
+    {
+      "i": 19,
+      "step": "equipment",
+      "label": "Приключенческий предмет 3 (d20)",
+      "notation": "1d20",
+      "dice": [
+        20
+      ],
+      "total": 20,
+      "result": "Бечёвка (клубок 100 футов)"
+    },
+    {
+      "i": 20,
+      "step": "equipment",
+      "label": "Приключенческий предмет 4 (d20)",
+      "notation": "1d20",
+      "dice": [
+        9
+      ],
+      "total": 9,
+      "result": "Железные клинья (12)"
+    },
+    {
+      "i": 21,
+      "step": "equipment",
+      "label": "Безделушка рода (d100)",
+      "notation": "d100",
+      "dice": [
+        4,
+        4
+      ],
+      "total": 44,
+      "result": "Лист, меняющийся с временами года: к зиме умирает, весной возрождается."
+    },
+    {
+      "i": 22,
+      "step": "equipment",
+      "label": "Золото в поясном кошеле (3d6)",
+      "notation": "3d6",
+      "dice": [
+        2,
+        3,
+        2
+      ],
+      "total": 7,
+      "result": "7 зм"
+    },
+    {
+      "i": 23,
+      "step": "alignment",
+      "label": "Мировоззрение (d6: 1–2 Закон, 3–4 Нейтралитет, 5–6 Хаос)",
+      "notation": "1d6",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Закон"
+    },
+    {
+      "i": 24,
+      "step": "name",
+      "label": "Имя (d20)",
+      "notation": "1d20",
+      "dice": [
+        19
+      ],
+      "total": 19,
+      "result": "Умбертоп"
+    },
+    {
+      "i": 25,
+      "step": "name",
+      "label": "Фамилия (d20)",
+      "notation": "1d20",
+      "dice": [
+        16
+      ],
+      "total": 16,
+      "result": "Оддполип"
+    },
+    {
+      "i": 26,
+      "step": "background",
+      "label": "Прошлое (d20)",
+      "notation": "1d20",
+      "dice": [
+        17
+      ],
+      "total": 17,
+      "result": "Трактирщик"
+    },
+    {
+      "i": 27,
+      "step": "details",
+      "label": "Голова (d12)",
+      "notation": "1d12",
+      "dice": [
+        6
+      ],
+      "total": 6,
+      "result": "Длинные сальные волосы"
+    },
+    {
+      "i": 28,
+      "step": "details",
+      "label": "Лицо (d12)",
+      "notation": "1d12",
+      "dice": [
+        9
+      ],
+      "total": 9,
+      "result": "Рот в дрожжевой пене"
+    },
+    {
+      "i": 29,
+      "step": "details",
+      "label": "Тело (d12)",
+      "notation": "1d12",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Дряблое"
+    },
+    {
+      "i": 30,
+      "step": "details",
+      "label": "Речь (d12)",
+      "notation": "1d12",
+      "dice": [
+        10
+      ],
+      "total": 10,
+      "result": "Чавкающая"
+    },
+    {
+      "i": 31,
+      "step": "details",
+      "label": "Нрав (d12)",
+      "notation": "1d12",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Суетливый"
+    },
+    {
+      "i": 32,
+      "step": "details",
+      "label": "Одежда (d12)",
+      "notation": "1d12",
+      "dice": [
+        10
+      ],
+      "total": 10,
+      "result": "Свиная замша"
+    },
+    {
+      "i": 33,
+      "step": "details",
+      "label": "Желание (d12)",
+      "notation": "1d12",
+      "dice": [
+        8
+      ],
+      "total": 8,
+      "result": "Основать подземное царство"
+    },
+    {
+      "i": 34,
+      "step": "details",
+      "label": "Убеждение (d12)",
+      "notation": "1d12",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Эль необходим для жизни"
+    },
+    {
+      "i": 35,
+      "step": "physical",
+      "label": "Возраст (3d6 + 50)",
+      "notation": "3d6",
+      "dice": [
+        6,
+        4,
+        2
+      ],
+      "total": 12,
+      "result": "62 лет"
+    },
+    {
+      "i": 36,
+      "step": "physical",
+      "label": "Срок жизни",
+      "notation": "5d8×10",
+      "dice": [
+        8,
+        8,
+        1,
+        6,
+        5
+      ],
+      "total": 280,
+      "result": "480 лет"
+    },
+    {
+      "i": 37,
+      "step": "physical",
+      "label": "Рост (2d6 + 42 дюймов)",
+      "notation": "2d6",
+      "dice": [
+        4,
+        2
+      ],
+      "total": 6,
+      "result": "4'0\" (122 см)"
+    },
+    {
+      "i": 38,
+      "step": "physical",
+      "label": "Вес (2d20 + 150 фунтов)",
+      "notation": "2d20",
+      "dice": [
+        12,
+        7
+      ],
+      "total": 19,
+      "result": "169 фунтов (77 кг)"
+    },
+    {
+      "i": 39,
+      "step": "moonsign",
+      "label": "Лунный знак (d100, стр. 175)",
+      "notation": "d100",
+      "dice": [
+        3,
+        1
+      ],
+      "total": 31,
+      "result": ""
+    },
+    {
+      "i": 40,
+      "step": "birthday",
+      "label": "День рождения внутри фазы луны (1d13)",
+      "notation": "1d13",
+      "dice": [
+        6
+      ],
+      "total": 6,
+      "result": "6 Харчмент"
+    }
+  ],
+  "checksum": "19BBA216",
+  "portraitPrompt": {
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: long greasy hair; mouth foaming with yeast; blubbery. symbiotic growth: radical fern growth around groin. clothing: pig suede. carrying: pinecone, a shield, club, shortsword. profession: level 1 mossling, formerly a tavernkeep. demeanour: flustered. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 1 уровня (в прошлом — трактирщик). Внешность — голова: длинные сальные волосы; лицо: рот в дрожжевой пене; тело: дряблое. Одежда: свиная замша. Снаряжение: шишечный доспех, щит, дубина, короткий меч. Настроение: суетливый. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+  },
+  "updatedAt": "2026-08-04T14:30:37.247Z"
+}

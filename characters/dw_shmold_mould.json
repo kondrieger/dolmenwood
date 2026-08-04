@@ -1,0 +1,563 @@
+{
+  "schema": "dolmenwood-character/1",
+  "id": "dw_shmold_mould",
+  "generatedAt": "2026-08-04T00:00:00.000Z",
+  "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
+  "origin": "Внесён вручную с игрового VTT-листа, сверен с книгой. Файл восстановлен после случайного удаления.",
+  "options": {
+    "mode": "kindredclass",
+    "abilityMethod": "manual-entry",
+    "moonSignRule": true,
+    "gender": "male"
+  },
+  "level": 2,
+  "xp": 2200,
+  "xpForNextLevel": 4400,
+  "status": "alive",
+  "kindred": {
+    "id": "mossling",
+    "ru": "мослинг",
+    "en": "Mossling",
+    "type": "mortal",
+    "typeRu": "Смертный",
+    "size": "Small",
+    "sizeRu": "Малый",
+    "page": 48
+  },
+  "profile": {
+    "mode": "kindredclass",
+    "id": "mossling_kc",
+    "ru": "мослинг (род-класс)",
+    "en": "Mossling Kindred-Class",
+    "primeAbilities": [
+      "WIS",
+      "CON"
+    ],
+    "primeRu": "Телосложение и Мудрость",
+    "hitDie": "d6",
+    "aptitude": "semi-martial",
+    "aptitudeRu": "Полувоинская",
+    "armour": "Любая, включая щиты",
+    "weapons": "Малое и Среднее",
+    "page": 186
+  },
+  "abilities": {
+    "STR": 13,
+    "INT": 13,
+    "WIS": 14,
+    "DEX": 8,
+    "CON": 11,
+    "CHA": 11
+  },
+  "abilitiesRolled": {
+    "STR": 13,
+    "INT": 13,
+    "WIS": 14,
+    "DEX": 8,
+    "CON": 11,
+    "CHA": 11
+  },
+  "mods": {
+    "STR": 1,
+    "INT": 1,
+    "WIS": 1,
+    "DEX": -1,
+    "CON": 0,
+    "CHA": 0
+  },
+  "magicResistance": 1,
+  "xpModifier": 0,
+  "attack": 0,
+  "saves": {
+    "doom": 8,
+    "ray": 9,
+    "hold": 10,
+    "blast": 13,
+    "spell": 12
+  },
+  "hp": {
+    "max": 9,
+    "current": 9,
+    "die": "d6",
+    "roll": null,
+    "conMod": 0
+  },
+  "skills": {
+    "basic": {
+      "listen": 6,
+      "search": 6,
+      "survival": 6,
+      "survivalForaging": 5
+    },
+    "class": []
+  },
+  "languages": [
+    {
+      "ru": "Волдийский",
+      "en": "Woldish"
+    },
+    {
+      "ru": "Мульч",
+      "en": "Mulch"
+    }
+  ],
+  "traits": {
+    "kindred": [],
+    "class": [
+      {
+        "ru": "Броня",
+        "en": "Armour",
+        "d": "Броню нужно подгонять под малый размер. мослинги предпочитают неметаллическую броню — из закалённой коры и сосновых шишек."
+      },
+      {
+        "ru": "Навыки мослинга",
+        "en": "Mossling Skills",
+        "d": "Выживание при собирательстве — цель 5."
+      },
+      {
+        "ru": "Сноровки",
+        "en": "Knacks",
+        "d": "Одна сноровка, выбранная или выброшенная при создании. Даёт новые умения на 1, 3, 5 и 7 уровнях."
+      },
+      {
+        "ru": "Стойкость",
+        "en": "Resilience",
+        "d": "Спасброски род-класса уже очень хороши; вдобавок +2 к спасброскам против грибных спор и ядов."
+      },
+      {
+        "ru": "Симбиотическая плоть",
+        "en": "Symbiotic Flesh",
+        "d": "На каждом уровне (включая 1-й) — случайная черта из таблицы Симбиотической плоти."
+      },
+      {
+        "ru": "Грибной симбиоз (с 4 ур.)",
+        "en": "Fungal Symbiosis (from Level 4)",
+        "d": "С 4 уровня мослинг может за 1 ход попытаться заключить симбиоз с невраждебным чудовищным грибом (уровнем минимум на 3 ниже своего), получив возможность применять его особые силы."
+      }
+    ]
+  },
+  "magic": {
+    "knack": {
+      "n": 3,
+      "ru": "Корневой друг",
+      "en": "Root Friend",
+      "d": "Живя в подземных норах, мослинг развил острое сродство с корнями лесных растений.",
+      "levels": [
+        {
+          "lv": 1,
+          "ru": "Вопрос корню",
+          "en": "Root question",
+          "d": "Раз в день мослинг может задать корню один вопрос о его окрестностях. Корень правдиво отвечает 1d6 словами."
+        },
+        {
+          "lv": 3,
+          "ru": "Призыв кореньев",
+          "en": "Summon roots",
+          "d": "Раз в день мослинг может вызвать съедобные коренья на поверхность: 1d4 свежих рациона."
+        },
+        {
+          "lv": 5,
+          "ru": "Корневой приют",
+          "en": "Root respite",
+          "d": "Раз в день мослинг может укрыться в корнях дерева: его уносит под землю в корневую систему, где он может незамеченным пролежать до часа."
+        },
+        {
+          "lv": 7,
+          "ru": "Призыв корневой твари",
+          "en": "Summon root thing",
+          "d": "Раз в день мослинг вызывает из земли чудовищный корнеплод. Тварь прибывает за 1d6 раундов и повинуется 1d6 ходов, после чего убегает в подлесок."
+        }
+      ]
+    },
+    "symbioticFlesh": [
+      {
+        "ru": "В волосах растут съедобные грибы.",
+        "en": "Edible mushrooms growing in hair."
+      }
+    ]
+  },
+  "alignment": {
+    "ru": "Хаос",
+    "en": "Chaotic",
+    "d": "Лгут и используют других ради своих целей, не заботясь о благе группы. Легко нарушают законы и нормы, считая правила такими же произвольными, как их прихоти.",
+    "rolled": false
+  },
+  "name": {
+    "ru": "Шмолд Молд",
+    "en": "Shmold Mould",
+    "first": {
+      "ru": "Шмолд",
+      "en": "Shmold"
+    },
+    "surname": {
+      "ru": "Молд",
+      "en": "Mould"
+    }
+  },
+  "gender": "male",
+  "background": {
+    "ru": "Мховод",
+    "en": "Moss farmer"
+  },
+  "details": {
+    "head": {
+      "label": "Голова",
+      "labelEn": "Head",
+      "ru": "Без шеи",
+      "en": "No neck"
+    },
+    "face": {
+      "label": "Лицо",
+      "labelEn": "Face",
+      "ru": "Из ноздрей сочится фиолетовая слизь",
+      "en": "Nostrils ooze purple slime"
+    },
+    "body": {
+      "label": "Тело",
+      "labelEn": "Body",
+      "ru": "Обрубки-руки",
+      "en": "Stumpy arms"
+    },
+    "speech": {
+      "label": "Речь",
+      "labelEn": "Speech",
+      "ru": "Заикающаяся",
+      "en": "Stammering"
+    },
+    "demeanour": {
+      "label": "Нрав",
+      "labelEn": "Demeanour",
+      "ru": "Шумный",
+      "en": "Blustery"
+    },
+    "dress": {
+      "label": "Одежда",
+      "labelEn": "Dress",
+      "ru": "Ворсистый фетр",
+      "en": "Brushed felt"
+    },
+    "desires": {
+      "label": "Желание",
+      "labelEn": "Desires",
+      "ru": "Дюжина супругов",
+      "en": "A dozen spouses"
+    },
+    "beliefs": {
+      "label": "Убеждение",
+      "labelEn": "Beliefs",
+      "ru": "Эль необходим для жизни",
+      "en": "Ale is essential for life"
+    }
+  },
+  "physical": {
+    "age": 56,
+    "lifespan": 360,
+    "heightCm": 127,
+    "weightKg": 83,
+    "heightInches": 50,
+    "heightImperial": "4'2\"",
+    "weightLbs": 183
+  },
+  "moonSign": {
+    "moon": "Ухмыляющаяся",
+    "phase": "растущая",
+    "en": "Grinning (W)",
+    "d": "50% вероятность, что стражи-нежить не обращают на персонажа внимания. (Впрочем, при провокации ведут себя как обычно.)"
+  },
+  "birthday": {
+    "month": "Гримволд",
+    "monthEn": "Grimvold",
+    "monthN": 1,
+    "day": 12
+  },
+  "gold": 318,
+  "coins": {
+    "copper": 0,
+    "silver": 0,
+    "gold": 318,
+    "pellucidium": 0
+  },
+  "trinket": {
+    "ru": "Заплесневелый гобелен с охотой на свинью мифических размеров.",
+    "en": "A mould-riddled tapestry depicting the hunt for a swine of mythic size.",
+    "roll": 47
+  },
+  "equipment": {
+    "armour": {
+      "id": "bark",
+      "kind": "armour",
+      "ru": "Корьевой доспех",
+      "en": "Bark",
+      "ac": 13,
+      "bulk": "light",
+      "bulkRu": "Лёгкая",
+      "slots": 1,
+      "weight": 300,
+      "cost": 30
+    },
+    "shield": {
+      "id": "shield",
+      "ru": "Щит",
+      "en": "Shield",
+      "acBonus": 1,
+      "slots": 1,
+      "weight": 100,
+      "cost": 10
+    },
+    "weapons": [
+      {
+        "id": "shortsword",
+        "kind": "weapon",
+        "ru": "Короткий меч",
+        "en": "Shortsword",
+        "dmg": "1d6",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 7,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      },
+      {
+        "id": "crookhorn_spear",
+        "kind": "weapon",
+        "ru": "Крукхорнское копьё",
+        "en": "Crookhorn Spear",
+        "dmg": "1d6",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 30,
+        "cost": null,
+        "qual": [
+          "brace",
+          "melee",
+          "missile"
+        ],
+        "range": "20/40/60",
+        "custom": true,
+        "special": "ОСОБОЕ: при попадании жертва делает спасбросок против Рока (Save vs Doom). Трофей, добытый в игре."
+      },
+      {
+        "id": "club",
+        "kind": "weapon",
+        "ru": "Дубина",
+        "en": "Club",
+        "dmg": "1d4",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 3,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      }
+    ],
+    "equipped": [
+      {
+        "id": "waterskin",
+        "ru": "Бурдюк",
+        "en": "Waterskin",
+        "qty": 1,
+        "slots": 1,
+        "weight": 50,
+        "cost": 1,
+        "cat": "container",
+        "d": "Кожаный сосуд на 2 пинты. Пустой весит 5 монет."
+      },
+      {
+        "id": "ironspikes",
+        "ru": "Железные клинья (12)",
+        "en": "Iron spikes (12)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 60,
+        "cost": 1,
+        "cat": "tools",
+        "d": "Можно заклинить дверь открытой или закрытой, закрепить верёвку и т.д."
+      },
+      {
+        "id": "chisel",
+        "ru": "Зубило",
+        "en": "Chisel",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "tools",
+        "d": "Используется с молотком для откалывания камня."
+      },
+      {
+        "id": "tinderbox",
+        "ru": "Огниво",
+        "en": "Tinder box",
+        "qty": 1,
+        "slots": 1,
+        "weight": 10,
+        "cost": 3,
+        "cat": "light",
+        "d": "Для разжигания огня, включая факелы. В опасной обстановке шанс 2 из 6 разжечь за раунд."
+      },
+      {
+        "id": "marbles",
+        "ru": "Шарики (мешок, 20)",
+        "en": "Marbles (bag of 20)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 1,
+        "cat": "tools",
+        "d": "Мешочек мелких цветных стеклянных шариков."
+      }
+    ],
+    "stowed": [
+      {
+        "id": "tent",
+        "ru": "Палатка",
+        "en": "Tent",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 20,
+        "cat": "camp",
+        "d": "Достаточно велика для двоих."
+      },
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "burglars_mix",
+        "ru": "Взломщицкая смесь",
+        "en": "Burglar's mix",
+        "qty": 3,
+        "slots": 1,
+        "weight": 1,
+        "cost": null,
+        "cat": "foraged",
+        "d": "Собрано в игре. Вес 1 монета за штуку."
+      }
+    ],
+    "container": null,
+    "adventuringItems": []
+  },
+  "notes": "ХРОНИКА\n\nПохитили и вернули сына свинопаса Ардак. Юг от Дрега в 1111 находится Друменский холм, в западной части.\nНа холме развалина небольшого форта. Как говорят подростки, это фейский форт. Фей нет, но если\nподкрадываешься — слышишь музыку из флейты. Арда пошёл послушать, и его сцапали кривороги.\nДержали 3 дня, не кормили. Внутри форта есть альков в подземелье.\nСвинопасы что-то планировали ночью у дома мэра.\n\nЕсть медная статуэтка танцующей нимфы (50 монет).\n\nЗАГАДКА В ПОДЗЕМЕЛЬЕ\nНа циферблате: «По прошествии множества эпох милость Мэлоухарта может воссиять».\nЗа циферблатом — фреска с эльфом: горькое отвращение на лице, иссиня-тёмная кожа, белые волосы,\nдорогие горностаевые меха, корона из серебряных рогов.\nЭто принц Мэлоухарт, которого обыграл в карты св. Торм (Player’s Book, стр. 102).\nЕго «милость» — вынужденное освобождение узника. Ищи не сокровище, а дверь или отпирание.\n\nУ МЕНЯ БУТЫЛКА ЖИДКОГО ВРЕМЕНИ В РЮКЗАКЕ.\n\nНынешний герцог — честный правитель, но живёт в тени отца, героя войны. У Теспиана своего наследия нет.",
+  "validation": [
+    {
+      "level": "warn",
+      "what": "Восстановлено после удаления: не хватает второй черты симбиотической плоти",
+      "page": 187,
+      "sheet": "Сейчас одна: «В волосах растут съедобные грибы»",
+      "book": "На 2 уровне их должно быть две — по одной за каждый уровень",
+      "note": "Вторую ты бросал вручную, и её значение при потере файла не сохранилось. Скажи, что выпало на d20, — впишу."
+    },
+    {
+      "level": "ok",
+      "what": "Спасброски приведены к книге",
+      "page": 187,
+      "sheet": "8 / 9 / 10 / 13 / 12",
+      "book": "Таблица мослинга-род-класса, 2 уровень",
+      "note": "Сверху ещё +2 против грибных спор и ядов."
+    },
+    {
+      "level": "ok",
+      "what": "Лунный знак и день рождения сходятся",
+      "page": 174,
+      "sheet": "Grinning Moon (Waxing), Grimvold 12",
+      "book": "Гримволд — 1-й месяц, его луна Ухмыляющаяся; день 12 — растущая фаза"
+    },
+    {
+      "level": "ok",
+      "what": "Класс Брони сходится",
+      "page": 120,
+      "sheet": "AC 13",
+      "book": "Корьевой доспех 13 + щит 1 − Ловкость 1 = 13"
+    },
+    {
+      "level": "info",
+      "what": "Навык Выживание",
+      "page": 187,
+      "sheet": "Survival 5",
+      "book": "Цель 5 только при собирательстве, обычное Выживание — 6"
+    }
+  ],
+  "log": [
+    {
+      "i": 1,
+      "step": "manual",
+      "label": "Внесено вручную",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "manual": true,
+      "result": "Создан на игровом VTT-листе, сверен с Player’s Book. Файл восстановлен после случайного удаления по данным переписки."
+    }
+  ],
+  "xpModifierBreakdown": {
+    "prime": 0,
+    "primeAbility": "Телосложение и Мудрость",
+    "lowestPrimeScore": 11,
+    "kindred": 0,
+    "total": 0
+  },
+  "ac": {
+    "value": 13,
+    "breakdown": [
+      "Корьевой доспех: базовый КБ 13",
+      "Щит: +1",
+      "Ловкость: -1"
+    ],
+    "situational": []
+  },
+  "speed": {
+    "value": 10,
+    "load": 1021,
+    "maxLoad": 1600,
+    "overloaded": false,
+    "loadParts": [
+      "Корьевой доспех 300",
+      "Щит 100",
+      "Короткий меч 20",
+      "Крукхорнское копьё 30",
+      "Дубина 20",
+      "Бурдюк 50",
+      "Железные клинья (12) 60",
+      "Зубило 20",
+      "Огниво 10",
+      "Шарики (мешок, 20) 20",
+      "Палатка 20",
+      "Рационы (сушёные, 1 день) 20",
+      "Рационы (сушёные, 1 день) 20",
+      "Взломщицкая смесь 3",
+      "Монеты (318 зм) 318",
+      "Безделушка 10"
+    ],
+    "equipped": 10,
+    "stowed": 6
+  },
+  "portraitPrompt": {
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: no neck; nostrils ooze purple slime; stumpy arms. symbiotic growth: edible mushrooms growing in hair. clothing: brushed felt. carrying: bark, a shield, shortsword, crookhorn spear, club, iron spikes (12), chisel, marbles (bag of 20). profession: level 2 mossling, formerly a moss farmer. demeanour: blustery. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 2 уровня (в прошлом — мховод). Внешность — голова: без шеи; лицо: из ноздрей сочится фиолетовая слизь; тело: обрубки-руки. Одежда: ворсистый фетр. Снаряжение: корьевой доспех, щит, короткий меч, крукхорнское копьё, дубина. Настроение: шумный. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+  },
+  "checksum": "123EC3EA"
+}
