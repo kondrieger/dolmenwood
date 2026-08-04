@@ -100,7 +100,7 @@
         }).join('') +
         '<tr><td><b>Щит</b> <span class="en">Shield</span></td><td>10 зм</td><td class="mono">+1</td><td>—</td><td>1</td></tr>' +
         '</tbody></table>' +
-        '<p class="muted">Корьевой и шишечный доспехи обычно делают только моцлинги и только малого размера. Подгонка брони под другой размер: 2d6 дней и половина цены.</p>' +
+        '<p class="muted">Корьевой и шишечный доспехи обычно делают только мослинги и только малого размера. Подгонка брони под другой размер: 2d6 дней и половина цены.</p>' +
       '</div></details>' +
       '<details><summary>Снаряжение</summary><div class="body">' +
         '<table class="tbl compact"><thead><tr><th>Предмет</th><th>Цена</th><th>Вес</th><th>Слоты</th></tr></thead><tbody>' +

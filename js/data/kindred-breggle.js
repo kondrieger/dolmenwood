@@ -153,16 +153,16 @@
 Глиняный горшочек с надписью «Лягушачья паста». Внутри что-то похожее на лягушачью пасту. ~ A clay pot labelled "Frog Paste," containing what appears to be frog paste.
 Комок извивающегося чёрного мха, соскобленный с нависшего монолита одной одинокой ночью. ~ A clump of writhing, black moss that you scraped off a looming monolith one lonely night.
 Пачка бумаг с наспех записанной историей твоей жизни. Странность в том, что нашёл ты их на трупе незнакомца, утонувшего в канаве. ~ A collection of papers with scrawled notes detailing your life story, found on the corpse of a stranger.
-Диковинный духовой инструмент моцлингов, вырезанный из тыквы. Ты никак не разберёшься, в какую дырку дуть. ~ A curious mossling wind instrument carved out of a gourd. You can't figure out which hole to blow in.
+Диковинный духовой инструмент мослингов, вырезанный из тыквы. Ты никак не разберёшься, в какую дырку дуть. ~ A curious mossling wind instrument carved out of a gourd. You can't figure out which hole to blow in.
 Диорама: две чучельные мыши верхом на чучельных белках, на турнире. ~ A diorama of two stuffed mice riding stuffed squirrels, jousting.
 Сушёный гриб с лицом. ~ A dried mushroom with a face.
 Папка с засушенными крылышками спрайтов. ~ A folio of pressed sprite-wings.
-Корявый корень в форме моцлинга. ~ A gnarled root shaped like a mossling.
+Корявый корень в форме мослинга. ~ A gnarled root shaped like a mossling.
 Письмо с предупреждением: несколько безымянных, но высокородных длиннорогих на самом деле переодетые кривороги. ~ A letter warning that several high-ranked longhorns are secretly crookhorns in disguise.
 Медальон с портретом пушистого кота в короне и надписью «Во имя любви к королю Пусскину». ~ A locket with a portrait of a fluffy cat wearing a crown, inscribed "For the love of King Pusskin."
 Длинноносая карнавальная маска. ~ A long-nosed masquerade mask.
 Браслет из кротовой шкурки, умащённый экзотическими духами фей. ~ A moleskin wristband, anointed with exotic fairy perfume.
-Трубка моцлингов, выдувающая радужные кольца дыма. ~ A mossling pipe that blows rainbow-coloured smoke rings.
+Трубка мослингов, выдувающая радужные кольца дыма. ~ A mossling pipe that blows rainbow-coloured smoke rings.
 Ожерелье из разномастных гуманоидных зубов. ~ A necklace of miscellaneous humanoid teeth.
 Окаменевшая репа. ~ A petrified turnip.
 Свиное сердце, сочащееся сукровицей, если его сжать. ~ A pig heart that oozes ichor when squeezed.

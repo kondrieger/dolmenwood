@@ -180,7 +180,7 @@
 Клубок серебристой бечёвки, невидимой в лунном свете. ~ A ball of silvery twine that is invisible in moonlight.
 Клубок пряжи, подаренный благодарным гримолкином. ~ A ball of yarn, gifted to you by a grateful grimalkin.
 Чёрная роза, которая никогда не вянет. ~ A black rose that never wilts.
-Плитка шоколада из какао, собранного с моцлинга. ~ A block of chocolate made with cocoa harvested from a mossling.
+Плитка шоколада из какао, собранного с мослинга. ~ A block of chocolate made with cocoa harvested from a mossling.
 Книга любительских стихов. Ты подозреваешь, что автор — могущественный вельможа Фейри. ~ A book of amateur poetry. You suspect the author to be a powerful Fairy noble.
 Венок, сплетённый из остролиста и ядовитого плюща. ~ A crown woven from holly and poison ivy.
 Маргаритка, светящаяся в лунном свете. ~ A daisy that glows in moonlight.

@@ -176,7 +176,7 @@
 Лютня, которая утром всегда расстроена, а вечером всегда настроена. ~ A lute that is always out of tune in the morning and in tune in the evening.
 Роскошная подушка с золотой вышивкой. ~ A luxurious, gold-embroidered cushion.
 Мышиный череп на верёвочке. (Якобы мыши с луны.) ~ A mouse skull on a string. (Allegedly, a mouse from the moon.)
-Гриб, украденный с головы моцлинга. ~ A mushroom stolen from the head of a mossling.
+Гриб, украденный с головы мослинга. ~ A mushroom stolen from the head of a mossling.
 Песня соловья, запертая в медальоне. ~ A nightingale's song, trapped in a locket.
 Пара сапог, которые никогда не выйдут из моды. ~ A pair of boots that will never go out of fashion.
 Пара костей, которые в сумме всегда дают девять. ~ A pair of dice that, when rolled together, always total to nine.

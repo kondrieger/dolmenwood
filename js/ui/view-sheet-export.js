@@ -220,7 +220,7 @@
     var blocks = [];
 
     if (m.knack) {
-      blocks.push(panel('Mossling Knack', 'Сноровка моцлинга',
+      blocks.push(panel('Mossling Knack', 'Сноровка мослинга',
         row(field('Knack Type', 'Тип сноровки', m.knack.en) +
             field('Unlocked Level', 'Открытый уровень', ch.level)) +
         '<p class="vtt-note">Описания уровней 1/3/5/7 подставятся сами. На 1 уровне доступно: ' + esc(m.knack.levels[0].en) + '.</p>'));

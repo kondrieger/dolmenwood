@@ -337,18 +337,18 @@
       magicLines.push('Малая руна: ' + rune.ru + ' (' + rune.en + ') — раз в день');
     }
 
-    /* Сноровка моцлинга */
+    /* Сноровка мослинга */
     var wantsKnack = prof.grantsKnack || (prof.mode === 'class' && kin.id === 'mossling');
     if (wantsKnack) {
       var kr = DW.dice.roll(1, 6);
       var knack = DW.KNACKS[kr.total - 1];
-      log.record('knack', 'Сноровка моцлинга (d6, стр. 112)', kr, { result: knack.ru });
+      log.record('knack', 'Сноровка мослинга (d6, стр. 112)', kr, { result: knack.ru });
       magicDice.push({ sides: 6, results: kr.dice, label: 'сноровка', value: kr.total });
       ch.magic.knack = knack;
       magicLines.push('Сноровка: ' + knack.ru + ' (' + knack.en + ') — на 1 уровне: ' + knack.levels[0].ru);
     }
 
-    /* Симбиотическая плоть моцлинга */
+    /* Симбиотическая плоть мослинга */
     var wantsSymb = prof.grantsSymbiotic || (prof.mode === 'class' && kin.id === 'mossling');
     if (wantsSymb) {
       var sr = DW.dice.roll(1, 20);
@@ -561,7 +561,7 @@
         if (ar.total >= prof.startArmour[i].r[0] && ar.total <= prof.startArmour[i].r[1]) { arow = prof.startArmour[i]; break; }
       }
       var picked = arow ? arow.items.slice() : [];
-      /* Моцлинг: кольчуга → корьевой доспех, латы → шишечный (стр. 49) */
+      /* мослинг: кольчуга → корьевой доспех, латы → шишечный (стр. 49) */
       var swapped = null;
       if (kin.id === 'mossling') {
         picked = picked.map(function (id) {
@@ -579,7 +579,7 @@
       }).join(' + ') : 'без брони';
       log.record('equipment', 'Броня (d6)', ar, { result: armDesc + (swapped ? ' [' + swapped + ']' : '') });
       dice.push({ sides: 6, results: ar.dice, label: 'броня', value: ar.total });
-      lines.push('Броня: ' + armDesc + (swapped ? ' (замена по правилу моцлингов: ' + swapped + ')' : ''));
+      lines.push('Броня: ' + armDesc + (swapped ? ' (замена по правилу мослингов: ' + swapped + ')' : ''));
     } else {
       lines.push('Броня: не носит (класс запрещает)');
     }

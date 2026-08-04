@@ -109,7 +109,7 @@ function rollRune() {
   runeRoll.value = { roll: r, kind, rune }
 }
 
-/* Симбиотическая плоть моцлинга — новая черта на каждом уровне */
+/* Симбиотическая плоть мослинга — новая черта на каждом уровне */
 const needsSymbiotic = prof.grantsSymbiotic || (prof.mode === 'class' && kin.id === 'mossling')
 const newSymbiotic = ref<any>(null)
 function rollSymbiotic() {
@@ -117,7 +117,7 @@ function rollSymbiotic() {
   newSymbiotic.value = { ...kin.symbioticFlesh[r.total - 1], rolled: r.total }
 }
 
-/* Новая ступень сноровки моцлинга — на 3, 5 и 7 уровнях */
+/* Новая ступень сноровки мослинга — на 3, 5 и 7 уровнях */
 const knackTier = computed(() => {
   if (!ch.magic?.knack) return null
   return ch.magic.knack.levels.find((l: any) => l.lv === toLevel) || null
@@ -357,7 +357,7 @@ function apply() {
 
     <div v-if="needsSymbiotic" class="lvl-step" :class="{ done: newSymbiotic }">
       <h3>Симбиотическая плоть</h3>
-      <div class="sub">Моцлинг получает новую случайную черту на каждом уровне (d20, стр. 49)</div>
+      <div class="sub">мослинг получает новую случайную черту на каждом уровне (d20, стр. 49)</div>
       <button v-if="!newSymbiotic" class="primary" @click="rollSymbiotic">🎲 Бросить d20</button>
       <div v-else class="callout good">{{ newSymbiotic.ru }} <span class="en">{{ newSymbiotic.en }}</span></div>
     </div>

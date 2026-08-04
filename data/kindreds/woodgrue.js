@@ -167,7 +167,7 @@ export const woodgrue = {
 Бронзовая статуэтка химеры из дюжины разных зверей. Подаривший клянётся, что это настоящее существо. ~ A bronze statuette of a chimera made up of a dozen different animals, insisted to be real.
 Погребальный саван, будто отпечатавший на себе лицо. С каждым днём лицо всё различимее. ~ A burial shroud seemingly imprinted with a face, becoming more distinguishable every day.
 Керамическая тарелка, издающая простенький мотив, если её поскрести. ~ A ceramic plate that emits a simple tune when scratched.
-Коллекция грибов, одолженная тебе моцлингом. ~ A collection of fungi, loaned to you by a mossling.
+Коллекция грибов, одолженная тебе мослингом. ~ A collection of fungi, loaned to you by a mossling.
 Мёртвая ворона в мешке. До того, как ты её убил, ты был почти уверен, что она за тобой следит. ~ A dead crow in a bag. Before you killed it, you were pretty sure it was spying on you.
 Накладные усы. Надев их, ты выглядишь с полной бородой. ~ A fake moustache. When worn, you appear to have a full beard.
 Запретный трактат, утверждающий, что у гримолкинов и вудгрю общие предки. ~ A forbidden treatise claiming grimalkins and woodgrues share the same ancestors.
@@ -177,7 +177,7 @@ export const woodgrue = {
 Плащ с капюшоном, сшитый из тысяч крыльев мотыльков. ~ A hooded cloak made from thousands of moth wings stitched together.
 Кружка для медовухи, вечно липкая. ~ A mead tankard that is perpetually sticky.
 Кривобокая окарина. Каждая нота жутко похожа на плач младенца. ~ A misshapen ocarina. Each note sounds eerily similar to a baby's cries.
-Трубка моцлинга, найденная тобой в куче компоста. Её дым навевает ностальгию. ~ A mossling pipe you found in a pile of compost. Its smoke makes people nostalgic.
+Трубка мослинга, найденная тобой в куче компоста. Её дым навевает ностальгию. ~ A mossling pipe you found in a pile of compost. Its smoke makes people nostalgic.
 Записка с обещанием, что «мистер Лис» придёт на помощь в час твоей величайшей нужды. ~ A note promising that a "Mr Fox" will come to your aid in your hour of greatest need.
 Пара одинаковых глазных яблок. При любой возможности они поворачиваются, чтобы уставиться на тебя. ~ A pair of matching eyeballs. Whenever possible, they rotate to stare at you.
 Пара маленьких бронзовых тарелочек. ~ A pair of small, bronze cymbals.
