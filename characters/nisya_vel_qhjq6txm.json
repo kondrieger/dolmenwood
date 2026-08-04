@@ -1,0 +1,310 @@
+{
+  "schema": "dolmenwood-character/1",
+  "id": "nisya_vel_qhjq6txm",
+  "owner": "Нися",
+  "generatedAt": "2026-08-04T21:01:48.433Z",
+  "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
+  "origin": "Внесён вручную через форму — броски не производились",
+  "options": {
+    "mode": "class",
+    "abilityMethod": "manual-entry",
+    "moonSignRule": true,
+    "gender": "male"
+  },
+  "level": 1,
+  "xp": 0,
+  "status": "alive",
+  "kindred": {
+    "id": "human",
+    "ru": "Человек",
+    "en": "Human",
+    "type": "mortal",
+    "typeRu": "Смертный",
+    "size": "Medium",
+    "sizeRu": "Средний",
+    "page": 44
+  },
+  "profile": {
+    "mode": "class",
+    "id": "fighter",
+    "ru": "Воин",
+    "en": "Fighter",
+    "primeAbilities": [
+      "STR"
+    ],
+    "primeRu": "Сила",
+    "hitDie": "d8",
+    "aptitude": "martial",
+    "aptitudeRu": "Воинская",
+    "armour": "Любая, включая щиты",
+    "weapons": "Любое",
+    "page": 64
+  },
+  "abilities": {
+    "STR": 12,
+    "INT": 9,
+    "WIS": 12,
+    "DEX": 13,
+    "CON": 14,
+    "CHA": 7
+  },
+  "abilitiesRolled": {
+    "STR": 12,
+    "INT": 9,
+    "WIS": 12,
+    "DEX": 13,
+    "CON": 14,
+    "CHA": 7
+  },
+  "mods": {
+    "STR": 0,
+    "INT": 0,
+    "WIS": 0,
+    "DEX": 1,
+    "CON": 1,
+    "CHA": -1
+  },
+  "attack": 1,
+  "saves": {
+    "doom": 12,
+    "ray": 13,
+    "hold": 14,
+    "blast": 15,
+    "spell": 16
+  },
+  "hp": {
+    "max": 7,
+    "current": 7,
+    "die": "d8",
+    "roll": null,
+    "conMod": 1
+  },
+  "skills": {
+    "basic": {
+      "listen": 6,
+      "search": 6,
+      "survival": 6
+    },
+    "class": []
+  },
+  "languages": [
+    {
+      "ru": "Волдийский",
+      "en": "Woldish"
+    }
+  ],
+  "traits": {
+    "kindred": [
+      {
+        "ru": "Решительность",
+        "en": "Decisiveness",
+        "p": 45,
+        "d": "При ничьей в броске инициативы люди ходят первыми, будто выиграли инициативу. Считаются отдельной стороной, действующей раньше остальных."
+      },
+      {
+        "ru": "Лидерство",
+        "en": "Leadership",
+        "p": 45,
+        "d": "Верность наёмников на службе у человека повышается на 1."
+      },
+      {
+        "ru": "Задор",
+        "en": "Spirited",
+        "p": 45,
+        "d": "Люди быстро учатся: +10% ко всему получаемому опыту. Это сверх бонуса за главную характеристику. Например, человек с главной характеристикой 15 получает суммарно +15% XP."
+      }
+    ],
+    "class": [
+      {
+        "ru": "Боевые таланты",
+        "en": "Combat Talents",
+        "p": 64,
+        "d": "На 1 уровне талантов ещё НЕТ. Первый талант появляется на 2 уровне, затем на 6, 10 и 14. Таланты: Боевая ярость, Рассечение, Защитник, Последний рубеж, Вождь, Кинжал в левой руке, Истребитель, Мастер оружия."
+      }
+    ]
+  },
+  "magic": {},
+  "combatTalents": [],
+  "alignment": {
+    "ru": "Нейтралитет",
+    "en": "Neutral",
+    "d": "Сотрудничают, пока это им не во вред. Относятся к другим так, как относятся к ним. Верят в опору на собственные силы и равновесие Закона и Хаоса.",
+    "rolled": false
+  },
+  "name": {
+    "ru": "Вэл",
+    "en": "Wel",
+    "first": {
+      "ru": "Вэл",
+      "en": "Wel"
+    },
+    "surname": null
+  },
+  "gender": "male",
+  "background": {
+    "ru": "Пшеничный фермер",
+    "en": "Wheat farmer"
+  },
+  "details": {
+    "head": {
+      "label": "Голова",
+      "labelEn": "Head",
+      "ru": "Тщательно напомаженные волосы",
+      "en": "Meticulously oiled hair"
+    },
+    "face": {
+      "label": "Лицо",
+      "labelEn": "Face",
+      "ru": "Широкие, расставленные черты",
+      "en": "Wide, spaced out features"
+    },
+    "body": {
+      "label": "Тело",
+      "labelEn": "Body",
+      "ru": "Бородавки",
+      "en": "Warts"
+    },
+    "speech": {
+      "label": "Речь",
+      "labelEn": "Speech",
+      "ru": "Громогласная",
+      "en": "Bellowing"
+    },
+    "demeanour": {
+      "label": "Нрав",
+      "labelEn": "Demeanour",
+      "ru": "Неряшливый",
+      "en": "Slovenly"
+    },
+    "dress": {
+      "label": "Одежда",
+      "labelEn": "Dress",
+      "ru": "Кружева, букетики и рюши",
+      "en": "Lace, posies, and frills"
+    },
+    "desires": {
+      "label": "Желание",
+      "labelEn": "Desires",
+      "ru": "Дурная слава",
+      "en": "Infamy"
+    },
+    "beliefs": {
+      "label": "Убеждение",
+      "labelEn": "Beliefs",
+      "ru": "Говорящие звери готовят восстание",
+      "en": "Talking beasts plot uprising"
+    }
+  },
+  "physical": {
+    "age": 29,
+    "lifespan": 68,
+    "heightCm": 183,
+    "weightKg": 65
+  },
+  "moonSign": {
+    "moon": "Мёртвая",
+    "phase": "растущая",
+    "en": "Dead (W)",
+    "d": "+1 к броскам атаки и урона в раунд после убийства врага."
+  },
+  "gold": 26,
+  "coins": {
+    "copper": 0,
+    "silver": 30,
+    "gold": 26,
+    "pellucidium": 0
+  },
+  "trinket": {
+    "ru": "—",
+    "en": "—",
+    "roll": null
+  },
+  "equipment": {
+    "armour": {
+      "id": "leather",
+      "kind": "armour",
+      "ru": "Кожаный доспех",
+      "en": "Leather",
+      "ac": 12,
+      "bulk": "light",
+      "bulkRu": "Лёгкая",
+      "slots": 1,
+      "weight": 200,
+      "cost": 20
+    },
+    "shield": null,
+    "weapons": [
+      {
+        "id": "shortsword",
+        "kind": "weapon",
+        "ru": "Короткий меч",
+        "en": "Shortsword",
+        "dmg": "1d6",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 7,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      }
+    ],
+    "equipped": [],
+    "stowed": [],
+    "container": null,
+    "adventuringItems": []
+  },
+  "notes": "- Прядь волос первого человека, которого я убил…..\n- Лунный знак: Монстры-нежить сначала атакуют остальных членов группы, а уже затем — самого персонажа.",
+  "validation": [],
+  "log": [
+    {
+      "i": 1,
+      "step": "manual",
+      "label": "Внесено вручную",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "manual": true,
+      "result": "Персонаж заполнен через форму ручного ввода: броски не производились. Числа, выводимые правилами (атака, спасброски, навыки, пороги опыта, КБ и вес), посчитаны приложением по таблицам книги."
+    }
+  ],
+  "magicResistance": 0,
+  "xpModifier": 10,
+  "xpModifierBreakdown": {
+    "prime": 0,
+    "primeAbility": "Сила",
+    "lowestPrimeScore": 12,
+    "kindred": 10,
+    "total": 10
+  },
+  "ac": {
+    "value": 13,
+    "breakdown": [
+      "Кожаный доспех: базовый КБ 12",
+      "Ловкость: +1"
+    ],
+    "situational": []
+  },
+  "speed": {
+    "value": 40,
+    "load": 256,
+    "maxLoad": 1600,
+    "overloaded": false,
+    "loadParts": [
+      "Кожаный доспех 200",
+      "Короткий меч 20",
+      "Монеты (26 зм) 26",
+      "Безделушка 10"
+    ],
+    "equipped": 2,
+    "stowed": 0
+  },
+  "xpForNextLevel": 2000,
+  "portraitPrompt": {
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a human. male, adult. features: meticulously oiled hair; wide, spaced out features; warts. clothing: lace, posies, and frills. carrying: leather, shortsword. profession: level 1 fighter, formerly a wheat farmer. demeanour: slovenly. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: человек, мужчина, воин 1 уровня (в прошлом — пшеничный фермер). Внешность — голова: тщательно напомаженные волосы; лицо: широкие, расставленные черты; тело: бородавки. Одежда: кружева, букетики и рюши. Снаряжение: кожаный доспех, короткий меч. Настроение: неряшливый. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+  },
+  "checksum": "A2BA49BE",
+  "updatedAt": "2026-08-04T21:04:52.364Z"
+}
