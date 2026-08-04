@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "dolmenwood",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8777"],
-      "port": 8777
+      "runtimeExecutable": "C:\\Users\\kondr\\.nvm\\versions\\node\\v22.23.2\\bin\\node.exe",
+      "runtimeArgs": ["node_modules/nuxt/bin/nuxt.mjs", "dev", "--port", "3111"],
+      "port": 3111
     }
   ]
 }

@@ -4,7 +4,8 @@
 (function () {
   'use strict';
 
-  var crypt = window.crypto || window.msCrypto;
+  /* globalThis.crypto есть и в браузере, и в Node 18+ — так модуль работает везде. */
+  var crypt = globalThis.crypto;
 
   function randInt(max) { // 0..max-1, равномерно
     if (crypt && crypt.getRandomValues) {

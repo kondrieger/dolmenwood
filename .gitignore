@@ -1,0 +1,41 @@
+# Зависимости
+node_modules/
+
+# Сборка и кеш Nuxt
+.nuxt/
+.output/
+.nitro/
+.cache/
+dist/
+
+# Окружение
+.env
+.env.*
+!.env.example
+
+# Логи
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Локальные настройки Claude Code
+.claude/settings.local.json
+
+# --- Данные игры ---------------------------------------------------
+# Персонажи — это личные данные партии, а не код.
+# Файлы лежат в characters/, но в репозиторий не попадают.
+characters/*.json
+!characters/example.json
+
+# Настройки интерфейса
+data/settings.json
