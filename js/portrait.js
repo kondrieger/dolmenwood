@@ -63,7 +63,7 @@
     if (gear.length) bits.push('carrying: ' + gear.join(', '));
 
     /* Профессия и характер */
-    bits.push('profession: level 1 ' + ch.profile.en.toLowerCase().replace(' kindred-class', '') +
+    bits.push('profession: level ' + (ch.level || 1) + ' ' + ch.profile.en.toLowerCase().replace(' kindred-class', '') +
       (ch.background ? ', formerly a ' + ch.background.en.toLowerCase() : ''));
     if (d.demeanour) bits.push('demeanour: ' + d.demeanour.en.toLowerCase());
 
@@ -82,7 +82,7 @@
     parts.push('Портрет фэнтезийного персонажа в полный рост, вид в три четверти');
     parts.push('Кто: ' + ch.kindred.ru.toLowerCase() + ', ' +
       (ch.gender === 'male' ? 'мужчина' : (ch.gender === 'female' ? 'женщина' : 'пол неясен')) +
-      ', ' + ch.profile.ru.toLowerCase() + ' 1 уровня' + (ch.background ? ' (в прошлом — ' + ch.background.ru.toLowerCase() + ')' : ''));
+      ', ' + ch.profile.ru.toLowerCase() + ' ' + (ch.level || 1) + ' уровня' + (ch.background ? ' (в прошлом — ' + ch.background.ru.toLowerCase() + ')' : ''));
     var look = [];
     ['head', 'face', 'body', 'fur'].forEach(function (k) { if (d[k]) look.push(d[k].label.toLowerCase() + ': ' + d[k].ru.toLowerCase()); });
     if (look.length) parts.push('Внешность — ' + look.join('; '));

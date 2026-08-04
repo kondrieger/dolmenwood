@@ -114,18 +114,23 @@
     }
   }
 
-  /** Последовательно прокатывает массив групп. */
+  /**
+   * Прокатывает все группы шага одновременно — так шаг занимает столько же
+   * времени, сколько один бросок, а не сумму всех.
+   */
   function rollSequence(container, groups, opts) {
     opts = opts || {};
-    var i = 0;
-    function next() {
-      if (i >= groups.length) return Promise.resolve();
-      var g = groups[i++];
-      return rollGroup(container, g, opts).then(function () {
-        return new Promise(function (r) { setTimeout(r, opts.animate === false ? 0 : 110); }).then(next);
+    if (!groups || !groups.length) return Promise.resolve();
+    var stagger = opts.animate === false ? 0 : (opts.stagger === undefined ? 40 : opts.stagger);
+    /* Ряды создаём сразу, чтобы порядок на экране совпадал с порядком бросков. */
+    return Promise.all(groups.map(function (g, i) {
+      if (!stagger) return rollGroup(container, g, opts);
+      var placeholder = document.createElement('div');
+      container.appendChild(placeholder);
+      return new Promise(function (resolve) {
+        setTimeout(function () { rollGroup(placeholder, g, opts).then(resolve); }, i * stagger);
       });
-    }
-    return next();
+    }));
   }
 
   DW.diceAnim = { rollGroup: rollGroup, rollSequence: rollSequence, makeDie: makeDie };

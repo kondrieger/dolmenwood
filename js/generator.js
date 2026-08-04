@@ -466,12 +466,11 @@
     steps.push({
       id: 'speed',
       title: 'Шаг 10. Скорость и нагрузка',
-      subtitle: 'Слотовая нагрузка (стр. 149)',
+      subtitle: 'Нагрузка по весу в монетах, 10 монет = 1 фунт (стр. 148). Одежда и поясной кошель не считаются',
       dice: [],
       lines: [
-        'Занято слотов на себе: ' + sp.equipped + ' из 10',
-        'Занято слотов в рюкзаке: ' + sp.stowed + ' из 10',
-        'Скорость: ' + sp.value + ' футов за раунд',
+        'Вес переносимого: ' + sp.load + ' из ' + sp.maxLoad + ' монет',
+        'Скорость: ' + sp.value + ' футов за раунд (до 400 монет — 40; до 600 — 30; до 800 — 20; до 1600 — 10)',
         'Исследование подземелья: ' + (sp.value * 3) + ' футов за ход. Бег: ' + (sp.value * 3) + ' футов за раунд. Путешествие: ' + Math.floor(sp.value / 5) + ' очков пути в день.'
       ]
     });
@@ -506,6 +505,7 @@
     if (opts.moonSign !== false && kin.type !== 'fairy') {
       var ms = log.pickRange('moonsign', 'Лунный знак (d100, стр. 175)', DW.MOON_SIGNS).item;
       ch.moonSign = { moon: ms.moon, phase: ms.phase, en: ms.moonEn, d: ms.d };
+      ch.birthday = birthdayFromMoon(log, ch.moonSign);
       steps.push({
         id: 'moonsign',
         title: 'Лунный знак (необязательное правило)',
@@ -712,30 +712,76 @@
     if (ch.equipment.armour) equipped += ch.equipment.armour.slots || 0;
     if (ch.equipment.shield) equipped += 1;
     ch.equipment.weapons.forEach(function (w) { equipped += w.slots || 1; });
-    ch.equipment.equipped.forEach(function (g) { equipped += g.slots || 0; });
-    /* Поясной кошель с монетами и безделушкой — 1 слот (пример из книги, стр. 149) */
-    equipped += 1;
-    ch.equipment.stowed.forEach(function (g) { stowed += (g.slots === 0 ? 0 : (g.slots || 1)) * (g.qty || 1); });
+    /* Одежда и поясной кошель не учитываются (домашнее правило Рефери). */
+    ch.equipment.equipped.forEach(function (g) { if (countsForLoad(g)) equipped += g.slots || 0; });
+    ch.equipment.stowed.forEach(function (g) { if (countsForLoad(g)) stowed += (g.slots === 0 ? 0 : (g.slots || 1)) * (g.qty || 1); });
     return { equipped: equipped, stowed: stowed };
   }
 
+  /* Домашнее правило Рефери: одежда и поясной кошель в инвентарь и в вес не идут. */
+  function countsForLoad(item) {
+    if (!item) return false;
+    if (DW.LOAD_EXEMPT_IDS.indexOf(item.id) >= 0) return false;
+    if (DW.LOAD_EXEMPT_CATS.indexOf(item.cat) >= 0) return false;
+    return true;
+  }
+
+  /* Полный вес переносимого в монетах (10 монет = 1 фунт), стр. 148.
+     Это же число идёт в поле Load на VTT-листе: Load / 1600. */
+  function computeLoad(ch) {
+    var w = 0, parts = [];
+    var eq = ch.equipment || {};
+    function add(name, weight) { if (weight) { w += weight; parts.push(name + ' ' + weight); } }
+
+    if (eq.armour && eq.armour.id !== 'none') add(eq.armour.ru, eq.armour.weight || 0);
+    if (eq.shield) add('Щит', 100);
+    (eq.weapons || []).forEach(function (x) { add(x.ru, x.weight || 0); });
+    (eq.equipped || []).forEach(function (g) { if (countsForLoad(g)) add(g.ru, (g.weight || 0) * (g.qty || 1)); });
+    (eq.stowed || []).forEach(function (g) { if (countsForLoad(g)) add(g.ru, (g.weight || 0) * (g.qty || 1)); });
+    if (eq.container && countsForLoad(eq.container)) add(eq.container.ru, eq.container.weight || 0);
+    add('Монеты (' + (ch.gold || 0) + ' зм)', ch.gold || 0);   /* любая монета весит 1 */
+    add('Безделушка', 10);                                      /* стр. 34 */
+
+    return { total: w, max: DW.MAX_LOAD, parts: parts };
+  }
+
+  /* День рождения, соответствующий выпавшему лунному знаку (для поля Birthday). */
+  var MOON_TO_MONTH = {
+    'Ухмыляющаяся': 1, 'Мёртвая': 2, 'Звериная': 3, 'Чешуйчатая': 4, 'Рыцарская': 5, 'Гниющая': 6,
+    'Девичья': 7, 'Ведьмина': 8, 'Разбойничья': 9, 'Козья': 10, 'Узкая': 11, 'Чёрная': 12
+  };
+  function birthdayFromMoon(log, moonSign) {
+    if (!moonSign) return null;
+    var monthN = MOON_TO_MONTH[moonSign.moon];
+    if (!monthN) return null;
+    var month = DW.MONTHS[monthN - 1];
+    var range = moonSign.phase === 'растущая' ? [1, 13] : (moonSign.phase === 'полная' ? [14, 16] : [17, 29]);
+    var span = range[1] - range[0] + 1;
+    var r = DW.dice.roll(1, span);
+    var day = range[0] + r.total - 1;
+    if (day > month.days) day = month.days;
+    if (log) log.record('birthday', 'День рождения внутри фазы луны (1d' + span + ')', r,
+      { result: day + ' ' + month.ru });
+    return { month: month.ru, monthEn: month.en, monthN: monthN, day: day };
+  }
+
+  /* Скорость по весу переносимого (стр. 148) — основная система нашей игры. */
   function computeSpeed(ch) {
+    var load = computeLoad(ch);
     var s = countSlots(ch);
-    var speed = 40;
-    for (var i = 0; i < DW.SLOT_ENCUMBRANCE.length; i++) {
-      var row = DW.SLOT_ENCUMBRANCE[i];
-      if (s.equipped <= row.equippedMax && s.stowed <= row.stowedMax) { speed = row.speed; break; }
-      speed = row.speed;
+    var speed = 10;
+    for (var i = 0; i < DW.WEIGHT_ENCUMBRANCE.length; i++) {
+      if (load.total <= DW.WEIGHT_ENCUMBRANCE[i].maxWeight) { speed = DW.WEIGHT_ENCUMBRANCE[i].speed; break; }
     }
-    /* Точнее: берём худшую (меньшую) скорость из двух колонок */
-    function lookup(count, key) {
-      for (var k = 0; k < DW.SLOT_ENCUMBRANCE.length; k++) {
-        if (count <= DW.SLOT_ENCUMBRANCE[k][key]) return DW.SLOT_ENCUMBRANCE[k].speed;
-      }
-      return 10;
-    }
-    speed = Math.min(lookup(s.equipped, 'equippedMax'), lookup(s.stowed, 'stowedMax'));
-    return { value: speed, equipped: s.equipped, stowed: s.stowed };
+    return {
+      value: speed,
+      load: load.total,
+      maxLoad: load.max,
+      overloaded: load.total > load.max,
+      loadParts: load.parts,
+      equipped: s.equipped,
+      stowed: s.stowed
+    };
   }
 
   /* ================= Мировоззрение ================= */
@@ -902,6 +948,9 @@
     classAllowedFor: classAllowedFor,
     computeAC: computeAC,
     computeSpeed: computeSpeed,
+    computeLoad: computeLoad,
+    countsForLoad: countsForLoad,
+    birthdayFromMoon: birthdayFromMoon,
     checksum: checksum,
     ABIL: ABIL, ABIL_RU: ABIL_RU, ABIL_EN: ABIL_EN,
     ALIGNMENTS: ALIGNMENTS

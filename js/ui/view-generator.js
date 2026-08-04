@@ -170,9 +170,12 @@
     if (running) return;
     running = true;
     var out = root.querySelector('#gen-out');
-    out.innerHTML = '<div class="card"><h2>Бросаем кости…</h2><div id="steps"></div></div>';
+    out.innerHTML = '<div class="card"><div class="card-head"><h2>Бросаем кости…</h2>' +
+      '<button class="small no-print" id="btn-skip">⏩ Показать сразу</button></div><div id="steps"></div></div>';
     var stepsBox = out.querySelector('#steps');
     root.querySelector('#btn-gen').disabled = true;
+    var skipped = false;
+    out.querySelector('#btn-skip').onclick = function () { skipped = true; this.disabled = true; };
 
     var res;
     try {
@@ -206,7 +209,8 @@
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       var tray = el.querySelector('.tray');
-      DW.diceAnim.rollSequence(tray, s.dice || [], { animate: animate, duration: animate ? 560 : 0 })
+      var live = animate && !skipped;
+      DW.diceAnim.rollSequence(tray, s.dice || [], { animate: live, duration: live ? 420 : 0, stagger: live ? 40 : 0 })
         .then(function () {
           if (s.lines && s.lines.length) {
             var ul = document.createElement('ul');
@@ -219,7 +223,7 @@
             w.textContent = s.warn;
             el.appendChild(w);
           }
-          setTimeout(nextStep, animate ? 260 : 0);
+          setTimeout(nextStep, (animate && !skipped) ? 140 : 0);
         });
     }
     nextStep();
@@ -228,6 +232,10 @@
   function finish(out, res, root) {
     running = false;
     root.querySelector('#btn-gen').disabled = false;
+    var skipBtn = out.querySelector('#btn-skip');
+    if (skipBtn) skipBtn.parentNode.removeChild(skipBtn);
+    var h2 = out.querySelector('.card-head h2');
+    if (h2) h2.textContent = 'Протокол генерации';
     var ch = res.character;
 
     var box = document.createElement('div');

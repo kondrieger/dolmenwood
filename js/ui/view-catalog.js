@@ -21,6 +21,8 @@
           '<div class="btn-row">' +
             '<button class="small" id="btn-export">⬇ Скачать весь каталог (JSON)</button>' +
             '<button class="small" id="btn-import">⬆ Загрузить JSON</button>' +
+            (DW.PRESETS && DW.PRESETS.shmold && !DW.store.get(DW.PRESETS.shmold.id)
+              ? '<button class="small" id="btn-preset">🍄 Добавить Шмолда Молда</button>' : '') +
             '<a class="btn small" href="#/generate">＋ Новый персонаж</a>' +
           '</div>' +
         '</div>' +
@@ -36,6 +38,14 @@
       if (!DW.store.all().length) { DW.toast('Каталог пуст'); return; }
       DW.store.exportAll(); DW.toast('Файл каталога скачан');
     };
+    var pb = root.querySelector('#btn-preset');
+    if (pb) pb.onclick = function () {
+      var ch = DW.PRESETS.shmold.build();
+      DW.store.save(ch);
+      DW.toast('Шмолд Молд добавлен');
+      location.hash = '#/char/' + ch.id;
+    };
+
     var fi = root.querySelector('#file-import');
     root.querySelector('#btn-import').onclick = function () { fi.click(); };
     fi.onchange = function () {
@@ -52,23 +62,34 @@
       fi.value = '';
     };
 
-    root.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-act]');
-      if (!b) return;
-      var id = b.getAttribute('data-id');
-      var act = b.getAttribute('data-act');
-      if (act === 'del') {
-        var ch = DW.store.get(id);
-        if (confirm('Удалить «' + (ch && ch.name ? ch.name.ru : id) + '» безвозвратно?\nСначала лучше скачать JSON.')) {
-          DW.store.remove(id); render(root); DW.toast('Удалён');
+    /* Обработчик вешаем ровно один раз на весь контейнер: он переживает перерисовки.
+       Раньше он добавлялся при каждой перерисовке, и одно нажатие «Удалить»
+       срабатывало столько раз, сколько было перерисовок. */
+    if (!root._dwCatalogBound) {
+      root._dwCatalogBound = true;
+      root.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-act]');
+        if (!b) return;
+        e.preventDefault();
+        var id = b.getAttribute('data-id');
+        var act = b.getAttribute('data-act');
+        if (act === 'del') {
+          var ch = DW.store.get(id);
+          if (!ch) { render(root); return; }
+          if (confirm('Удалить «' + (ch.name ? ch.name.ru : id) + '» безвозвратно?\n\nОтменить будет нельзя. Если персонаж ещё может пригодиться — сначала скачай JSON.')) {
+            DW.store.remove(id);
+            render(root);
+            DW.toast('Персонаж удалён');
+          }
+        } else if (act === 'status') {
+          DW.store.setStatus(id, b.getAttribute('data-val'));
+          render(root);
+        } else if (act === 'export') {
+          var c = DW.store.get(id);
+          if (c) { DW.store.exportOne(c); DW.toast('Файл скачан'); }
         }
-      } else if (act === 'status') {
-        DW.store.setStatus(id, b.getAttribute('data-val'));
-        render(root);
-      } else if (act === 'export') {
-        DW.store.exportOne(DW.store.get(id)); DW.toast('Файл скачан');
-      }
-    });
+      });
+    }
   }
 
   function section(title, list) {

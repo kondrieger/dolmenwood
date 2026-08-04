@@ -21,12 +21,15 @@
       magicCard(ch) +
       equipmentCard(ch) +
       personaCard(ch) +
+      validationCard(ch) +
       portraitCard(ch) +
       cheatCard(ch) +
+      (DW.sheetExport ? DW.sheetExport.card(ch) : '') +
       logCard(ch) +
       jsonCard(ch);
 
     wire(root, ch);
+    if (DW.sheetExport) DW.sheetExport.wire(root);
   }
 
   /* ================= Шапка ================= */
@@ -130,10 +133,13 @@
   }
 
   function qualNote(w) {
-    return (w.qual || []).map(function (q) {
+    var base = (w.qual || []).map(function (q) {
       var Q = DW.WEAPON_QUALITIES[q];
       return Q ? Q.ru.toLowerCase() : q;
     }).join(', ');
+    /* Особый эффект нестандартного (найденного в игре) оружия. */
+    if (w.special) return base ? base + '. ' + w.special : w.special;
+    return base;
   }
 
   function combatCard(ch) {
@@ -323,40 +329,105 @@
   /* ================= Снаряжение ================= */
   function equipmentCard(ch) {
     var eq = ch.equipment;
+    var counts = DW.Generator.countsForLoad;
     function li(name, en, meta, note) {
       return '<li><span>' + esc(name) + (en ? ' <span class="en">' + esc(en) + '</span>' : '') +
         (note ? '<br><span class="muted" style="font-size:.78rem">' + esc(note) + '</span>' : '') + '</span>' +
         (meta ? '<span class="meta">' + esc(meta) + '</span>' : '') + '</li>';
     }
     var equippedHtml = '';
-    if (eq.armour && eq.armour.id !== 'none') equippedHtml += li(eq.armour.ru, eq.armour.en, 'КБ ' + eq.armour.ac + ' · ' + eq.armour.bulkRu + ' · ' + eq.armour.slots + ' сл.');
-    if (eq.shield) equippedHtml += li('Щит', 'Shield', '+1 КБ · 1 сл.');
+    if (eq.armour && eq.armour.id !== 'none') equippedHtml += li(eq.armour.ru, eq.armour.en, 'КБ ' + eq.armour.ac + ' · ' + eq.armour.weight + ' мон.');
+    if (eq.shield) equippedHtml += li('Щит', 'Shield', '+1 КБ · 100 мон.');
     (eq.weapons || []).forEach(function (w) {
-      equippedHtml += li(w.ru, w.en, w.dmg + ' · ' + (w.slots || 1) + ' сл.', qualNote(w) + (w.range ? ' · дистанции ' + w.range + ' футов' : ''));
+      equippedHtml += li(w.ru, w.en, w.dmg + ' · ' + (w.weight || 0) + ' мон.', qualNote(w) + (w.range ? ' · дистанции ' + w.range + ' футов' : ''));
     });
-    (eq.equipped || []).forEach(function (g) { equippedHtml += li(g.ru, g.en, (g.slots ? g.slots + ' сл.' : '—'), g.d); });
+    (eq.equipped || []).forEach(function (g) {
+      if (!counts(g)) return;
+      equippedHtml += li(g.ru, g.en, (g.weight || 0) + ' мон.', g.d);
+    });
+    equippedHtml += li('Монеты: ' + ch.gold + ' зм', 'Coins', ch.gold + ' мон.');
+    equippedHtml += li('Безделушка', 'Trinket', '10 мон.', ch.trinket.ru);
 
     var stowedHtml = (eq.stowed || []).map(function (g) {
-      return li(g.ru + (g.qty > 1 ? ' ×' + g.qty : ''), g.en, (g.slots ? g.slots + ' сл.' : '—'), g.d);
+      if (!counts(g)) return '';
+      return li(g.ru + (g.qty > 1 ? ' ×' + g.qty : ''), g.en, ((g.weight || 0) * (g.qty || 1)) + ' мон.', g.d);
     }).join('');
 
+    var notCounted = [];
+    (eq.equipped || []).concat(eq.stowed || []).forEach(function (g) { if (!counts(g)) notCounted.push(g.ru); });
+
+    var load = ch.speed.load !== undefined ? ch.speed.load : DW.Generator.computeLoad(ch).total;
+    var maxLoad = ch.speed.maxLoad || DW.MAX_LOAD;
+    var pct = Math.min(100, Math.round(load / maxLoad * 100));
+
     return '<div class="card">' +
-      '<h2>Снаряжение <span class="en">Equipment</span></h2>' +
+      '<h2>Снаряжение <span class="en">Equipment / Inventory</span></h2>' +
+      '<div class="load-bar-wrap">' +
+        '<div class="load-bar"><div class="load-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="load-nums"><b>' + load + '</b> / ' + maxLoad + ' <span class="en">Load</span></div>' +
+      '</div>' +
+      '<p class="muted" style="margin:6px 0 14px;font-size:.84rem">Вес считается в монетах: 10 монет = 1 фунт. ' +
+        'До 400 → Скорость 40 · до 600 → 30 · до 800 → 20 · до 1600 → 10. У тебя <b>' + ch.speed.value + '</b>.' +
+        (notCounted.length ? ' Не учитывается по правилу Рефери: ' + esc(notCounted.join(', ')) + '.' : '') + '</p>' +
       '<div class="grid two">' +
-        '<div><h3>На себе <span class="muted" style="font-weight:400;font-size:.8rem">(' + ch.speed.equipped + ' из 10 слотов)</span></h3>' +
-          '<ul class="item-list">' + equippedHtml +
-          li('Поясной кошель: ' + ch.gold + ' зм и безделушка', 'Belt pouch', '1 сл.') + '</ul></div>' +
-        '<div><h3>В рюкзаке <span class="muted" style="font-weight:400;font-size:.8rem">(' + ch.speed.stowed + ' из 10 слотов)</span></h3>' +
+        '<div><h3>На себе <span class="en">Equipped Items</span></h3>' +
+          '<ul class="item-list">' + equippedHtml + '</ul></div>' +
+        '<div><h3>В рюкзаке <span class="en">Stowed Items</span></h3>' +
           '<ul class="item-list">' + stowedHtml + '</ul></div>' +
       '</div>' +
+      dropHint(ch, load) +
       '<div class="callout"><b>' + T('Безделушка', 'trinket') + ':</b> ' + esc(ch.trinket.ru) +
         '<br><span class="en">' + esc(ch.trinket.en) + '</span></div>' +
-      '<p class="muted" style="font-size:.84rem">' + T('Нагрузка', 'encumbrance') + ' по слотам: 0–3 слота на себе → Скорость 40; 4–5 → 30; 6–7 → 20; 8–10 → 10. ' +
-        'Достать вещь из рюкзака в бою — целый раунд. Броню и оружие можно бросить, чтобы удрать быстрее.</p>' +
+      '<p class="muted" style="font-size:.84rem">Достать вещь из рюкзака в бою — целый раунд. ' +
+        'Броню, мешок и оружие можно бросить, чтобы удрать быстрее. Больше ' + maxLoad + ' монет унести нельзя вообще.</p>' +
       '</div>';
   }
 
+  /* Подсказка «что выложить», если персонаж ползает из-за веса. */
+  function dropHint(ch, load) {
+    if (ch.speed.value >= 40) return '';
+    var parts = (ch.speed.loadParts || DW.Generator.computeLoad(ch).parts || []).map(function (p) {
+      var m = /^(.*)\s(\d+)$/.exec(p);
+      return m ? { name: m[1], w: parseInt(m[2], 10) } : null;
+    }).filter(Boolean).sort(function (a, b) { return b.w - a.w; });
+
+    /* Сколько надо сбросить, чтобы попасть в следующую ступень скорости. */
+    var target = 400;
+    for (var i = 0; i < DW.WEIGHT_ENCUMBRANCE.length; i++) {
+      if (DW.WEIGHT_ENCUMBRANCE[i].speed > ch.speed.value && load > DW.WEIGHT_ENCUMBRANCE[i].maxWeight) {
+        target = DW.WEIGHT_ENCUMBRANCE[i].maxWeight;
+      }
+    }
+    var nextSpeed = 40, need = load - 400;
+    for (var k = DW.WEIGHT_ENCUMBRANCE.length - 1; k >= 0; k--) {
+      if (DW.WEIGHT_ENCUMBRANCE[k].speed > ch.speed.value) { nextSpeed = DW.WEIGHT_ENCUMBRANCE[k].speed; need = load - DW.WEIGHT_ENCUMBRANCE[k].maxWeight; }
+    }
+
+    var heavy = parts.slice(0, 3).map(function (p) { return p.name + ' (' + p.w + ')'; });
+    return '<div class="callout"><b>Ты медленный из-за веса.</b> Скорость ' + ch.speed.value +
+      ' вместо 40, а скорость партии равна скорости самого медленного. ' +
+      'Чтобы разогнаться до ' + nextSpeed + ', надо скинуть ещё <b>' + Math.max(1, need) + '</b> монет веса.<br>' +
+      'Самое тяжёлое: ' + esc(heavy.join(', ')) + '. Тяжёлое обычно оставляют в лагере или на муле.</div>';
+  }
+
   /* ================= Личность ================= */
+  /* Расхождения между нашим расчётом по книге и живым листом на VTT. */
+  function validationCard(ch) {
+    if (!ch.validation || !ch.validation.length) return '';
+    return '<div class="card">' +
+      '<h2>Сверка с книгой <span class="en">Rules check</span></h2>' +
+      '<p class="muted" style="margin-top:-4px">Это места, где данные листа расходятся с Player’s Book. ' +
+      'Ничего не исправлено автоматически — покажи гейм-мастеру и уточни, как считаем.</p>' +
+      ch.validation.map(function (v) {
+        return '<div class="callout' + (v.level === 'ok' ? ' good' : (v.level === 'warn' ? ' danger' : '')) + '">' +
+          '<b>' + esc(v.what) + '</b><br>' +
+          'На листе: ' + esc(v.sheet) + '<br>' +
+          'По книге: ' + esc(v.book) + (v.page ? ' (стр. ' + v.page + ')' : '') +
+          (v.note ? '<br><span class="muted">' + esc(v.note) + '</span>' : '') +
+          '</div>';
+      }).join('') + '</div>';
+  }
+
   function personaCard(ch) {
     var d = ch.details || {};
     var rows = Object.keys(d).map(function (k) {
@@ -507,7 +578,8 @@
 
       '<details><summary>🌲 Путешествие и лагерь</summary><div class="body">' +
         '<p>В пути ты получаешь <b>Скорость ÷ 5</b> очков пути в день — у тебя <b>' + Math.floor(ch.speed.value / 5) + '</b>. Ими оплачивается пересечение гексов разной местности.</p>' +
-        '<p>Скорость партии = скорость <b>самого медленного</b>. Если ты нагрузился железом, тормозишь всех.</p>' +
+        '<p>Скорость партии = скорость <b>самого медленного</b>. Если ты нагрузился железом, тормозишь всех. ' +
+          'Сейчас ты несёшь <b>' + (ch.speed.load !== undefined ? ch.speed.load : '?') + '</b> монет веса из ' + (ch.speed.maxLoad || 1600) + '.</p>' +
         '<p><b>Ночлег.</b> В диком лагере — проверка Телосложения, чтобы нормально выспаться. Без ночного отдыха заклинатели не восстанавливают заклинания. ' +
           'Замерзать без зимнего плаща — 1d4 хита в день.</p>' +
         '<p><b>Еда.</b> Сушёные рационы портятся за неделю в сырости (грибной лес, подземелья!). Искать еду в лесу — проверка Выживания (у тебя ' + b.survival + '+' +
@@ -586,13 +658,17 @@
       else DW.toast('Опыт сохранён');
     };
 
-    root.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-copy]');
-      if (!b) return;
-      var el = root.querySelector('#' + b.getAttribute('data-copy'));
-      if (!el) return;
-      copy(el.textContent);
-    });
+    /* Один раз на контейнер — иначе обработчики копятся при каждой перерисовке. */
+    if (!root._dwCharBound) {
+      root._dwCharBound = true;
+      root.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-copy]');
+        if (!b) return;
+        e.preventDefault();
+        var el = root.querySelector('#' + b.getAttribute('data-copy'));
+        if (el) copy(el.textContent);
+      });
+    }
   }
 
   function copy(text) {
