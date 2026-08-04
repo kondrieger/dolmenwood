@@ -568,7 +568,7 @@ function generateEquipment(log, kin, prof, opts) {
       if (ar.total >= prof.startArmour[i].r[0] && ar.total <= prof.startArmour[i].r[1]) { arow = prof.startArmour[i]; break; }
     }
     var picked = arow ? arow.items.slice() : [];
-    /* мослинг: кольчуга → корьевой доспех, латы → шишечный (стр. 49) */
+    /* Мослинг: кольчуга → корьевой доспех, латы → шишечный (стр. 49) */
     var swapped = null;
     if (kin.id === 'mossling') {
       picked = picked.map(function (id) {

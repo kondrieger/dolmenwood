@@ -5,6 +5,7 @@ export * from './classes.js'
 export * from './magic.js'
 export * from './equipment.js'
 export * from './moon.js'
+export * from './players.js'
 
 import { breggle } from './kindreds/breggle.js'
 import { elf } from './kindreds/elf.js'

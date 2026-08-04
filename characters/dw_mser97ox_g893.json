@@ -31,7 +31,7 @@
   "subPar": false,
   "kindred": {
     "id": "mossling",
-    "ru": "мослинг",
+    "ru": "Мослинг",
     "en": "Mossling",
     "type": "mortal",
     "typeRu": "Смертный",
@@ -42,7 +42,7 @@
   "profile": {
     "mode": "kindredclass",
     "id": "mossling_kc",
-    "ru": "мослинг (род-класс)",
+    "ru": "Мослинг (род-класс)",
     "en": "Mossling Kindred-Class",
     "primeAbilities": [
       "WIS",
