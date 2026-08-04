@@ -70,8 +70,8 @@ export async function deleteCharacter(id: string): Promise<boolean> {
 const SETTINGS_FILE = resolve(process.cwd(), 'data', 'settings.json')
 
 const DEFAULT_SETTINGS = {
-  mode: 'class',
-  kindred: 'human',
+  mode: 'kindredclass',
+  kindred: 'mossling',
   cls: 'fighter',
   abilityMethod: '3d6-in-order',
   gender: 'any',

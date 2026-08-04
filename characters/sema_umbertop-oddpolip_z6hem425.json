@@ -1,7 +1,7 @@
 {
   "schema": "dolmenwood-character/1",
   "generatedAt": "2026-08-04T14:30:21.489Z",
-  "id": "dw_mser97ox_g893",
+  "id": "sema_umbertop-oddpolip_z6hem425",
   "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
   "options": {
     "mode": "kindredclass",
@@ -991,5 +991,6 @@
     "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: long greasy hair; mouth foaming with yeast; blubbery. symbiotic growth: radical fern growth around groin. clothing: pig suede. carrying: pinecone, a shield, club, shortsword. profession: level 1 mossling, formerly a tavernkeep. demeanour: flustered. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
     "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 1 уровня (в прошлом — трактирщик). Внешность — голова: длинные сальные волосы; лицо: рот в дрожжевой пене; тело: дряблое. Одежда: свиная замша. Снаряжение: шишечный доспех, щит, дубина, короткий меч. Настроение: суетливый. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
   },
-  "updatedAt": "2026-08-04T14:30:37.247Z"
+  "updatedAt": "2026-08-04T14:30:37.247Z",
+  "owner": "Сёма"
 }

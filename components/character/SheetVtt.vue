@@ -139,6 +139,12 @@ const moonSignEn = computed(() => {
           </div>
           <div class="vtt-row">
             <div class="vtt-field">
+              <div class="vtt-label">Игрок <span class="vtt-ru">чей персонаж</span></div>
+              <select v-model="ch.owner" class="edit-field" @change="touch(false)">
+                <option v-for="p in D.PLAYERS" :key="p" :value="p">{{ p }}</option>
+              </select>
+            </div>
+            <div class="vtt-field">
               <div class="vtt-label">Affiliation <span class="vtt-ru">Принадлежность</span></div>
               <input v-model="ch.affiliation" class="edit-field" placeholder="—" @input="touch(false)">
             </div>

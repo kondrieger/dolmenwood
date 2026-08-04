@@ -1,6 +1,6 @@
 {
   "schema": "dolmenwood-character/1",
-  "id": "dw_shmold_mould",
+  "id": "sema_shmold-mold_5iiifc7z",
   "generatedAt": "2026-08-04T00:00:00.000Z",
   "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
   "origin": "Внесён вручную с игрового VTT-листа, сверен с книгой. Файл восстановлен после случайного удаления.",
@@ -559,5 +559,6 @@
     "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: no neck; nostrils ooze purple slime; stumpy arms. symbiotic growth: edible mushrooms growing in hair. clothing: brushed felt. carrying: bark, a shield, shortsword, crookhorn spear, club, iron spikes (12), chisel, marbles (bag of 20). profession: level 2 mossling, formerly a moss farmer. demeanour: blustery. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
     "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 2 уровня (в прошлом — мховод). Внешность — голова: без шеи; лицо: из ноздрей сочится фиолетовая слизь; тело: обрубки-руки. Одежда: ворсистый фетр. Снаряжение: корьевой доспех, щит, короткий меч, крукхорнское копьё, дубина. Настроение: шумный. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
   },
-  "checksum": "123EC3EA"
+  "checksum": "123EC3EA",
+  "owner": "Сёма"
 }

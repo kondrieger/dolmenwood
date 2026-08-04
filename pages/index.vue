@@ -2,9 +2,10 @@
 /** Генератор персонажа: выбор рода и класса, пошаговый прогон с кубиками. */
 import * as D from '~/data'
 import { Generator } from '~/utils/generator.js'
+import { newCharacterId } from '~/utils/ids.js'
 
 const { settings, set } = useSettings()
-const { save } = useCharacters()
+const { save, list } = useCharacters()
 const router = useRouter()
 
 const result = ref<any>(null)
@@ -82,8 +83,15 @@ async function generate() {
   running.value = false
 }
 
+const owner = ref('')
+
 async function keep() {
+  if (!owner.value) return
   const ch = result.value.character
+  // Имя файла складывается из игрока, имени и случайного хвоста —
+  // так персонажи в общем репозитории заведомо не столкнутся.
+  ch.owner = owner.value
+  ch.id = newCharacterId(owner.value, ch.name.ru, list.value.map((c: any) => c.id))
   await save(ch, true)
   router.push(`/characters/${ch.id}`)
 }
@@ -212,8 +220,14 @@ async function keep() {
         <div class="stat"><div class="k">Золото</div><div class="v">{{ result.character.gold }}</div></div>
       </div>
       <hr class="rule">
-      <div class="btn-row">
-        <button class="primary" @click="keep">💾 Сохранить в файл и открыть лист</button>
+      <label class="field"><span>Чей это персонаж? <span class="en">обязательно</span></span></label>
+      <div class="chips">
+        <button v-for="p in D.PLAYERS" :key="p" class="chip" :class="{ on: owner === p }" @click="owner = p">{{ p }}</button>
+      </div>
+      <div class="btn-row" style="margin-top: 12px">
+        <button class="primary" :disabled="!owner" @click="keep">
+          {{ owner ? '💾 Сохранить в файл и открыть лист' : 'Сначала выбери игрока' }}
+        </button>
         <button @click="generate">🎲 Перебросить заново</button>
       </div>
     </div>

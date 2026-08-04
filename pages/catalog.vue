@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import * as D from '~/data'
+
 const { list, load, remove, setStatus } = useCharacters()
 await load()
 
-const alive = computed(() => list.value.filter((c) => c.status === 'alive'))
-const rest = computed(() => list.value.filter((c) => c.status !== 'alive'))
+/** Фильтр по игроку: пусто — показываем всех. */
+const ownerFilter = ref('')
+const visible = computed(() =>
+  ownerFilter.value ? list.value.filter((c) => c.owner === ownerFilter.value) : list.value
+)
+const owners = computed(() => {
+  const seen = new Map<string, number>()
+  list.value.forEach((c) => seen.set(c.owner || '—', (seen.get(c.owner || '—') || 0) + 1))
+  return [...seen.entries()].sort((a, b) => b[1] - a[1])
+})
+
+const alive = computed(() => visible.value.filter((c) => c.status === 'alive'))
+const rest = computed(() => visible.value.filter((c) => c.status !== 'alive'))
 const sections = computed(() => [
   { t: 'Активные', items: alive.value },
   { t: 'Погибшие и ушедшие на покой', items: rest.value }
@@ -28,6 +41,13 @@ async function del(c: any) {
         Всего: {{ list.length }} · живых: {{ alive.length }} · остальных: {{ rest.length }}.
         Каждый персонаж — отдельный файл в папке <span class="mono">characters/</span>.
       </p>
+      <div class="chips" style="margin-top: 12px">
+        <button class="chip" :class="{ on: ownerFilter === '' }" @click="ownerFilter = ''">Все ({{ list.length }})</button>
+        <button
+          v-for="[name, n] in owners" :key="name" class="chip"
+          :class="{ on: ownerFilter === name }" @click="ownerFilter = name"
+        >{{ name }} ({{ n }})</button>
+      </div>
     </div>
 
     <div v-if="!list.length" class="card empty">
@@ -46,6 +66,7 @@ async function del(c: any) {
               <span class="badge" :class="c.status">{{ c.status === 'dead' ? 'Погиб' : c.status === 'retired' ? 'На покое' : 'Жив' }}</span>
             </div>
             <div class="who">{{ c.kindred.ru }} · {{ c.profile.ru }} · {{ c.level }} ур. · {{ c.alignment.ru }}</div>
+            <div class="muted" style="font-size: 0.78rem; margin-bottom: 6px">Игрок: <b>{{ c.owner || '— не указан —' }}</b></div>
             <div class="mini">
               <span>ХП <b>{{ c.hp.max }}</b></span>
               <span>КБ <b>{{ c.ac.value }}</b></span>

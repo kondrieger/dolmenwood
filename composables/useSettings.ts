@@ -1,8 +1,8 @@
 /** Настройки интерфейса (выбор в генераторе, тема). Лежат в data/settings.json. */
 export function useSettings() {
   const settings = useState<Record<string, any>>('dw-settings', () => ({
-    mode: 'class',
-    kindred: 'human',
+    mode: 'kindredclass',
+    kindred: 'mossling',
     cls: 'fighter',
     abilityMethod: '3d6-in-order',
     gender: 'any',

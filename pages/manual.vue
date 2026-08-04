@@ -7,7 +7,7 @@ import {
   glamourQuota, symbioticQuota, talentQuota, hpRange, languageQuota, ABIL
 } from '~/utils/manual.js'
 
-const { save } = useCharacters()
+const { save, list } = useCharacters()
 const router = useRouter()
 
 const draft = ref<any>(emptyDraft())
@@ -84,7 +84,7 @@ async function create() {
   if (blocking.value.length) return
   saving.value = true
   try {
-    const ch = buildCharacter(draft.value)
+    const ch = buildCharacter(draft.value, list.value.map((c: any) => c.id))
     await save(ch, true)
     router.push(`/characters/${ch.id}`)
   } finally {
@@ -138,6 +138,16 @@ async function create() {
               >{{ D.CLASSES[c].ru }}</button>
             </div>
           </template>
+
+          <label class="field" style="margin-top: 14px">
+            <span>Игрок <span class="en">обязательно</span></span>
+          </label>
+          <div class="chips">
+            <button
+              v-for="p in D.PLAYERS" :key="p" class="chip"
+              :class="{ on: draft.owner === p }" @click="draft.owner = p"
+            >{{ p }}</button>
+          </div>
 
           <div class="vtt-row" style="margin-top: 14px">
             <label class="field"><span>Имя по-русски</span>

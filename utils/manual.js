@@ -6,12 +6,14 @@ import * as D from '../data/index.js'
 import { Generator } from './generator.js'
 import { portraitPrompt } from './portrait.js'
 import { recompute } from './sheet.js'
+import { newCharacterId } from './ids.js'
 
 export const ABIL = Generator.ABIL
 
 /** Пустая заготовка для формы. */
 export function emptyDraft() {
   return {
+    owner: '',
     mode: 'class',
     kindred: 'human',
     cls: 'fighter',
@@ -122,6 +124,11 @@ export function checkDraft(draft) {
 
   if (!draft.nameRu.trim()) add('error', 'Не заполнено имя', 'Без имени персонажа не сохранить.')
 
+  if (!draft.owner) {
+    add('error', 'Не выбран игрок',
+      'Каждый персонаж закрепляется за игроком: файлы лежат в общем репозитории, и по владельцу видно, чей это лист.')
+  }
+
   ABIL.forEach((a) => {
     const v = Number(draft.abilities[a])
     if (!(v >= 3 && v <= 18)) {
@@ -205,7 +212,7 @@ export function checkDraft(draft) {
 
 /* ================== Сборка персонажа ================== */
 
-export function buildCharacter(draft) {
+export function buildCharacter(draft, takenIds = []) {
   const prof = profileFor(draft)
   const kin = D.KINDREDS[draft.kindred]
   const level = Math.min(15, Math.max(1, Number(draft.level) || 1))
@@ -282,7 +289,8 @@ export function buildCharacter(draft) {
 
   const ch = {
     schema: 'dolmenwood-character/1',
-    id: 'dw_' + Date.now().toString(36) + '_' + Math.floor(Math.random() * 1e6).toString(36),
+    id: newCharacterId(draft.owner, draft.nameRu, takenIds),
+    owner: draft.owner,
     generatedAt: new Date().toISOString(),
     source: "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
     origin: 'Внесён вручную через форму — броски не производились',
