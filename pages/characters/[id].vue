@@ -167,6 +167,8 @@ const attacks = computed(() => {
       </table>
     </div>
 
+    <CharacterPortraitPrompt :character="character" />
+
     <CharacterValidationCard v-if="character.validation?.length" :character="character" />
 
     <CharacterCheatSheet :character="character" />

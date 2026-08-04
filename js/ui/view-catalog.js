@@ -21,8 +21,6 @@
           '<div class="btn-row">' +
             '<button class="small" id="btn-export">⬇ Скачать весь каталог (JSON)</button>' +
             '<button class="small" id="btn-import">⬆ Загрузить JSON</button>' +
-            (DW.PRESETS && DW.PRESETS.shmold && !DW.store.get(DW.PRESETS.shmold.id)
-              ? '<button class="small" id="btn-preset">🍄 Добавить Шмолда Молда</button>' : '') +
             '<a class="btn small" href="#/generate">＋ Новый персонаж</a>' +
           '</div>' +
         '</div>' +
@@ -38,14 +36,6 @@
       if (!DW.store.all().length) { DW.toast('Каталог пуст'); return; }
       DW.store.exportAll(); DW.toast('Файл каталога скачан');
     };
-    var pb = root.querySelector('#btn-preset');
-    if (pb) pb.onclick = function () {
-      var ch = DW.PRESETS.shmold.build();
-      DW.store.save(ch);
-      DW.toast('Шмолд Молд добавлен');
-      location.hash = '#/char/' + ch.id;
-    };
-
     var fi = root.querySelector('#file-import');
     root.querySelector('#btn-import').onclick = function () { fi.click(); };
     fi.onchange = function () {

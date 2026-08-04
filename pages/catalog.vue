@@ -21,7 +21,8 @@ async function del(c: any) {
     <div class="card">
       <div class="card-head">
         <h2>Каталог персонажей</h2>
-        <NuxtLink class="btn small" to="/">＋ Новый персонаж</NuxtLink>
+        <NuxtLink class="btn small" to="/">🎲 Сгенерировать</NuxtLink>
+        <NuxtLink class="btn small" to="/manual">✎ Внести вручную</NuxtLink>
       </div>
       <p class="muted" style="margin: 0">
         Всего: {{ list.length }} · живых: {{ alive.length }} · остальных: {{ rest.length }}.

@@ -17,7 +17,16 @@ const kindredPool = computed(() =>
 )
 const kindred = computed(() => D.KINDREDS[settings.value.kindred])
 const klass = computed(() => D.CLASSES[settings.value.cls])
-const allowed = computed(() => Generator.classAllowedFor(settings.value.kindred, settings.value.cls))
+/**
+ * В режиме род-класса выбранный класс не участвует вообще, поэтому его
+ * ограничения не должны блокировать кнопку. Раньше залежавшийся в настройках
+ * «клирик» гасил генерацию для эльфа, гримолкина и вудгрю.
+ */
+const allowed = computed(() =>
+  settings.value.mode === 'kindredclass'
+    ? { ok: true, why: '' }
+    : Generator.classAllowedFor(settings.value.kindred, settings.value.cls)
+)
 
 watch(
   () => settings.value.mode,
@@ -168,6 +177,7 @@ async function keep() {
         </button>
         <button :disabled="running" @click="randomise">Случайный род и класс</button>
         <button v-if="running && settings.animate" @click="skipped = true">⏩ Показать сразу</button>
+        <NuxtLink class="btn" to="/manual">✎ Внести готового персонажа</NuxtLink>
       </div>
     </div>
 

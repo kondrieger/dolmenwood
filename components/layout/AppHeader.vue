@@ -10,6 +10,7 @@ const { settings, toggleTheme } = useSettings()
     </div>
     <nav class="nav">
       <NuxtLink to="/">Генератор</NuxtLink>
+      <NuxtLink to="/manual">Внести вручную</NuxtLink>
       <NuxtLink to="/catalog">Каталог</NuxtLink>
       <NuxtLink to="/rules">Справочник</NuxtLink>
       <a href="#" :title="settings.theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'" @click.prevent="toggleTheme">◐</a>
