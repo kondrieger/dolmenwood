@@ -204,49 +204,49 @@
       "label": "Голова",
       "labelEn": "Head",
       "ru": "Без шеи",
-      "en": "No neck"
+      "en": "Без шеи"
     },
     "face": {
       "label": "Лицо",
       "labelEn": "Face",
       "ru": "Из ноздрей сочится фиолетовая слизь",
-      "en": "Nostrils ooze purple slime"
+      "en": "Из ноздрей сочится фиолетовая слизь"
     },
     "body": {
       "label": "Тело",
       "labelEn": "Body",
       "ru": "Обрубки-руки",
-      "en": "Stumpy arms"
+      "en": "Обрубки-руки"
     },
     "speech": {
       "label": "Речь",
       "labelEn": "Speech",
       "ru": "Заикающаяся",
-      "en": "Stammering"
+      "en": "Заикающаяся"
     },
     "demeanour": {
       "label": "Нрав",
       "labelEn": "Demeanour",
       "ru": "Шумный",
-      "en": "Blustery"
+      "en": "Шумный"
     },
     "dress": {
       "label": "Одежда",
       "labelEn": "Dress",
       "ru": "Ворсистый фетр",
-      "en": "Brushed felt"
+      "en": "Ворсистый фетр"
     },
     "desires": {
-      "label": "Желание",
+      "label": "Желания",
       "labelEn": "Desires",
       "ru": "Дюжина супругов",
-      "en": "A dozen spouses"
+      "en": "Дюжина супруг"
     },
     "beliefs": {
-      "label": "Убеждение",
+      "label": "Убеждения",
       "labelEn": "Beliefs",
       "ru": "Эль необходим для жизни",
-      "en": "Ale is essential for life"
+      "en": "Эль необходим для жизни"
     }
   },
   "physical": {
@@ -270,11 +270,11 @@
     "monthN": 1,
     "day": 12
   },
-  "gold": 318,
+  "gold": 26,
   "coins": {
     "copper": 0,
-    "silver": 0,
-    "gold": 318,
+    "silver": 6,
+    "gold": 26,
     "pellucidium": 0
   },
   "trinket": {
@@ -284,16 +284,16 @@
   },
   "equipment": {
     "armour": {
-      "id": "bark",
+      "id": "pinecone",
       "kind": "armour",
-      "ru": "Корьевой доспех",
-      "en": "Bark",
-      "ac": 13,
-      "bulk": "light",
-      "bulkRu": "Лёгкая",
-      "slots": 1,
-      "weight": 300,
-      "cost": 30
+      "ru": "Шишечный доспех",
+      "en": "Pinecone",
+      "ac": 15,
+      "bulk": "medium",
+      "bulkRu": "Средняя",
+      "slots": 2,
+      "weight": 400,
+      "cost": 50
     },
     "shield": {
       "id": "shield",
@@ -338,21 +338,6 @@
         "range": "20/40/60",
         "custom": true,
         "special": "ОСОБОЕ: при попадании жертва делает спасбросок против Рока (Save vs Doom). Трофей, добытый в игре."
-      },
-      {
-        "id": "club",
-        "kind": "weapon",
-        "ru": "Дубина",
-        "en": "Club",
-        "dmg": "1d4",
-        "size": "Medium",
-        "slots": 1,
-        "weight": 20,
-        "cost": 3,
-        "qual": [
-          "melee"
-        ],
-        "range": null
       }
     ],
     "equipped": [
@@ -369,25 +354,16 @@
       },
       {
         "id": "ironspikes",
-        "ru": "Железные клинья (12)",
+        "ru": "Железные клинья (8)",
         "en": "Iron spikes (12)",
         "qty": 1,
         "slots": 1,
         "weight": 60,
         "cost": 1,
         "cat": "tools",
-        "d": "Можно заклинить дверь открытой или закрытой, закрепить верёвку и т.д."
-      },
-      {
-        "id": "chisel",
-        "ru": "Зубило",
-        "en": "Chisel",
-        "qty": 1,
-        "slots": 1,
-        "weight": 20,
-        "cost": 2,
-        "cat": "tools",
-        "d": "Используется с молотком для откалывания камня."
+        "d": "Можно заклинить дверь открытой или закрытой, закрепить верёвку и т.д.",
+        "cp": 100,
+        "edited": true
       },
       {
         "id": "tinderbox",
@@ -461,7 +437,7 @@
     "container": null,
     "adventuringItems": []
   },
-  "notes": "ХРОНИКА\n\nПохитили и вернули сына свинопаса Ардак. Юг от Дрега в 1111 находится Друменский холм, в западной части.\nНа холме развалина небольшого форта. Как говорят подростки, это фейский форт. Фей нет, но если\nподкрадываешься — слышишь музыку из флейты. Арда пошёл послушать, и его сцапали кривороги.\nДержали 3 дня, не кормили. Внутри форта есть альков в подземелье.\nСвинопасы что-то планировали ночью у дома мэра.\n\nЕсть медная статуэтка танцующей нимфы (50 монет).\n\nЗАГАДКА В ПОДЗЕМЕЛЬЕ\nНа циферблате: «По прошествии множества эпох милость Мэлоухарта может воссиять».\nЗа циферблатом — фреска с эльфом: горькое отвращение на лице, иссиня-тёмная кожа, белые волосы,\nдорогие горностаевые меха, корона из серебряных рогов.\nЭто принц Мэлоухарт, которого обыграл в карты св. Торм (Player’s Book, стр. 102).\nЕго «милость» — вынужденное освобождение узника. Ищи не сокровище, а дверь или отпирание.\n\nУ МЕНЯ БУТЫЛКА ЖИДКОГО ВРЕМЕНИ В РЮКЗАКЕ.\n\nНынешний герцог — честный правитель, но живёт в тени отца, героя войны. У Теспиана своего наследия нет.",
+  "notes": "Безделушка: Заплесневелый гобелен с охотой на свинью мифических размеров.\n\n25-го числа Вальту дадут пизды\n\nСимбиотическая плоть Symbiotic Flesh\nВ волосах растут съедобные грибы. Edible mushrooms growing in hair.\n\nИз уха растёт миниатюрное деревце Miniature tree growing from ear.\n\nНа каждом новом уровне добавляется ещё одна случайная черта.\n\nУ МЕНЯ БУТЫЛКА ЖИДКОГО ВРЕМЕНИ В РЮКЗАКЕ\n\nнынешний герцог честный правитель, но он живет в тени отца, героя войны. даже будучи 60 лет, его подданные ждут кризисов, которые сформируют наследие. но у теспиана ничего нет.\n\n+2 реакции у жителей дрега.\n\nна гексе 0912 деревня Свайнскомп\n\nСлухи:\nиногда зимой в дольменвуде встают облака тумана густого из земли под лесом. в нем призраки фантомы и гули. туман длится несколько дней и зовется Ваги\nмадам Шантивуд это дамочка с политическими амбициями. хочет расширить власть за пределы острова. проводить приватные вечеринки с аристократами и собирает компромат\nна юге от Дичвея находится гостиница ведьмы. по тропинке Путь Харида находится заведение которое управляется парой карг-ведьм, похищают гостей, которые им неугодны\nот матросов которые приплыли с севера услышали разговоры о том что в Дольменвуде на дорогах рыщут морозные феи. они точно слуги Холодного Принца. они предлагают холодные как лед драгоценности и фейское серебро в обмен на информацию о том что происходит в лесу\nв гексе 1011 есть Кромлех (как стоунхэнж) и туда соваться не стоит это проклятые камни делать там нечего",
   "validation": [],
   "log": [
     {
@@ -483,45 +459,43 @@
     "total": 0
   },
   "ac": {
-    "value": 13,
+    "value": 15,
     "breakdown": [
-      "Корьевой доспех: базовый КБ 13",
+      "Шишечный доспех: базовый КБ 15",
       "Щит: +1",
       "Ловкость: -1"
     ],
     "situational": []
   },
   "speed": {
-    "value": 10,
-    "load": 1021,
+    "value": 20,
+    "load": 789,
     "maxLoad": 1600,
     "overloaded": false,
     "loadParts": [
-      "Корьевой доспех 300",
+      "Шишечный доспех 400",
       "Щит 100",
       "Короткий меч 20",
       "Крукхорнское копьё 30",
-      "Дубина 20",
       "Бурдюк 50",
-      "Железные клинья (12) 60",
-      "Зубило 20",
+      "Железные клинья (8) 60",
       "Огниво 10",
       "Шарики (мешок, 20) 20",
       "Палатка 20",
       "Рационы (сушёные, 1 день) 20",
       "Рационы (сушёные, 1 день) 20",
       "Взломщицкая смесь 3",
-      "Монеты (318 зм) 318",
+      "Монеты (26 зм) 26",
       "Безделушка 10"
     ],
-    "equipped": 10,
+    "equipped": 9,
     "stowed": 6
   },
   "portraitPrompt": {
-    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: no neck; nostrils ooze purple slime; stumpy arms. symbiotic growth: edible mushrooms growing in hair. clothing: brushed felt. carrying: bark, a shield, shortsword, crookhorn spear, club, iron spikes (12), chisel, marbles (bag of 20). profession: level 2 mossling, formerly a moss farmer. demeanour: blustery. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
-    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 2 уровня (в прошлом — мховод). Внешность — голова: без шеи; лицо: из ноздрей сочится фиолетовая слизь; тело: обрубки-руки. Одежда: ворсистый фетр. Снаряжение: корьевой доспех, щит, короткий меч, крукхорнское копьё, дубина. Настроение: шумный. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a mossling — a short, squat, pot-bellied humanoid of gnarled bark-like skin in green, yellow and brown, patched with moss, lichen and fungus; hair and beard are plant-like, mossy green or black. male, ancient but hale. features: no neck; nostrils ooze purple slime; stumpy arms. symbiotic growth: edible mushrooms growing in hair. clothing: brushed felt. carrying: pinecone, a shield, shortsword, crookhorn spear, iron spikes (12), marbles (bag of 20). profession: level 2 mossling, formerly a moss farmer. demeanour: blustery. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: мослинг, мужчина, мослинг (род-класс) 2 уровня (в прошлом — мховод). Внешность — голова: без шеи; лицо: из ноздрей сочится фиолетовая слизь; тело: обрубки-руки. Одежда: ворсистый фетр. Снаряжение: шишечный доспех, щит, короткий меч, крукхорнское копьё. Настроение: шумный. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
   },
   "checksum": "123EC3EA",
   "owner": "Сёма",
-  "updatedAt": "2026-08-04T19:32:28.832Z"
+  "updatedAt": "2026-08-11T16:16:22.660Z"
 }
