@@ -1,5 +1,10 @@
 /* Снаряжение — Player's Book, стр. 116–121.
-   cost — в золотых (gp); weight — в монетах (10 монет = 1 фунт); slots — слоты нагрузки. */
+   cost — в золотых (gp); weight — в монетах (10 монет = 1 фунт); slots — слоты нагрузки.
+
+   Товары с рынка, которых нет в этом файле (трубки, трубочный лист, грибы и травы,
+   напитки, сбруя, лошади, гончие, повозки), лежат в data/goods.js и в конце файла
+   подмешиваются в GEAR, чтобы каталог и инвентарь работали с ними как со всем прочим. */
+import { PIPES, PIPELEAF, HERBS, BEVERAGES, BEVERAGE_VESSELS, TACK } from './goods.js'
 
 /* ======================= ОРУЖИЕ ======================= */
 export const WEAPONS = {
@@ -56,6 +61,12 @@ export const GEAR = {
   backpack:   { ru: 'Рюкзак',                  en: 'Backpack',            cost: 4,  weight: 50,  slots: 0, cat: 'container', d: 'Кожаная сумка с лямками. Вмещает до 400 монет / 10 слотов.' },
   beltpouch:  { ru: 'Поясной кошель',          en: 'Belt pouch',          cost: 1,  weight: 10,  slots: 0, cat: 'container', d: 'Кожаный кошель, вмещает до 50 монет.' },
   sack:       { ru: 'Мешок',                   en: 'Sack',                cost: 1,  weight: 5,   slots: 0, cat: 'container', d: 'Большой мешковинный мешок, вмещает 600 монет / 10 слотов.' },
+  barrel:     { ru: 'Бочка',                   en: 'Barrel',              cost: 1,  weight: 70,  slots: 2, cat: 'container', d: 'Деревянная бочка на 40 галлонов (320 пинт).' },
+  bucket:     { ru: 'Ведро',                   en: 'Bucket',              cost: 1,  weight: 20,  slots: 1, cat: 'container', d: 'Вмещает 40 пинт (5 галлонов).' },
+  casket_lg:  { ru: 'Ларец железный (большой)', en: 'Casket (iron, large)', cost: 30, weight: 400, slots: 2, cat: 'container', d: 'Цельножелезный ларец, вмещает до 800 монет.' },
+  casket_sm:  { ru: 'Ларец железный (малый)',  en: 'Casket (iron, small)', cost: 10, weight: 100, slots: 1, cat: 'container', d: 'Цельножелезный ларец, вмещает до 250 монет.' },
+  chest_lg:   { ru: 'Сундук деревянный (большой)', en: 'Chest (wooden, large)', cost: 5, weight: 200, slots: 2, cat: 'container', d: 'Вмещает до 1000 монет.' },
+  chest_sm:   { ru: 'Сундук деревянный (малый)', en: 'Chest (wooden, small)', cost: 1, weight: 50, slots: 1, cat: 'container', d: 'Вмещает до 300 монет.' },
   waterskin:  { ru: 'Бурдюк',                  en: 'Waterskin',           cost: 1,  weight: 50,  slots: 1, cat: 'container', d: 'Кожаный сосуд на 2 пинты. Пустой весит 5 монет.' },
   vial:       { ru: 'Стеклянная склянка',      en: 'Vial (glass)',        cost: 1,  weight: 1,   slots: 0, cat: 'container', d: 'Вмещает до полпинты жидкости.' },
   scrollcase: { ru: 'Тубус для свитков',       en: 'Scroll case',         cost: 1,  weight: 5,   slots: 1, cat: 'container', d: 'Промасленная кожаная труба с крышкой. Не полностью водонепроницаема.' },
@@ -122,11 +133,66 @@ export const GEAR = {
   /* Боеприпасы */
   arrows:     { ru: 'Стрелы (колчан, 20)',     en: 'Arrows (quiver of 20)', cost: 5, weight: 20, slots: 1, cat: 'ammo' },
   quarrels:   { ru: 'Болты (футляр, 20)',      en: 'Quarrels (case of 20)', cost: 10, weight: 20, slots: 1, cat: 'ammo' },
-  stones:     { ru: 'Камни для пращи (20)',    en: 'Sling stones (20)',   cost: 0,  weight: 20,  slots: 1, cat: 'ammo', d: 'Бесплатны, вес 1 монета за штуку.' }
+  stones:     { ru: 'Камни для пращи (20)',    en: 'Sling stones (20)',   cost: 0,  weight: 20,  slots: 1, cat: 'ammo', d: 'Бесплатны, вес 1 монета за штуку.' },
+  arrow_one:  { ru: 'Стрела (штука)',          en: 'Arrow (single)',      cp: 25,   weight: 1,   slots: 0, cat: 'ammo', d: 'Поштучно стрела стоит 25 медяков (стр. 118).' },
+  quarrel_one:{ ru: 'Болт (штука)',            en: 'Quarrel (single)',    cp: 50,   weight: 1,   slots: 0, cat: 'ammo', d: 'Поштучно болт стоит 5 серебряных (стр. 118).' }
 };
 
 /* Алиасы для стартовых наборов классов */
 GEAR.instrument_any = { ru: 'Музыкальный инструмент (струнный или духовой)', en: 'Musical instrument (stringed or wind)', cost: 20, weight: 50, slots: 1, cat: 'tools', choice: ['instrument_string', 'windinstrument'] };
+
+/* ======================= ТОВАРЫ РЫНКА (data/goods.js) ======================= */
+/* Трубки, лист, травы, сбруя — обычные носимые предметы, кладутся в GEAR как есть. */
+Object.assign(GEAR, PIPES, PIPELEAF, HERBS, TACK);
+
+/* Напитки — стр. 126–127. Порция и тара идут отдельными позициями:
+   вес одной порции в книге не указан (weight: null), а вес бутыли и бочонка — указан.
+   Бутыль: 5 порций по цене 4. Бочонок: 10 порций по цене 8. */
+Object.keys(BEVERAGES).forEach(function (id) {
+  var b = BEVERAGES[id];
+  GEAR[id] = {
+    ru: b.ru + ' (порция)', en: b.en + ' (portion)', cp: b.cp, weight: null, slots: 0,
+    cat: 'drink', page: b.page, type: b.type, rarity: b.rarity,
+    d: b.d + ' Вес одной порции в книге не указан.'
+  };
+  Object.keys(BEVERAGE_VESSELS).forEach(function (vk) {
+    var v = BEVERAGE_VESSELS[vk];
+    if (v.forTypes.indexOf(b.type) < 0) return;
+    GEAR[id + '__' + vk] = {
+      ru: b.ru + ' (' + v.ru + ', ' + v.portions + ' порций)', en: b.en + ' (' + v.en + ')',
+      cp: b.cp * v.pricePortions, weight: v.weight, slots: 1,
+      cat: 'drink', page: b.page, type: b.type, rarity: b.rarity,
+      d: b.d + ' В таре ' + v.portions + ' порций по цене ' + v.pricePortions + '.'
+    };
+  });
+});
+
+/* ======================= ОРУЖИЕ ИЗ ОСОБЫХ МЕТАЛЛОВ — стр. 119 ======================= */
+export const SPECIAL_METALS = {
+  cold_iron: {
+    ru: 'Холодное железо', en: 'Cold iron', costMult: 2, page: 119,
+    d: 'Двойная цена. +1 к урону против фей и полуфейских, −1 к урону против всех прочих. Куётся из чистого железа в пламени древнего тиса и закаляется в воде, настоянной на корне мандрагоры. Изготовление под заказ — задержка 2d6 дней.'
+  },
+  silver: {
+    ru: 'Серебро', en: 'Silver', costMult: 10, page: 119,
+    d: 'Десятикратная цена. Наносит обычный урон всем врагам, но некоторых можно ранить только серебром (или магией). Изготовление под заказ — задержка 2d6 дней.'
+  }
+};
+
+/* ======================= ПОДГОНКА БРОНИ — стр. 119 ======================= */
+export const ARMOUR_TAILORING = {
+  custom: 'Если брони нужного размера нет в продаже, оружейник может изготовить её по мерке. Без наценки, но занимает 2d6 дней.',
+  adapt: 'Оружейник может перешить имеющуюся броню под персонажа другого размера. Занимает 2d6 дней и стоит половину полной цены брони.',
+  disallowed: 'Необязательное правило: за оружие, недоступное роду или классу, — штраф −4 к броскам атаки. За броню и щиты — штраф −2 к Классу Брони, и персонаж не может пользоваться способностями, завязанными на скрытность, реакцию, ловкость или магию (гламуры, заклинания).'
+};
+
+/* ======================= МОНЕТА — стр. 117 ======================= */
+export const COINS = {
+  gp: { ru: 'Золотая монета', en: 'Gold piece', short: 'зм', cp: 100, d: 'Стоит 10 серебряных, 100 медных.' },
+  sp: { ru: 'Серебряная монета', en: 'Silver piece', short: 'см', cp: 10, d: 'Стоит 1/10 золотой, 10 медных.' },
+  cp: { ru: 'Медная монета', en: 'Copper piece', short: 'мм', cp: 1, d: 'Стоит 1/100 золотой, 1/10 серебряной.' },
+  pp: { ru: 'Пеллюцидий', en: 'Pellucidium piece', short: 'пм', cp: 500, d: 'Фейское серебро. Стоит 5 золотых, 50 серебряных, 500 медных. Бледный серебристый металл родом из Фейри: даже в кромешной тьме слабо поблёскивает, будто под луной.' }
+};
 
 /* ======================= ТАБЛИЦА ПРИКЛЮЧЕНЧЕСКИХ ПРЕДМЕТОВ (d20) — стр. 19 ======================= */
 export const ADVENTURING_ITEMS = [

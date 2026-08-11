@@ -4,6 +4,7 @@
 import * as D from '../data/index.js'
 import { Generator } from './generator.js'
 import { portraitPrompt } from './portrait.js'
+import { priceCp } from './money.js'
 
 /** Восстанавливает «профиль» (класс или род-класс) по сохранённому персонажу. */
 export function profileOf(ch) {
@@ -71,7 +72,22 @@ export function recompute(ch) {
 export function gearEntry(id, qty) {
   const g = D.GEAR[id]
   if (!g) return null
-  return { id, ru: g.ru, en: g.en, qty: qty || 1, slots: g.slots, weight: g.weight, cost: g.cost, cat: g.cat, d: g.d || '' }
+  return {
+    id, ru: g.ru, en: g.en, qty: qty || 1, slots: g.slots, weight: g.weight,
+    cost: g.cost, cp: priceCp(g), cat: g.cat, page: g.page || null, d: g.d || ''
+  }
+}
+
+/** Лошадь, гончая или повозка: имущество, а не поклажа — в вес и слоты не идёт. */
+export function propertyEntry(kind, id) {
+  const src = kind === 'horse' ? D.HORSES : kind === 'hound' ? D.HOUNDS : D.VEHICLES
+  const p = src[id]
+  if (!p) return null
+  return {
+    id, kind, ru: p.ru, en: p.en, qty: 1, cp: p.cp, page: p.page || null,
+    stat: p.stat || '', d: p.d || '',
+    load: p.load ?? null, cargo: p.cargo ?? null, speed: p.speed ?? null, weight: p.weight ?? null
+  }
 }
 
 export function weaponEntry(id) {
@@ -92,60 +108,107 @@ export function armourEntry(id) {
   }
 }
 
-/** Полный каталог предметов книги для выбора. */
+/** Русские имена разделов каталога. */
+export const CAT_RU = {
+  weapon: 'Оружие', armour: 'Броня',
+  container: 'Ёмкости', light: 'Свет', camp: 'Лагерь', holy: 'Святое',
+  tools: 'Инструменты', clothing: 'Одежда', ammo: 'Боеприпасы',
+  pipe: 'Трубки', pipeleaf: 'Трубочный лист', herb: 'Грибы и травы',
+  drink: 'Напитки', tack: 'Сбруя и корм',
+  horse: 'Лошади', hound: 'Гончие', vehicle: 'Повозки и суда'
+}
+
+/** Разделы, которые не носят на себе: в вес и слоты не идут. */
+export const PROPERTY_CATS = ['horse', 'hound', 'vehicle']
+
+/**
+ * Полный каталог книги: всё, что персонаж может купить или взять.
+ * carried: false — имущество (лошади, гончие, повозки); оно живёт отдельным
+ * списком и не участвует в нагрузке.
+ */
 export function itemCatalogue() {
   const rows = []
+  const push = (r) => rows.push({ carried: true, ...r, cat: CAT_RU[r.catId] || 'Снаряжение' })
+
   Object.keys(D.WEAPONS).forEach((id) => {
     const w = D.WEAPONS[id]
-    rows.push({
-      key: 'w:' + id, kind: 'weapon', id, ru: w.ru, en: w.en,
-      cat: 'Оружие', catId: 'weapon', weight: w.weight, cost: w.cost,
+    push({
+      key: 'w:' + id, kind: 'weapon', id, ru: w.ru, en: w.en, catId: 'weapon',
+      weight: w.weight, cp: priceCp(w), page: 118,
       note: w.dmg + ' · ' + w.size + (w.range ? ' · ' + w.range + ' футов' : '')
     })
   })
   Object.keys(D.ARMOUR).forEach((id) => {
     if (id === 'none') return
     const a = D.ARMOUR[id]
-    rows.push({
-      key: 'a:' + id, kind: 'armour', id, ru: a.ru, en: a.en,
-      cat: 'Броня', catId: 'armour', weight: a.weight, cost: a.cost,
-      note: 'КБ ' + a.ac + ' · ' + a.bulkRu
+    push({
+      key: 'a:' + id, kind: 'armour', id, ru: a.ru, en: a.en, catId: 'armour',
+      weight: a.weight, cp: priceCp(a), page: 118, note: 'КБ ' + a.ac + ' · ' + a.bulkRu
     })
   })
-  rows.push({
+  push({
     key: 'a:shield', kind: 'shield', id: 'shield', ru: D.SHIELD.ru, en: D.SHIELD.en,
-    cat: 'Броня', catId: 'armour', weight: D.SHIELD.weight, cost: D.SHIELD.cost, note: '+1 КБ'
+    catId: 'armour', weight: D.SHIELD.weight, cp: priceCp(D.SHIELD), page: 118, note: '+1 КБ'
   })
-  const CAT_RU = {
-    container: 'Ёмкости', light: 'Свет', camp: 'Лагерь', holy: 'Святое',
-    tools: 'Инструменты', clothing: 'Одежда', ammo: 'Боеприпасы'
-  }
+
   Object.keys(D.GEAR).forEach((id) => {
     if (id === 'instrument_any') return
     const g = D.GEAR[id]
-    rows.push({
-      key: 'g:' + id, kind: 'gear', id, ru: g.ru, en: g.en,
-      cat: CAT_RU[g.cat] || 'Снаряжение', catId: g.cat,
-      weight: g.weight, cost: g.cost, note: g.d || ''
+    const extra = [g.kind, g.type, g.rarity, g.avail && 'доступность ' + g.avail].filter(Boolean).join(' · ')
+    push({
+      key: 'g:' + id, kind: 'gear', id, ru: g.ru, en: g.en, catId: g.cat,
+      weight: g.weight, cp: priceCp(g), page: g.page || null,
+      note: [extra, g.sum, g.d].filter(Boolean).join(' — ')
+    })
+  })
+
+  const property = { horse: D.HORSES, hound: D.HOUNDS, vehicle: D.VEHICLES }
+  Object.keys(property).forEach((catId) => {
+    Object.keys(property[catId]).forEach((id) => {
+      const p = property[catId][id]
+      const facts = [
+        p.type, p.load != null && 'везёт ' + p.load + ' монет',
+        p.cargo != null && 'груз ' + p.cargo + ' монет',
+        p.speed != null && 'Скорость ' + p.speed, p.crew
+      ].filter(Boolean).join(' · ')
+      push({
+        key: catId + ':' + id, kind: catId, id, ru: p.ru, en: p.en, catId,
+        weight: p.weight ?? null, cp: p.cp, page: p.page || null, carried: false,
+        note: [facts, p.stat, p.d].filter(Boolean).join(' — ')
+      })
     })
   })
   return rows
 }
 
+/** Кладёт предмет в список, складывая одинаковые в стопку. */
+function stackInto(list, entry) {
+  const same = list.find((x) => x.id === entry.id && x.kind === entry.kind)
+  if (same) same.qty = (same.qty || 1) + (entry.qty || 1)
+  else list.push(entry)
+}
+
 /** Добавляет предмет из каталога. where: 'equipped' | 'stowed'. */
 export function addItem(ch, row, where = 'stowed') {
   const eq = ch.equipment
+  if (PROPERTY_CATS.includes(row.kind)) {
+    // Имущество не носят на себе — оно не участвует в нагрузке.
+    if (!eq.property) eq.property = []
+    stackInto(eq.property, propertyEntry(row.kind, row.id))
+    recompute(ch)
+    return ch
+  }
   if (row.kind === 'armour') {
     eq.armour = armourEntry(row.id)
   } else if (row.kind === 'shield') {
     eq.shield = { id: 'shield', ru: D.SHIELD.ru, en: D.SHIELD.en, acBonus: 1, slots: 1, weight: D.SHIELD.weight, cost: D.SHIELD.cost }
   } else if (row.kind === 'weapon') {
-    eq.weapons.push(weaponEntry(row.id))
+    // Запасное оружие можно убрать в рюкзак: правила это не запрещают, а нагрузка
+    // по весу (стр. 148) считает всё несомое независимо от того, где оно лежит.
+    if (where === 'stowed') stackInto(eq.stowed, { ...weaponEntry(row.id), qty: 1 })
+    else eq.weapons.push(weaponEntry(row.id))
   } else {
-    const list = where === 'equipped' ? eq.equipped : eq.stowed
-    const existing = list.find((x) => x.id === row.id)
-    if (existing) existing.qty = (existing.qty || 1) + 1
-    else list.push(gearEntry(row.id))
+    stackInto(where === 'equipped' ? eq.equipped : eq.stowed, gearEntry(row.id))
   }
   recompute(ch)
   return ch
@@ -157,7 +220,11 @@ export function removeItem(ch, where, index) {
   if (where === 'armour') eq.armour = armourEntry('none')
   else if (where === 'shield') eq.shield = null
   else if (where === 'weapons') eq.weapons.splice(index, 1)
-  else {
+  else if (where === 'property') {
+    const it = (eq.property || [])[index]
+    if (it && (it.qty || 1) > 1) it.qty -= 1
+    else (eq.property || []).splice(index, 1)
+  } else {
     const list = where === 'equipped' ? eq.equipped : eq.stowed
     const it = list[index]
     if (it && (it.qty || 1) > 1) it.qty -= 1
@@ -167,17 +234,41 @@ export function removeItem(ch, where, index) {
   return ch
 }
 
-/** Переносит предмет между «на себе» и «в рюкзаке». */
+/**
+ * Переносит предмет между «на себе» и «в рюкзаке».
+ * from: 'equipped' | 'stowed' | 'weapons'.
+ *
+ * Оружие живёт отдельно от прочего снаряжения: в руках оно лежит в eq.weapons,
+ * потому что оттуда берутся атаки, а убранное — в eq.stowed вместе со всем
+ * остальным. Поэтому перенос оружия ходит между этими двумя списками, минуя
+ * eq.equipped.
+ */
 export function moveItem(ch, from, index) {
   const eq = ch.equipment
+
+  if (from === 'weapons') {
+    const w = eq.weapons[index]
+    if (!w) return ch
+    eq.weapons.splice(index, 1)
+    stackInto(eq.stowed, { ...w, qty: 1 })
+    recompute(ch)
+    return ch
+  }
+
   const src = from === 'equipped' ? eq.equipped : eq.stowed
-  const dst = from === 'equipped' ? eq.stowed : eq.equipped
   const it = src[index]
   if (!it) return ch
+
+  if (from === 'stowed' && it.kind === 'weapon') {
+    if ((it.qty || 1) > 1) it.qty -= 1
+    else src.splice(index, 1)
+    eq.weapons.push(weaponEntry(it.id))
+    recompute(ch)
+    return ch
+  }
+
   src.splice(index, 1)
-  const same = dst.find((x) => x.id === it.id)
-  if (same) same.qty = (same.qty || 1) + (it.qty || 1)
-  else dst.push(it)
+  stackInto(from === 'equipped' ? eq.stowed : eq.equipped, it)
   recompute(ch)
   return ch
 }

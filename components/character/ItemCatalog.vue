@@ -1,6 +1,8 @@
 <script setup lang="ts">
 /** Каталог снаряжения по книге: поиск, фильтр по разделу, добавление в лист. */
 import { itemCatalogue, addItem, profileOf } from '~/utils/sheet.js'
+import { matches } from '~/utils/text.js'
+import { formatPrice } from '~/utils/money.js'
 
 interface Props {
   character: any
@@ -19,12 +21,12 @@ const cats = computed(() => {
   return seen
 })
 
+/* Ищем и по названию раздела: «броня», «свет», «лагерь» — тоже осмысленные запросы. */
 const rows = computed(() => {
-  const q = query.value.trim().toLowerCase()
+  const q = query.value
   return all.filter((r) => {
     if (cat.value !== 'all' && r.cat !== cat.value) return false
-    if (!q) return true
-    return (r.ru + ' ' + r.en + ' ' + (r.note || '')).toLowerCase().includes(q)
+    return matches([r.ru, r.en, r.cat, r.note].join(' '), q)
   })
 })
 
@@ -68,7 +70,7 @@ function add(row: any) {
 <template>
   <UiModalDialog
     title="Каталог снаряжения"
-    subtitle="Всё из Player’s Book, стр. 116–121. Цены в золотых, вес в монетах (10 монет = 1 фунт)"
+    subtitle="Всё, что продаётся в книге: Player’s Book, стр. 116–131. Вес в монетах (10 монет = 1 фунт); «—» значит, что веса в книге нет"
     wide
     @close="emit('close')"
   >
@@ -99,15 +101,21 @@ function add(row: any) {
           <tr v-for="r in rows" :key="r.key">
             <td>
               <b>{{ r.ru }}</b> <span class="en">{{ r.en }}</span>
-              <div v-if="r.note" class="muted" style="font-size: 0.76rem">{{ r.note }}</div>
+              <span v-if="!r.carried" class="muted" style="font-size: 0.72rem"> · имущество, в вес не идёт</span>
+              <div v-if="r.note" class="muted item-note" :title="r.note">{{ r.note }}</div>
               <div v-if="restriction(r)" style="font-size: 0.76rem; color: var(--blood)">⚠ {{ restriction(r) }}</div>
             </td>
-            <td class="dim" style="font-size: 0.8rem">{{ r.cat }}</td>
-            <td class="num">{{ r.cost }} зм</td>
-            <td class="num">{{ r.weight }}</td>
+            <td class="dim" style="font-size: 0.8rem">
+              {{ r.cat }}
+              <div v-if="r.page" class="muted" style="font-size: 0.72rem">стр. {{ r.page }}</div>
+            </td>
+            <td class="num">{{ formatPrice(r.cp) }}</td>
+            <td class="num" :title="r.weight == null ? 'В книге вес не указан' : ''">
+              {{ r.weight == null ? '—' : r.weight }}
+            </td>
             <td>
               <div class="row-actions">
-                <button class="small" @click="add(r)">Взять</button>
+                <button class="small" @click="add(r)">{{ r.carried ? 'Взять' : 'Купить' }}</button>
               </div>
             </td>
           </tr>
@@ -119,8 +127,23 @@ function add(row: any) {
     </div>
 
     <p class="muted" style="font-size: 0.82rem; margin-top: 10px">
-      Броня и щит заменяют надетые. Оружие и снаряжение добавляются к уже имеющимся.
+      Броня и щит заменяют надетые. Оружие и снаряжение добавляются к уже имеющимся;
+      оружие можно положить и в рюкзак — тогда оно не участвует в атаках, но вес несёт.
+      Лошади, гончие и повозки идут в «Имущество» и в нагрузку не входят.
       Ограничения класса показаны предупреждением, но не запрещают взять предмет — решает Рефери.
     </p>
   </UiModalDialog>
 </template>
+
+<style scoped>
+/* Описания трав и напитков длинные — показываем начало, полное видно по наведению. */
+.item-note {
+  font-size: 0.76rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 52ch;
+}
+</style>

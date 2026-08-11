@@ -2,6 +2,7 @@
 /** Инвентарь: вес по правилам, перенос между «на себе» и рюкзаком, удаление. */
 import { removeItem, moveItem } from '~/utils/sheet.js'
 import { Generator } from '~/utils/generator.js'
+import { formatPrice } from '~/utils/money.js'
 
 interface Props {
   character: any
@@ -16,6 +17,7 @@ const load = computed(() => ch.speed?.load ?? Generator.computeLoad(ch).total)
 const maxLoad = computed(() => ch.speed?.maxLoad ?? 1600)
 const pct = computed(() => Math.min(100, Math.round((load.value / maxLoad.value) * 100)))
 
+const property = computed(() => ch.equipment.property || [])
 const equippedGear = computed(() => (ch.equipment.equipped || []).filter((g: any) => counts(g)))
 const stowedGear = computed(() => (ch.equipment.stowed || []).filter((g: any) => counts(g)))
 const exempt = computed(() =>
@@ -35,7 +37,10 @@ function shift(where: string, item: any) {
   moveItem(ch, where, realIndex(list, item))
   emit('changed')
 }
+function dropProperty(i: number) { removeItem(ch, 'property', i); emit('changed') }
 function dropWeapon(i: number) { removeItem(ch, 'weapons', i); emit('changed') }
+/** Убрать оружие из рук в рюкзак: оно перестаёт быть доступным для атаки, но вес остаётся. */
+function stowWeapon(i: number) { moveItem(ch, 'weapons', i); emit('changed') }
 function dropArmour() { removeItem(ch, 'armour', 0); emit('changed') }
 function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
 </script>
@@ -104,7 +109,10 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
               <div v-if="w.special" class="muted" style="font-size: 0.76rem; color: var(--gold)">{{ w.special }}</div>
             </td>
             <td class="num">{{ w.weight }}</td>
-            <td class="row-actions"><button class="small danger" @click="dropWeapon(i)">✕</button></td>
+            <td class="row-actions">
+              <button class="small" title="Убрать в рюкзак" @click="stowWeapon(i)">↓</button>
+              <button class="small danger" @click="dropWeapon(i)">✕</button>
+            </td>
           </tr>
           <tr v-for="g in equippedGear" :key="'e' + g.id">
             <td><b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span><span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span></td>
@@ -122,17 +130,42 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
           <tr><th>В рюкзаке <span class="en">Stowed</span></th><th style="text-align: right">Вес</th><th /></tr>
         </thead>
         <tbody>
-          <tr v-for="g in stowedGear" :key="'s' + g.id">
-            <td><b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span><span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span></td>
+          <tr v-for="(g, i) in stowedGear" :key="'s' + i + (g.kind || '') + g.id">
+            <td>
+              <b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span><span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span>
+              <span v-if="g.kind === 'weapon'" class="muted"> · {{ g.dmg }} · убрано, для атаки надо достать</span>
+            </td>
             <td class="num">{{ (g.weight || 0) * (g.qty || 1) }}</td>
             <td class="row-actions">
-              <button class="small" title="На себя" @click="shift('stowed', g)">↑</button>
+              <button class="small" :title="g.kind === 'weapon' ? 'Взять в руки' : 'На себя'" @click="shift('stowed', g)">↑</button>
               <button class="small danger" @click="drop('stowed', g)">✕</button>
             </td>
           </tr>
           <tr v-if="!stowedGear.length"><td colspan="3" class="muted">Пусто</td></tr>
         </tbody>
       </table>
+
+      <table v-if="property.length" class="item-table" style="margin-top: 16px">
+        <thead>
+          <tr><th>Имущество и животные <span class="en">Property</span></th><th style="text-align: right">Цена</th><th /></tr>
+        </thead>
+        <tbody>
+          <tr v-for="(p, i) in property" :key="'p' + i + p.id">
+            <td>
+              <b>{{ p.ru }}</b> <span class="en">{{ p.en }}</span><span v-if="p.qty > 1" class="muted"> ×{{ p.qty }}</span>
+              <div v-if="p.stat" class="muted" style="font-size: 0.74rem">{{ p.stat }}</div>
+              <div v-if="p.load" class="muted" style="font-size: 0.74rem">Везёт {{ p.load }} монет на обычной Скорости, вдвое больше — на половинной.</div>
+              <div v-if="p.cargo" class="muted" style="font-size: 0.74rem">Груз до {{ p.cargo }} монет.</div>
+            </td>
+            <td class="num">{{ formatPrice(p.cp) }}</td>
+            <td class="row-actions"><button class="small danger" @click="dropProperty(i)">✕</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p v-if="property.length" class="vtt-note">
+        Имущество в нагрузку не входит — его несёт не персонаж. Поклажу, навьюченную
+        на животное, считает Рефери по его грузоподъёмности (стр. 120).
+      </p>
 
       <p v-if="exempt.length" class="vtt-note">
         Не учитывается по правилу Рефери: {{ exempt.map((g: any) => g.ru).join(', ') }}.
