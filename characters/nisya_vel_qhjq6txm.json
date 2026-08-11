@@ -232,7 +232,15 @@
       "weight": 200,
       "cost": 20
     },
-    "shield": null,
+    "shield": {
+      "id": "shield",
+      "ru": "Щит",
+      "en": "Shield",
+      "acBonus": 1,
+      "slots": 1,
+      "weight": 100,
+      "cost": 10
+    },
     "weapons": [
       {
         "id": "shortsword",
@@ -248,10 +256,70 @@
           "melee"
         ],
         "range": null
+      },
+      {
+        "id": "warhammer",
+        "kind": "weapon",
+        "ru": "Боевой молот",
+        "en": "War hammer",
+        "dmg": "1d6",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 40,
+        "cost": 5,
+        "qual": [
+          "melee"
+        ],
+        "range": null
       }
     ],
     "equipped": [],
-    "stowed": [],
+    "stowed": [
+      {
+        "id": "rope",
+        "ru": "Верёвка (50 футов)",
+        "en": "Rope (50' long)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 100,
+        "cost": 1,
+        "cat": "tools",
+        "d": "Выдерживает вес трёх человек со снаряжением."
+      },
+      {
+        "id": "shovel",
+        "ru": "Лопата",
+        "en": "Shovel",
+        "qty": 1,
+        "slots": 1,
+        "weight": 50,
+        "cost": 2,
+        "cat": "tools",
+        "d": "Для копания земли."
+      },
+      {
+        "id": "clothes",
+        "ru": "Одежда, обычная",
+        "en": "Clothes, common",
+        "qty": 3,
+        "slots": 0,
+        "weight": 30,
+        "cost": 1,
+        "cat": "clothing",
+        "d": "Полный комплект одежды: шоссы, туника, рубаха, пояс, платье и т.п."
+      },
+      {
+        "id": "oilflask",
+        "ru": "Флакон масла",
+        "en": "Oil (flask)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 10,
+        "cost": 1,
+        "cat": "light",
+        "d": "Питает фонарь 4 часа. Можно метать как оружие (1d8) или разлить лужей (3 фута, горит 1 ход, 1d8 урона проходящим)."
+      }
+    ],
     "container": null,
     "adventuringItems": []
   },
@@ -279,32 +347,38 @@
     "total": 10
   },
   "ac": {
-    "value": 13,
+    "value": 14,
     "breakdown": [
       "Кожаный доспех: базовый КБ 12",
+      "Щит: +1",
       "Ловкость: +1"
     ],
     "situational": []
   },
   "speed": {
-    "value": 40,
-    "load": 256,
+    "value": 30,
+    "load": 556,
     "maxLoad": 1600,
     "overloaded": false,
     "loadParts": [
       "Кожаный доспех 200",
+      "Щит 100",
       "Короткий меч 20",
+      "Боевой молот 40",
+      "Верёвка (50 футов) 100",
+      "Лопата 50",
+      "Флакон масла 10",
       "Монеты (26 зм) 26",
       "Безделушка 10"
     ],
-    "equipped": 2,
-    "stowed": 0
+    "equipped": 4,
+    "stowed": 3
   },
   "xpForNextLevel": 2000,
   "portraitPrompt": {
-    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a human. male, adult. features: meticulously oiled hair; wide, spaced out features; warts. clothing: lace, posies, and frills. carrying: leather, shortsword. profession: level 1 fighter, formerly a wheat farmer. demeanour: slovenly. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
-    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: человек, мужчина, воин 1 уровня (в прошлом — пшеничный фермер). Внешность — голова: тщательно напомаженные волосы; лицо: широкие, расставленные черты; тело: бородавки. Одежда: кружева, букетики и рюши. Снаряжение: кожаный доспех, короткий меч. Настроение: неряшливый. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a human. male, adult. features: meticulously oiled hair; wide, spaced out features; warts. clothing: lace, posies, and frills. carrying: leather, a shield, shortsword, war hammer. profession: level 1 fighter, formerly a wheat farmer. demeanour: slovenly. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: человек, мужчина, воин 1 уровня (в прошлом — пшеничный фермер). Внешность — голова: тщательно напомаженные волосы; лицо: широкие, расставленные черты; тело: бородавки. Одежда: кружева, букетики и рюши. Снаряжение: кожаный доспех, щит, короткий меч, боевой молот. Настроение: неряшливый. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
   },
   "checksum": "A2BA49BE",
-  "updatedAt": "2026-08-04T21:04:52.364Z"
+  "updatedAt": "2026-08-04T21:08:45.282Z"
 }

@@ -1,0 +1,961 @@
+{
+  "schema": "dolmenwood-character/1",
+  "generatedAt": "2026-08-10T16:39:40.481Z",
+  "id": "nisya_dzhayms-logviv_r2br95wq",
+  "source": "Dolmenwood Player's Book (Necrotic Gnome, 6 Aug 2024)",
+  "options": {
+    "mode": "class",
+    "abilityMethod": "3d6-in-order",
+    "moonSignRule": true,
+    "gender": "male"
+  },
+  "level": 1,
+  "xp": 0,
+  "status": "alive",
+  "abilities": {
+    "STR": 13,
+    "INT": 7,
+    "WIS": 10,
+    "DEX": 7,
+    "CON": 11,
+    "CHA": 12
+  },
+  "abilitiesRolled": {
+    "STR": 13,
+    "INT": 7,
+    "WIS": 10,
+    "DEX": 7,
+    "CON": 11,
+    "CHA": 12
+  },
+  "subPar": false,
+  "kindred": {
+    "id": "human",
+    "ru": "Человек",
+    "en": "Human",
+    "type": "mortal",
+    "typeRu": "Смертный",
+    "size": "Medium",
+    "sizeRu": "Средний",
+    "page": 44
+  },
+  "profile": {
+    "mode": "class",
+    "id": "bard",
+    "ru": "Бард",
+    "en": "Bard",
+    "primeAbilities": [
+      "CHA",
+      "DEX"
+    ],
+    "primeRu": "Харизма и Ловкость",
+    "hitDie": "d6",
+    "aptitude": "semi-martial",
+    "aptitudeRu": "Полувоинская",
+    "armour": "Лёгкая и Средняя, без щитов",
+    "weapons": "Малое и Среднее",
+    "page": 58
+  },
+  "mods": {
+    "STR": 1,
+    "INT": -1,
+    "WIS": 0,
+    "DEX": -1,
+    "CON": 0,
+    "CHA": 0
+  },
+  "xpModifier": 0,
+  "xpModifierBreakdown": {
+    "prime": -10,
+    "primeAbility": "Харизма и Ловкость",
+    "lowestPrimeScore": 7,
+    "kindred": 10,
+    "total": 0
+  },
+  "magicResistance": 0,
+  "attack": 0,
+  "saves": {
+    "doom": 13,
+    "ray": 14,
+    "hold": 13,
+    "blast": 15,
+    "spell": 15
+  },
+  "xpForNextLevel": 1750,
+  "skills": {
+    "basic": {
+      "listen": 5,
+      "search": 6,
+      "survival": 6
+    },
+    "class": [
+      {
+        "ru": "Разбор документа",
+        "en": "Decipher Document",
+        "target": 6,
+        "d": "Успех позволяет понять суть немагического текста на незнакомом языке, разгадать шифр или опознать зашифрованные ориентиры на карте. Повторить попытку на том же документе можно только после получения уровня."
+      },
+      {
+        "ru": "Ловкость рук",
+        "en": "Legerdemain",
+        "target": 6,
+        "d": "Фокус ловкости рук: спрятать в ладони мелкий предмет, подсыпать яд в напиток, стянуть мелочь у другого существа. Штраф −1 за каждые 3 уровня жертвы или наблюдателя. При натуральной 1 — спасбросок против Рока, чтобы не быть замеченным."
+      },
+      {
+        "ru": "Слушать",
+        "en": "Listen",
+        "target": 5,
+        "d": "Прислушаться к двери, чтобы понять, есть ли кто за ней."
+      },
+      {
+        "ru": "Знание чудовищ",
+        "en": "Monster Lore",
+        "target": 5,
+        "d": "Опознать чудовище, его основные силы и уязвимости по мифам и фольклору. Повторить на том же виде чудовищ можно только после получения уровня."
+      }
+    ]
+  },
+  "languages": [
+    {
+      "ru": "Волдийский",
+      "en": "Woldish"
+    }
+  ],
+  "traits": {
+    "kindred": [
+      {
+        "ru": "Решительность",
+        "en": "Decisiveness",
+        "p": 45,
+        "d": "При ничьей в броске инициативы люди ходят первыми, будто выиграли инициативу. Считаются отдельной стороной, действующей раньше остальных."
+      },
+      {
+        "ru": "Лидерство",
+        "en": "Leadership",
+        "p": 45,
+        "d": "Верность наёмников на службе у человека повышается на 1."
+      },
+      {
+        "ru": "Задор",
+        "en": "Spirited",
+        "p": 45,
+        "d": "Люди быстро учатся: +10% ко всему получаемому опыту. Это сверх бонуса за главную характеристику. Например, человек с главной характеристикой 15 получает суммарно +15% XP."
+      }
+    ],
+    "class": [
+      {
+        "ru": "Контрчары",
+        "en": "Counter Charm",
+        "p": 58,
+        "d": "Пока бард играет и поёт, союзники в 30 футах невосприимчивы к магии, основанной на музыке или песне, и получают +2 к спасброскам против магии фей. Раз за ход. Играя, бард движется на половине Скорости, но не может атаковать или делать что-то ещё. Прекращается, если барда ранили или он провалил спасбросок."
+      },
+      {
+        "ru": "Очарование",
+        "en": "Enchantment",
+        "p": 59,
+        "d": "Раз в день за уровень (не в бою): игрой и пением бард завораживает существ в радиусе 30 футов. Суммарные уровни жертв — до двойного уровня барда. Каждая делает спасбросок против Заклинания или становится зачарованной: слушает как заворожённая и идёт за бардом. Если выступление длилось хотя бы 1 ход и не прервалось, каждая жертва делает ещё один спасбросок (с +2) или начинает считать барда близким другом и выполнять его приказы на 1 ход за уровень барда. На 1 уровне действует только на смертных; с 4 — на животных и полуфейских; с 7 — на фей и монстров."
+      }
+    ]
+  },
+  "magic": {},
+  "hp": {
+    "max": 4,
+    "current": 4,
+    "die": "d6",
+    "roll": 4,
+    "conMod": 0
+  },
+  "equipment": {
+    "armour": {
+      "id": "none",
+      "kind": "armour",
+      "ru": "Без брони",
+      "en": "Unarmoured",
+      "ac": 10,
+      "bulk": "none",
+      "bulkRu": "—",
+      "slots": 0,
+      "weight": 0,
+      "cost": 0
+    },
+    "shield": null,
+    "weapons": [
+      {
+        "id": "sling",
+        "kind": "weapon",
+        "ru": "Праща",
+        "en": "Sling",
+        "dmg": "1d4",
+        "size": "Small",
+        "slots": 1,
+        "weight": 10,
+        "cost": 2,
+        "qual": [
+          "missile"
+        ],
+        "range": "40/80/160"
+      },
+      {
+        "id": "club",
+        "kind": "weapon",
+        "ru": "Дубина",
+        "en": "Club",
+        "dmg": "1d4",
+        "size": "Medium",
+        "slots": 1,
+        "weight": 20,
+        "cost": 3,
+        "qual": [
+          "melee"
+        ],
+        "range": null
+      }
+    ],
+    "equipped": [
+      {
+        "id": "clothes",
+        "ru": "Одежда, обычная",
+        "en": "Clothes, common",
+        "qty": 1,
+        "slots": 0,
+        "weight": 30,
+        "cost": 1,
+        "cat": "clothing",
+        "d": "Полный комплект одежды: шоссы, туника, рубаха, пояс, платье и т.п."
+      },
+      {
+        "id": "beltpouch",
+        "ru": "Поясной кошель",
+        "en": "Belt pouch",
+        "qty": 1,
+        "slots": 0,
+        "weight": 10,
+        "cost": 1,
+        "cat": "container",
+        "d": "Кожаный кошель, вмещает до 50 монет."
+      },
+      {
+        "id": "windinstrument",
+        "ru": "Музыкальный инструмент (духовой)",
+        "en": "Musical instrument (wind)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 5,
+        "cat": "tools",
+        "d": "Например, флейта или дудка."
+      }
+    ],
+    "stowed": [
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "rations",
+        "ru": "Рационы (сушёные, 1 день)",
+        "en": "Rations (preserved)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 2,
+        "cat": "camp",
+        "d": "Хранятся до 2 месяцев, или 1 неделю в сырости (грибной лес, подземелья)."
+      },
+      {
+        "id": "waterskin",
+        "ru": "Бурдюк",
+        "en": "Waterskin",
+        "qty": 1,
+        "slots": 1,
+        "weight": 50,
+        "cost": 1,
+        "cat": "container",
+        "d": "Кожаный сосуд на 2 пинты. Пустой весит 5 монет."
+      },
+      {
+        "id": "tinderbox",
+        "ru": "Огниво",
+        "en": "Tinder box",
+        "qty": 1,
+        "slots": 1,
+        "weight": 10,
+        "cost": 3,
+        "cat": "light",
+        "d": "Для разжигания огня, включая факелы. В опасной обстановке шанс 2 из 6 разжечь за раунд."
+      },
+      {
+        "id": "stones",
+        "ru": "Камни для пращи (20)",
+        "en": "Sling stones (20)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 20,
+        "cost": 0,
+        "cat": "ammo",
+        "d": "Бесплатны, вес 1 монета за штуку."
+      },
+      {
+        "id": "torches",
+        "ru": "Факелы (3)",
+        "en": "Torches (3)",
+        "qty": 1,
+        "slots": 1,
+        "weight": 30,
+        "cost": 1,
+        "cat": "light",
+        "d": "Зажжённый факел даёт свет в радиусе 30 футов и горит 1 час (6 ходов). Можно применять в бою (1d4)."
+      },
+      {
+        "id": "inkquill",
+        "ru": "Чернила, перо, 5 листов бумаги",
+        "en": "Ink, quill, 5 sheets paper",
+        "qty": 1,
+        "slots": 1,
+        "weight": 6,
+        "cost": 2,
+        "cat": "tools",
+        "d": "Письменный набор."
+      },
+      {
+        "id": "grapplinghook",
+        "ru": "Кошка",
+        "en": "Grappling hook",
+        "qty": 1,
+        "slots": 1,
+        "weight": 40,
+        "cost": 20,
+        "cat": "tools",
+        "d": "Железная, с 3–4 крюками и кольцом для верёвки."
+      },
+      {
+        "id": "sledgehammer",
+        "ru": "Кувалда",
+        "en": "Sledgehammer",
+        "qty": 1,
+        "slots": 1,
+        "weight": 100,
+        "cost": 5,
+        "cat": "tools",
+        "d": "Большой тяжёлый молот для дробления камня."
+      }
+    ],
+    "container": {
+      "id": "backpack",
+      "ru": "Рюкзак",
+      "en": "Backpack",
+      "qty": 1,
+      "slots": 0,
+      "weight": 50,
+      "cost": 4,
+      "cat": "container",
+      "d": "Кожаная сумка с лямками. Вмещает до 400 монет / 10 слотов."
+    },
+    "adventuringItems": [
+      "torches",
+      "inkquill",
+      "grapplinghook",
+      "sledgehammer"
+    ]
+  },
+  "gold": 6,
+  "trinket": {
+    "ru": "Крошечная плетёная фигурка, украденная тобой из хижины ведьмы.",
+    "en": "A tiny wicker effigy that you stole from a witch's hut.",
+    "roll": 69
+  },
+  "ac": {
+    "value": 9,
+    "breakdown": [
+      "Без брони: базовый КБ 10",
+      "Ловкость: -1"
+    ],
+    "situational": []
+  },
+  "speed": {
+    "value": 30,
+    "load": 412,
+    "maxLoad": 1600,
+    "overloaded": false,
+    "loadParts": [
+      "Праща 10",
+      "Дубина 20",
+      "Музыкальный инструмент (духовой) 20",
+      "Рационы (сушёные, 1 день) 20",
+      "Рационы (сушёные, 1 день) 20",
+      "Бурдюк 50",
+      "Огниво 10",
+      "Камни для пращи (20) 20",
+      "Факелы (3) 30",
+      "Чернила, перо, 5 листов бумаги 6",
+      "Кошка 40",
+      "Кувалда 100",
+      "Рюкзак 50",
+      "Монеты (6 зм) 6",
+      "Безделушка 10"
+    ],
+    "equipped": 3,
+    "stowed": 9
+  },
+  "alignment": {
+    "ru": "Хаос",
+    "en": "Neutral",
+    "d": "Лгут и используют других ради своих целей, не заботясь о благе группы. Легко нарушают законы и нормы, считая правила такими же произвольными, как их прихоти.",
+    "rolled": true,
+    "dice": {
+      "sides": 6,
+      "results": [
+        5
+      ],
+      "label": "мировоззрение",
+      "value": 5
+    }
+  },
+  "name": {
+    "ru": "Джаймс Логвив",
+    "en": "Jymes Logueweave",
+    "first": {
+      "ru": "Джаймс",
+      "en": "Jymes"
+    },
+    "surname": {
+      "ru": "Логвив",
+      "en": "Logueweave"
+    },
+    "style": null
+  },
+  "gender": "male",
+  "background": {
+    "ru": "Ткач",
+    "en": "Weaver"
+  },
+  "details": {
+    "head": {
+      "label": "Голова",
+      "labelEn": "Head",
+      "ru": "Длинные косы",
+      "en": "Long braids"
+    },
+    "face": {
+      "label": "Лицо",
+      "labelEn": "Face",
+      "ru": "Щербатый",
+      "en": "Gap-toothed"
+    },
+    "body": {
+      "label": "Тело",
+      "labelEn": "Body",
+      "ru": "Чрезмерно волосатое",
+      "en": "Excessively hairy"
+    },
+    "speech": {
+      "label": "Речь",
+      "labelEn": "Speech",
+      "ru": "Грубая",
+      "en": "Coarse"
+    },
+    "demeanour": {
+      "label": "Нрав",
+      "labelEn": "Demeanour",
+      "ru": "Общительный",
+      "en": "Gregarious"
+    },
+    "dress": {
+      "label": "Одежда",
+      "labelEn": "Dress",
+      "ru": "Пёстрое лоскутное",
+      "en": "Colourful patchwork"
+    },
+    "desires": {
+      "label": "Желание",
+      "labelEn": "Desires",
+      "ru": "Очистить имя семьи",
+      "en": "Clear family name"
+    },
+    "beliefs": {
+      "label": "Убеждение",
+      "labelEn": "Beliefs",
+      "ru": "Наг-Лорд несёт конец света",
+      "en": "Nag-Lord brings final doom"
+    }
+  },
+  "physical": {
+    "age": 29,
+    "lifespan": 74,
+    "heightInches": 71,
+    "heightCm": 180,
+    "heightImperial": "5'11\"",
+    "weightLbs": 168,
+    "weightKg": 76
+  },
+  "moonSign": {
+    "moon": "Чешуйчатая",
+    "phase": "полная",
+    "en": "Squamous (F)",
+    "d": "+2 к спасброскам против дыхания и магических сил вивернов и драконов."
+  },
+  "birthday": {
+    "month": "Симсволд",
+    "monthEn": "Symswald",
+    "monthN": 4,
+    "day": 15
+  },
+  "log": [
+    {
+      "i": 1,
+      "step": "abilities",
+      "label": "Сила (Strength)",
+      "notation": "3d6",
+      "dice": [
+        2,
+        6,
+        5
+      ],
+      "total": 13,
+      "result": "13",
+      "value": 13
+    },
+    {
+      "i": 2,
+      "step": "abilities",
+      "label": "Интеллект (Intelligence)",
+      "notation": "3d6",
+      "dice": [
+        2,
+        1,
+        4
+      ],
+      "total": 7,
+      "result": "7",
+      "value": 7
+    },
+    {
+      "i": 3,
+      "step": "abilities",
+      "label": "Мудрость (Wisdom)",
+      "notation": "3d6",
+      "dice": [
+        5,
+        2,
+        3
+      ],
+      "total": 10,
+      "result": "10",
+      "value": 10
+    },
+    {
+      "i": 4,
+      "step": "abilities",
+      "label": "Ловкость (Dexterity)",
+      "notation": "3d6",
+      "dice": [
+        2,
+        1,
+        4
+      ],
+      "total": 7,
+      "result": "7",
+      "value": 7
+    },
+    {
+      "i": 5,
+      "step": "abilities",
+      "label": "Телосложение (Constitution)",
+      "notation": "3d6",
+      "dice": [
+        2,
+        4,
+        5
+      ],
+      "total": 11,
+      "result": "11",
+      "value": 11
+    },
+    {
+      "i": 6,
+      "step": "abilities",
+      "label": "Харизма (Charisma)",
+      "notation": "3d6",
+      "dice": [
+        3,
+        6,
+        3
+      ],
+      "total": 12,
+      "result": "12",
+      "value": 12
+    },
+    {
+      "i": 7,
+      "step": "kindred",
+      "label": "Род",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "result": "Человек (Human) — выбран игроком",
+      "manual": true
+    },
+    {
+      "i": 8,
+      "step": "class",
+      "label": "Класс",
+      "notation": "—",
+      "dice": [],
+      "total": null,
+      "result": "Бард (Bard) — выбран игроком",
+      "manual": true
+    },
+    {
+      "i": 9,
+      "step": "hp",
+      "label": "Хиты (1d6 + модификатор Телосложения)",
+      "notation": "1d6",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "4 +0 = 4 хитов"
+    },
+    {
+      "i": 10,
+      "step": "equipment",
+      "label": "Броня (d6)",
+      "notation": "1d6",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "без брони"
+    },
+    {
+      "i": 11,
+      "step": "equipment",
+      "label": "Оружие, бросок 1 (d6)",
+      "notation": "1d6",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "Праща + Камни для пращи (20)"
+    },
+    {
+      "i": 12,
+      "step": "equipment",
+      "label": "Оружие, бросок 2 (d6)",
+      "notation": "1d6",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Дубина"
+    },
+    {
+      "i": 13,
+      "step": "equipment",
+      "label": "Музыкальный инструмент (струнный/духовой)",
+      "notation": "1d2",
+      "dice": [
+        2
+      ],
+      "total": 2,
+      "result": "Музыкальный инструмент (духовой)"
+    },
+    {
+      "i": 14,
+      "step": "equipment",
+      "label": "Приключенческий предмет 1 (d20)",
+      "notation": "1d20",
+      "dice": [
+        19
+      ],
+      "total": 19,
+      "result": "Факелы (3)"
+    },
+    {
+      "i": 15,
+      "step": "equipment",
+      "label": "Приключенческий предмет 2 (d20)",
+      "notation": "1d20",
+      "dice": [
+        8
+      ],
+      "total": 8,
+      "result": "Чернила, перо, 5 листов бумаги"
+    },
+    {
+      "i": 16,
+      "step": "equipment",
+      "label": "Приключенческий предмет 3 (d20)",
+      "notation": "1d20",
+      "dice": [
+        7
+      ],
+      "total": 7,
+      "result": "Кошка"
+    },
+    {
+      "i": 17,
+      "step": "equipment",
+      "label": "Приключенческий предмет 4 (d20)",
+      "notation": "1d20",
+      "dice": [
+        16
+      ],
+      "total": 16,
+      "result": "Кувалда"
+    },
+    {
+      "i": 18,
+      "step": "equipment",
+      "label": "Безделушка рода (d100)",
+      "notation": "d100",
+      "dice": [
+        6,
+        9
+      ],
+      "total": 69,
+      "result": "Крошечная плетёная фигурка, украденная тобой из хижины ведьмы."
+    },
+    {
+      "i": 19,
+      "step": "equipment",
+      "label": "Золото в поясном кошеле (3d6)",
+      "notation": "3d6",
+      "dice": [
+        3,
+        1,
+        2
+      ],
+      "total": 6,
+      "result": "6 зм"
+    },
+    {
+      "i": 20,
+      "step": "alignment",
+      "label": "Мировоззрение (d6: 1–2 Закон, 3–4 Нейтралитет, 5–6 Хаос)",
+      "notation": "1d6",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Хаос"
+    },
+    {
+      "i": 21,
+      "step": "name",
+      "label": "Имя (d20)",
+      "notation": "1d20",
+      "dice": [
+        13
+      ],
+      "total": 13,
+      "result": "Джаймс"
+    },
+    {
+      "i": 22,
+      "step": "name",
+      "label": "Фамилия (d20)",
+      "notation": "1d20",
+      "dice": [
+        12
+      ],
+      "total": 12,
+      "result": "Логвив"
+    },
+    {
+      "i": 23,
+      "step": "background",
+      "label": "Прошлое (d100)",
+      "notation": "d100",
+      "dice": [
+        9,
+        1
+      ],
+      "total": 91,
+      "result": "Ткач"
+    },
+    {
+      "i": 24,
+      "step": "details",
+      "label": "Голова (d12)",
+      "notation": "1d12",
+      "dice": [
+        6
+      ],
+      "total": 6,
+      "result": "Длинные косы"
+    },
+    {
+      "i": 25,
+      "step": "details",
+      "label": "Лицо (d12)",
+      "notation": "1d12",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Щербатый"
+    },
+    {
+      "i": 26,
+      "step": "details",
+      "label": "Тело (d12)",
+      "notation": "1d12",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "Чрезмерно волосатое"
+    },
+    {
+      "i": 27,
+      "step": "details",
+      "label": "Речь (d12)",
+      "notation": "1d12",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "Грубая"
+    },
+    {
+      "i": 28,
+      "step": "details",
+      "label": "Нрав (d12)",
+      "notation": "1d12",
+      "dice": [
+        5
+      ],
+      "total": 5,
+      "result": "Общительный"
+    },
+    {
+      "i": 29,
+      "step": "details",
+      "label": "Одежда (d12)",
+      "notation": "1d12",
+      "dice": [
+        1
+      ],
+      "total": 1,
+      "result": "Пёстрое лоскутное"
+    },
+    {
+      "i": 30,
+      "step": "details",
+      "label": "Желание (d12)",
+      "notation": "1d12",
+      "dice": [
+        2
+      ],
+      "total": 2,
+      "result": "Очистить имя семьи"
+    },
+    {
+      "i": 31,
+      "step": "details",
+      "label": "Убеждение (d12)",
+      "notation": "1d12",
+      "dice": [
+        4
+      ],
+      "total": 4,
+      "result": "Наг-Лорд несёт конец света"
+    },
+    {
+      "i": 32,
+      "step": "physical",
+      "label": "Возраст (2d10 + 15)",
+      "notation": "2d10",
+      "dice": [
+        8,
+        6
+      ],
+      "total": 14,
+      "result": "29 лет"
+    },
+    {
+      "i": 33,
+      "step": "physical",
+      "label": "Срок жизни",
+      "notation": "2d20",
+      "dice": [
+        11,
+        13
+      ],
+      "total": 24,
+      "result": "74 лет"
+    },
+    {
+      "i": 34,
+      "step": "physical",
+      "label": "Рост (2d6 + 64 дюймов)",
+      "notation": "2d6",
+      "dice": [
+        6,
+        1
+      ],
+      "total": 7,
+      "result": "5'11\" (180 см)"
+    },
+    {
+      "i": 35,
+      "step": "physical",
+      "label": "Вес (6d10 + 120 фунтов)",
+      "notation": "6d10",
+      "dice": [
+        8,
+        10,
+        9,
+        3,
+        10,
+        8
+      ],
+      "total": 48,
+      "result": "168 фунтов (76 кг)"
+    },
+    {
+      "i": 36,
+      "step": "moonsign",
+      "label": "Лунный знак (d100, стр. 175)",
+      "notation": "d100",
+      "dice": [
+        2,
+        5
+      ],
+      "total": 25,
+      "result": ""
+    },
+    {
+      "i": 37,
+      "step": "birthday",
+      "label": "День рождения внутри фазы луны (1d3)",
+      "notation": "1d3",
+      "dice": [
+        2
+      ],
+      "total": 2,
+      "result": "15 Симсволд"
+    }
+  ],
+  "checksum": "AA7CFB10",
+  "portraitPrompt": {
+    "en": "Fantasy character portrait, three-quarter view, full figure. subject: a human. male, adult. features: long braids; gap-toothed; excessively hairy. clothing: colourful patchwork. carrying: sling, club, musical instrument (wind). profession: level 1 bard, formerly a weaver. demeanour: gregarious. setting: Dolmenwood — a tangled fairytale forest of ancient oaks, standing stones, toadstools and drifting mist; overcast, autumnal light. style: painterly old-school fantasy illustration, muted earthy palette of moss green, bark brown, ochre and faded gold, fine ink linework, storybook folk-horror mood, detailed but not glossy. no text, no watermark, no modern objects.",
+    "ru": "Портрет фэнтезийного персонажа в полный рост, вид в три четверти. Кто: человек, мужчина, бард 1 уровня (в прошлом — ткач). Внешность — голова: длинные косы; лицо: щербатый; тело: чрезмерно волосатое. Одежда: пёстрое лоскутное. Снаряжение: праща, дубина. Настроение: общительный. Место: Дольменвуд — сказочный спутанный лес древних дубов, стоячих камней, поганок и ползущего тумана; пасмурный осенний свет. Стиль: живописная старошкольная фэнтези-иллюстрация, приглушённая земляная палитра (мох, кора, охра, потускневшее золото), тонкая тушевая линия, настроение книжного фольк-хоррора. Без текста и водяных знаков."
+  },
+  "owner": "Нися",
+  "updatedAt": "2026-08-10T16:41:44.624Z",
+  "coins": {
+    "copper": 0,
+    "silver": 0,
+    "gold": 6,
+    "pellucidium": 0
+  }
+}
