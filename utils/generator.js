@@ -57,7 +57,10 @@ function buildProfile(opts) {
       grantsKnack: !!kc.grantsKnack,
       grantsSymbiotic: !!kc.grantsSymbiotic,
       grantsSpellBook: false,
-      magicType: null,
+      /* У бреггла с 4 уровня есть тайная магия (стр. 181), но стартовой книги нет.
+         Раньше здесь стоял жёсткий null, и слоты заклинаний терялись. */
+      magicType: kc.magicType || null,
+      spellsPerDay: kc.spellsPerDay || null,
       bonusLanguages: [],
       acBonusByLevel: null,
       page: kin.kcPage,
@@ -143,7 +146,9 @@ function generate(opts) {
       var total = sorted[1] + sorted[2] + sorted[3];
       log.record('abilities', ABIL_RU[a] + ' (' + ABIL_EN[a] + ')', r, { result: total + ' (отброшена ' + dropped + ')', dropped: dropped, value: total });
       scores[a] = total;
-      abilityRolls.push({ ab: a, dice: r.dice, total: total });
+      /* dropIndex — какая именно кость отброшена, чтобы лоток её пригасил:
+         иначе видно четыре кости и сумму, которая им не равна. */
+      abilityRolls.push({ ab: a, dice: r.dice, total: total, dropIndex: r.dice.indexOf(dropped) });
     } else {
       r = DICE.roll(3, 6);
       log.record('abilities', ABIL_RU[a] + ' (' + ABIL_EN[a] + ')', r, { result: String(r.total), value: r.total });
@@ -164,7 +169,7 @@ function generate(opts) {
     title: 'Шаг 1. Бросок характеристик',
     subtitle: method === '4d6-drop-lowest' ? '4d6, отбросить худшую, по порядку' : '3d6 по порядку, без перестановок (стр. 18)',
     dice: abilityRolls.map(function (r) {
-      return { sides: 6, results: r.dice, label: ABIL_RU[r.ab], value: r.total };
+      return { sides: 6, results: r.dice, label: ABIL_RU[r.ab], value: r.total, dropIndex: r.dropIndex };
     }),
     lines: ABIL.map(function (a) {
       return ABIL_RU[a] + ' ' + scores[a] + ' (модификатор ' + fmtMod(abilityMod(scores[a])) + ')';
@@ -510,14 +515,25 @@ function generate(opts) {
 
   /* --- Лунный знак --- */
   if (opts.moonSign !== false && kin.type !== 'fairy') {
-    var ms = log.pickRange('moonsign', 'Лунный знак (d100, стр. 175)', D.MOON_SIGNS).item;
+    /* Бросок луны держим под рукой: birthdayFromMoon пишет в журнал свой бросок,
+       и «последняя запись» после него — уже день рождения, а не луна. */
+    var moonPick = log.pickRange('moonsign', 'Лунный знак (d100, стр. 175)', D.MOON_SIGNS);
+    var ms = moonPick.item;
     ch.moonSign = { moon: ms.moon, phase: ms.phase, en: ms.moonEn, d: ms.d };
-    ch.birthday = birthdayFromMoon(log, ch.moonSign);
+    var bday = birthdayFromMoon(log, ch.moonSign);
+    var moonDice = [{ sides: 100, results: moonPick.roll.dice, label: 'луна', value: moonPick.roll.total }];
+    if (bday) {
+      moonDice.push({ sides: bday.roll.sides, results: bday.roll.dice, label: 'день фазы', value: bday.roll.total });
+      /* В лист кладём только сам день: бросок уже записан в журнале. */
+      ch.birthday = { month: bday.month, monthEn: bday.monthEn, monthN: bday.monthN, day: bday.day };
+    } else {
+      ch.birthday = null;
+    }
     steps.push({
       id: 'moonsign',
       title: 'Лунный знак (необязательное правило)',
       subtitle: 'd100 по таблице лунных знаков (стр. 175). У фей лунных знаков не бывает',
-      dice: [{ sides: 100, results: log.entries[log.entries.length - 1].dice, label: 'луна', value: log.entries[log.entries.length - 1].total }],
+      dice: moonDice,
       lines: [ms.moon + ' луна, ' + ms.phase + ' (' + ms.moonEn + ')', ms.d]
     });
   } else if (kin.type === 'fairy') {
@@ -769,7 +785,9 @@ function birthdayFromMoon(log, moonSign) {
   if (day > month.days) day = month.days;
   if (log) log.record('birthday', 'День рождения внутри фазы луны (1d' + span + ')', r,
     { result: day + ' ' + month.ru });
-  return { month: month.ru, monthEn: month.en, monthN: monthN, day: day };
+  /* roll возвращаем наружу, чтобы шаг показал именно этот бросок,
+     а не выуживал «последнюю запись журнала» и не путал кости. */
+  return { month: month.ru, monthEn: month.en, monthN: monthN, day: day, roll: r };
 }
 
 /* Скорость по весу переносимого (стр. 148) — основная система нашей игры. */

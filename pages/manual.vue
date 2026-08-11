@@ -4,8 +4,11 @@ import * as D from '~/data'
 import { Generator } from '~/utils/generator.js'
 import {
   emptyDraft, profileFor, checkDraft, buildCharacter,
-  glamourQuota, symbioticQuota, talentQuota, hpRange, languageQuota, ABIL
+  glamourQuota, symbioticQuota, talentQuota, hpRange, languageQuota,
+  arcaneKnownAllowed, giftBlocks, ABIL
 } from '~/utils/manual.js'
+import { matches } from '~/utils/text.js'
+import { dice } from '~/utils/dice.js'
 
 const { save, list } = useCharacters()
 const router = useRouter()
@@ -33,7 +36,10 @@ watch(() => draft.value.kindred, () => {
     const ok = D.CLASS_ORDER.find((c) => Generator.classAllowedFor(draft.value.kindred, c).ok)
     if (ok) draft.value.cls = ok
   }
-  draft.value.details = { head: '', face: '', body: '', speech: '', demeanour: '', dress: '', desires: '', beliefs: '' }
+  // Таблицы примет и безделушек у каждого рода свои — при смене рода сбрасываем.
+  draft.value.details = emptyDraft().details
+  draft.value.trinket = emptyDraft().trinket
+  trinketQuery.value = ''
   draft.value.symbiotic = []
   draft.value.knack = ''
 })
@@ -56,20 +62,54 @@ const derived = computed(() => {
 })
 const hp = computed(() => hpRange(draft.value))
 
-/* Таблицы для выпадающих списков внешности */
+/* Таблицы для выпадающих списков внешности.
+   Набор у родов разный: у бреггла и гримолкина вместо «Тела» идёт «Шерсть»,
+   поэтому берём то, что есть у рода, и подписи тоже из его данных. */
+const DETAIL_ORDER = ['head', 'face', 'body', 'fur', 'dress', 'demeanour', 'speech', 'desires', 'beliefs']
 const detailTables = computed(() => {
   const k = kin.value
   return [
-    { key: 'head', ru: 'Голова', en: 'Head', items: k.details.head?.items || [] },
-    { key: 'face', ru: 'Лицо', en: 'Face', items: k.details.face?.items || [] },
-    { key: 'body', ru: 'Тело / Шерсть', en: 'Body / Fur', items: (k.details.body || k.details.fur)?.items || [] },
-    { key: 'dress', ru: 'Одежда', en: 'Dress', items: k.details.dress?.items || [] },
-    { key: 'demeanour', ru: 'Нрав', en: 'Demeanour', items: k.details.demeanour?.items || [] },
-    { key: 'speech', ru: 'Речь', en: 'Speech', items: k.details.speech?.items || [] },
-    { key: 'desires', ru: 'Желание', en: 'Desires', items: k.details.desires?.items || [] },
-    { key: 'beliefs', ru: 'Убеждение', en: 'Beliefs', items: k.details.beliefs?.items || [] }
+    ...DETAIL_ORDER
+      .filter((key) => k.details[key])
+      .map((key) => ({ key, ru: k.details[key].ru, en: k.details[key].en, items: k.details[key].items || [] }))
   ]
 })
+
+/* ===== Безделушка рода (стр. 34) =====
+   При генерации она бросается по d100; при ручном вводе её можно выбрать,
+   бросить честной костью или вписать свою. */
+const trinketQuery = ref('')
+const trinketList = computed(() => {
+  const all = kin.value.trinkets || []
+  const q = trinketQuery.value
+  return all.filter((t: any) => matches([t.ru, t.en].join(' '), q))
+})
+const trinketIsCustom = computed(() => {
+  const t = draft.value.trinket
+  if (!t?.ru) return false
+  return !(kin.value.trinkets || []).some((x: any) => x.ru === t.ru)
+})
+
+function pickTrinket(en: string) {
+  const t = (kin.value.trinkets || []).find((x: any) => x.en === en)
+  draft.value.trinket = t ? { ru: t.ru, en: t.en, roll: null } : { ru: '', en: '', roll: null }
+}
+function rollTrinket() {
+  const r = dice.rollD100()
+  const all = kin.value.trinkets || []
+  const t = all.find((x: any) => r.total >= x.from && r.total <= x.to) || all[all.length - 1]
+  draft.value.trinket = { ru: t.ru, en: t.en, roll: r.total }
+  trinketQuery.value = ''
+}
+function customTrinket(text: string) {
+  draft.value.trinket = { ru: text, en: text, roll: null }
+}
+
+/* Что вообще можно выбрать в «Особых дарах» у этого персонажа.
+   Список живёт в manual.js — там же его проверяет сверка по всем родам и классам.
+   У вудгрю (и у бреггла до 4 уровня) выбирать нечего: все дары автоматические,
+   и пустая карточка только сбивает с толку — прячем её целиком. */
+const gifts = computed(() => giftBlocks(draft.value))
 
 const backgroundTable = computed(() => kin.value.backgroundsD100 || kin.value.backgrounds || [])
 
@@ -215,8 +255,8 @@ async function create() {
           </div>
         </div>
 
-        <!-- Особые дары -->
-        <div v-if="prof" class="card">
+        <!-- Особые дары. Если выбирать нечего — карточки нет вовсе. -->
+        <div v-if="prof && gifts.length" class="card">
           <h3>Особые дары</h3>
 
           <template v-if="glamourQuota(draft) > 0">
@@ -283,6 +323,28 @@ async function create() {
             </select>
           </template>
 
+          <template v-if="arcaneKnownAllowed(draft) > 0">
+            <label class="field" style="margin-top: 14px">
+              <span>Выученные тайные заклинания <span class="en">Arcane spells</span></span>
+            </label>
+            <p class="muted" style="margin-top: -6px; font-size: 0.84rem">
+              С 4 уровня длиннорогий заучивает {{ arcaneKnownAllowed(draft) }} закл. 1 ранга в день (стр. 181).
+              Стартовой книги у него нет: заклинания он учит у наставника, из найденных книг или
+              исследованием — отметь те, что персонаж уже знает.
+            </p>
+            <div class="chips">
+              <button
+                v-for="(s, id) in D.ARCANE_R1" :key="id" class="chip"
+                :class="{ on: draft.arcaneSpells.includes(id) }" :title="s.d"
+                @click="toggle(draft.arcaneSpells, id, 0)"
+              >{{ s.ru }}</button>
+            </div>
+            <p class="muted" style="font-size: 0.8rem">
+              В приложении пока есть только заклинания 1 ранга. Заклинания старших рангов
+              вписывай в заметки — выдумывать их из головы нельзя.
+            </p>
+          </template>
+
           <template v-if="prof.id === 'cleric' && draft.level >= 2">
             <label class="field" style="margin-top: 14px"><span>Святой орден</span></label>
             <div class="chips">
@@ -327,6 +389,52 @@ async function create() {
             </select>
           </label>
 
+          <hr class="rule">
+          <label class="field">
+            <span>Безделушка <span class="en">Trinket</span> — таблица рода, стр. 34</span>
+          </label>
+          <p class="muted" style="margin-top: -6px; font-size: 0.84rem">
+            При создании персонаж получает безделушку броском d100. Выбери из таблицы,
+            брось кость или впиши свою, если Рефери дал что-то особое.
+          </p>
+
+          <div v-if="draft.trinket.ru" class="callout" style="margin-bottom: 10px">
+            <b>{{ draft.trinket.ru }}</b>
+            <span v-if="draft.trinket.roll" class="muted"> · выпало {{ draft.trinket.roll }}</span>
+            <span v-if="trinketIsCustom" class="muted"> · своя, в таблице рода такой нет</span>
+            <br><span class="en">{{ draft.trinket.en }}</span>
+            <div style="margin-top: 8px">
+              <button class="small" @click="draft.trinket = { ru: '', en: '', roll: null }">Убрать</button>
+            </div>
+          </div>
+
+          <div class="btn-row" style="margin-bottom: 8px">
+            <button class="small" @click="rollTrinket">🎲 Бросить d100</button>
+          </div>
+
+          <input
+            v-model="trinketQuery" type="text" class="edit-field"
+            placeholder="Поиск по таблице: свеча, кость, письмо…"
+          >
+          <select
+            class="edit-field" style="margin-top: 8px"
+            :value="trinketIsCustom ? '' : draft.trinket.en"
+            @change="pickTrinket(($event.target as HTMLSelectElement).value)"
+          >
+            <option value="">— выбери из таблицы рода ({{ trinketList.length }}) —</option>
+            <option v-for="t in trinketList" :key="t.en" :value="t.en">{{ t.from }}–{{ t.to }} · {{ t.ru }}</option>
+          </select>
+
+          <label class="field" style="margin-top: 8px">
+            <span>…или впиши свою</span>
+            <input
+              type="text" class="edit-field" :value="trinketIsCustom ? draft.trinket.ru : ''"
+              placeholder="Например: обломок рога, добытый в игре"
+              @input="customTrinket(($event.target as HTMLInputElement).value)"
+            >
+          </label>
+
+          <hr class="rule">
           <label class="field"><span>Заметки</span>
             <textarea v-model="draft.notes" class="edit-field" style="min-height: 90px; font-family: var(--font)" /></label>
         </div>

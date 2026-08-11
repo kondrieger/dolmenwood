@@ -11,7 +11,13 @@ interface Props {
   character: any
 }
 const props = defineProps<Props>()
-const emit = defineEmits<{ changed: []; levelup: []; items: [] }>()
+const emit = defineEmits<{
+  changed: []
+  levelup: []
+  items: []
+  open: [where: string, index: number]
+  custom: []
+}>()
 
 const ch = props.character
 const tab = ref('stats')
@@ -317,7 +323,13 @@ const moonSignEn = computed(() => {
 
     <!-- ============ INVENTORY ============ -->
     <div v-show="tab === 'inventory'" class="vtt-pane">
-      <CharacterInventoryPanel :character="ch" @changed="touch(true)" @items="emit('items')" />
+      <CharacterInventoryPanel
+        :character="ch"
+        @changed="touch(true)"
+        @items="emit('items')"
+        @custom="emit('custom')"
+        @open="(where, index) => emit('open', where, index)"
+      />
     </div>
 
     <!-- ============ MAGIC ============ -->

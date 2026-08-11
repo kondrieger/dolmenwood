@@ -84,6 +84,25 @@ const ch = props.character
     </div>
   </div>
 
+  <div v-if="m.arcaneSpells && m.arcaneSpells.length" class="vtt-panel">
+    <div class="vtt-panel-head">Arcane Spells <span class="vtt-ru">Тайные заклинания</span></div>
+    <div class="vtt-panel-body">
+      <p class="vtt-note" style="margin-top: 0">
+        Выученные заклинания. Книги заклинаний у этого персонажа нет — он учит их
+        у наставника, из найденных книг или исследованием (стр. 181).
+      </p>
+      <div class="cheat">
+        <details v-for="s in m.arcaneSpells" :key="s.en" open>
+          <summary>{{ s.ru }} <span class="en">{{ s.en }}</span></summary>
+          <div class="body">
+            <p class="muted" style="font-size: 0.82rem">Ранг {{ s.rank }} · {{ s.dur }} · {{ s.range }}</p>
+            <p>{{ s.d }}</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
   <div v-if="m.holySpells && m.holySpells.length" class="vtt-panel">
     <div class="vtt-panel-head">Holy Spells <span class="vtt-ru">Святые заклинания</span></div>
     <div class="vtt-panel-body">

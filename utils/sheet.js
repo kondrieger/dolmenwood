@@ -5,6 +5,7 @@ import * as D from '../data/index.js'
 import { Generator } from './generator.js'
 import { portraitPrompt } from './portrait.js'
 import { priceCp } from './money.js'
+import { slugify } from './ids.js'
 
 /** Восстанавливает «профиль» (класс или род-класс) по сохранённому персонажу. */
 export function profileOf(ch) {
@@ -230,6 +231,140 @@ export function removeItem(ch, where, index) {
     if (it && (it.qty || 1) > 1) it.qty -= 1
     else list.splice(index, 1)
   }
+  recompute(ch)
+  return ch
+}
+
+/* ============ Правка отдельного предмета ============ */
+
+/** Список, в котором лежит предмет. */
+function listFor(ch, where) {
+  const eq = ch.equipment
+  if (where === 'weapons') return eq.weapons
+  if (where === 'equipped') return eq.equipped
+  if (where === 'stowed') return eq.stowed
+  if (where === 'property') return (eq.property = eq.property || [])
+  return null
+}
+
+/** Предмет по расположению и номеру. Броня и щит лежат поодиночке. */
+export function itemAt(ch, where, index) {
+  if (where === 'armour') return ch.equipment.armour
+  if (where === 'shield') return ch.equipment.shield
+  const list = listFor(ch, where)
+  return list ? list[index] : null
+}
+
+/** Каноническая запись книги для предмета, или null, если предмет не книжный. */
+export function bookEntry(item) {
+  if (!item || !item.id) return null
+  if (item.kind === 'weapon') return D.WEAPONS[item.id] || null
+  if (item.kind === 'armour') return D.ARMOUR[item.id] || null
+  if (item.kind === 'shield' || item.id === 'shield') return D.SHIELD
+  if (item.kind === 'horse') return D.HORSES[item.id] || null
+  if (item.kind === 'hound') return D.HOUNDS[item.id] || null
+  if (item.kind === 'vehicle') return D.VEHICLES[item.id] || null
+  return D.GEAR[item.id] || null
+}
+
+/** Поля, расхождение которых с книгой считается правкой руками. */
+const TRACKED = ['ru', 'en', 'weight', 'cp', 'slots', 'dmg']
+
+/** Книжное значение поля; цена приводится к медякам. */
+function bookValue(book, field) {
+  if (!book) return undefined
+  return field === 'cp' ? priceCp(book) : book[field]
+}
+
+/** Чем предмет отличается от книги: [{ field, ours, book }]. */
+export function divergences(item) {
+  const book = bookEntry(item)
+  if (!book || item.custom) return []
+  return TRACKED
+    .map((field) => ({ field, ours: item[field], book: bookValue(book, field) }))
+    .filter((x) => x.book !== undefined && x.ours !== undefined && x.ours !== x.book)
+}
+
+/**
+ * Правит предмет. Если книжное значение изменили руками, ставится пометка
+ * edited: Рефери должен видеть, что цифра больше не из книги.
+ */
+export function updateItem(ch, where, index, patch) {
+  const it = itemAt(ch, where, index)
+  if (!it) return ch
+  Object.assign(it, patch)
+  if (it.qty != null) it.qty = Math.max(1, Number(it.qty) || 1)
+  if (!it.custom) {
+    if (divergences(it).length) it.edited = true
+    else delete it.edited
+  }
+  recompute(ch)
+  return ch
+}
+
+/** Возвращает предмету книжные значения. */
+export function resetToBook(ch, where, index) {
+  const it = itemAt(ch, where, index)
+  const book = bookEntry(it)
+  if (!it || !book) return ch
+  TRACKED.forEach((f) => {
+    const v = bookValue(book, f)
+    if (v !== undefined) it[f] = v
+  })
+  delete it.edited
+  recompute(ch)
+  return ch
+}
+
+/** Перекладывает предмет в другое место листа. */
+export function relocateItem(ch, from, index, to) {
+  if (from === to) return ch
+  const it = itemAt(ch, from, index)
+  if (!it) return ch
+  // У оружия свой маршрут между руками и рюкзаком — он в moveItem.
+  if ((from === 'weapons' && to === 'stowed') ||
+      (from === 'stowed' && to === 'weapons' && it.kind === 'weapon')) {
+    return moveItem(ch, from, index)
+  }
+  const src = listFor(ch, from)
+  const dst = listFor(ch, to)
+  if (!src || !dst) return ch
+  src.splice(index, 1)
+  stackInto(dst, it)
+  recompute(ch)
+  return ch
+}
+
+/**
+ * Свой предмет, которого нет в книге. Помечается custom, чтобы Рефери
+ * сразу видел отсебятину: правила такого предмета не знают.
+ */
+export function addCustomItem(ch, where, draft) {
+  const num = (v) => (v === '' || v == null ? null : Number(v))
+  const entry = {
+    id: 'custom_' + (slugify(draft.ru || draft.en || '', 20) || 'item') + '_' + Math.random().toString(36).slice(2, 8),
+    custom: true,
+    ru: draft.ru || 'Без названия',
+    en: draft.en || '',
+    qty: Math.max(1, Number(draft.qty) || 1),
+    weight: num(draft.weight),
+    cp: num(draft.cp),
+    slots: Number(draft.slots) || 0,
+    cat: 'custom',
+    d: draft.d || ''
+  }
+  if (draft.kind === 'weapon') {
+    entry.kind = 'weapon'
+    entry.dmg = draft.dmg || ''
+    entry.size = draft.size || 'Medium'
+    entry.qual = draft.qual && draft.qual.length ? draft.qual : ['melee']
+    if (where === 'weapons') {
+      ch.equipment.weapons.push(entry)
+      recompute(ch)
+      return ch
+    }
+  }
+  stackInto(listFor(ch, where) || ch.equipment.stowed, entry)
   recompute(ch)
   return ch
 }

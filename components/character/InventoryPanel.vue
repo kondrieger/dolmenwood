@@ -8,7 +8,14 @@ interface Props {
   character: any
 }
 const props = defineProps<Props>()
-const emit = defineEmits<{ changed: []; items: [] }>()
+const emit = defineEmits<{
+  changed: []
+  items: []
+  /** Открыть карточку предмета: где лежит и под каким номером. */
+  open: [where: string, index: number]
+  /** Открыть карточку создания своего предмета. */
+  custom: []
+}>()
 
 const ch = props.character
 const counts = Generator.countsForLoad
@@ -36,6 +43,11 @@ function shift(where: string, item: any) {
   const list = where === 'equipped' ? ch.equipment.equipped : ch.equipment.stowed
   moveItem(ch, where, realIndex(list, item))
   emit('changed')
+}
+/** Открыть карточку предмета из списка «на себе» или «в рюкзаке». */
+function openGear(where: string, item: any) {
+  const list = where === 'equipped' ? ch.equipment.equipped : ch.equipment.stowed
+  emit('open', where, realIndex(list, item))
 }
 function dropProperty(i: number) { removeItem(ch, 'property', i); emit('changed') }
 function dropWeapon(i: number) { removeItem(ch, 'weapons', i); emit('changed') }
@@ -84,7 +96,11 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
     <div class="vtt-panel-body">
       <div class="btn-row no-print" style="margin-bottom: 12px">
         <button class="primary" @click="emit('items')">＋ Добавить из каталога книги</button>
+        <button @click="emit('custom')">✎ Свой предмет</button>
       </div>
+      <p class="vtt-note" style="margin-top: -6px">
+        Щёлкни по названию, чтобы открыть карточку предмета и поправить её.
+      </p>
 
       <table class="item-table">
         <thead>
@@ -92,20 +108,33 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
         </thead>
         <tbody>
           <tr v-if="ch.equipment.armour && ch.equipment.armour.id !== 'none'">
-            <td><b>{{ ch.equipment.armour.ru }}</b> <span class="en">{{ ch.equipment.armour.en }}</span>
-              <span class="muted"> · КБ {{ ch.equipment.armour.ac }} · {{ ch.equipment.armour.bulkRu }}</span></td>
+            <td>
+              <button class="item-open" @click="emit('open', 'armour', 0)">
+                <b>{{ ch.equipment.armour.ru }}</b> <span class="en">{{ ch.equipment.armour.en }}</span>
+              </button>
+              <span class="muted"> · КБ {{ ch.equipment.armour.ac }} · {{ ch.equipment.armour.bulkRu }}</span>
+            </td>
             <td class="num">{{ ch.equipment.armour.weight }}</td>
             <td class="row-actions"><button class="small danger" title="Снять" @click="dropArmour">✕</button></td>
           </tr>
           <tr v-if="ch.equipment.shield">
-            <td><b>Щит</b> <span class="en">Shield</span> <span class="muted"> · +1 КБ</span></td>
+            <td>
+              <button class="item-open" @click="emit('open', 'shield', 0)">
+                <b>Щит</b> <span class="en">Shield</span>
+              </button>
+              <span class="muted"> · +1 КБ</span>
+            </td>
             <td class="num">100</td>
             <td class="row-actions"><button class="small danger" @click="dropShield">✕</button></td>
           </tr>
           <tr v-for="(w, i) in ch.equipment.weapons" :key="'w' + i">
             <td>
-              <b>{{ w.ru }}</b> <span class="en">{{ w.en }}</span>
+              <button class="item-open" @click="emit('open', 'weapons', i)">
+                <b>{{ w.ru }}</b> <span class="en">{{ w.en }}</span>
+              </button>
               <span class="muted"> · {{ w.dmg }}</span>
+              <span v-if="w.custom" class="mark" title="Своего предмета нет в книге">своё</span>
+              <span v-else-if="w.edited" class="mark" title="Значение изменено вручную">правлено</span>
               <div v-if="w.special" class="muted" style="font-size: 0.76rem; color: var(--gold)">{{ w.special }}</div>
             </td>
             <td class="num">{{ w.weight }}</td>
@@ -115,7 +144,14 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
             </td>
           </tr>
           <tr v-for="g in equippedGear" :key="'e' + g.id">
-            <td><b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span><span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span></td>
+            <td>
+              <button class="item-open" @click="openGear('equipped', g)">
+                <b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span>
+              </button>
+              <span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span>
+              <span v-if="g.custom" class="mark" title="Своего предмета нет в книге">своё</span>
+              <span v-else-if="g.edited" class="mark" title="Значение изменено вручную">правлено</span>
+            </td>
             <td class="num">{{ (g.weight || 0) * (g.qty || 1) }}</td>
             <td class="row-actions">
               <button class="small" title="В рюкзак" @click="shift('equipped', g)">↓</button>
@@ -132,7 +168,12 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
         <tbody>
           <tr v-for="(g, i) in stowedGear" :key="'s' + i + (g.kind || '') + g.id">
             <td>
-              <b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span><span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span>
+              <button class="item-open" @click="openGear('stowed', g)">
+                <b>{{ g.ru }}</b> <span class="en">{{ g.en }}</span>
+              </button>
+              <span v-if="g.qty > 1" class="muted"> ×{{ g.qty }}</span>
+              <span v-if="g.custom" class="mark" title="Своего предмета нет в книге">своё</span>
+              <span v-else-if="g.edited" class="mark" title="Значение изменено вручную">правлено</span>
               <span v-if="g.kind === 'weapon'" class="muted"> · {{ g.dmg }} · убрано, для атаки надо достать</span>
             </td>
             <td class="num">{{ (g.weight || 0) * (g.qty || 1) }}</td>
@@ -152,7 +193,10 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
         <tbody>
           <tr v-for="(p, i) in property" :key="'p' + i + p.id">
             <td>
-              <b>{{ p.ru }}</b> <span class="en">{{ p.en }}</span><span v-if="p.qty > 1" class="muted"> ×{{ p.qty }}</span>
+              <button class="item-open" @click="emit('open', 'property', i)">
+                <b>{{ p.ru }}</b> <span class="en">{{ p.en }}</span>
+              </button>
+              <span v-if="p.qty > 1" class="muted"> ×{{ p.qty }}</span>
               <div v-if="p.stat" class="muted" style="font-size: 0.74rem">{{ p.stat }}</div>
               <div v-if="p.load" class="muted" style="font-size: 0.74rem">Везёт {{ p.load }} монет на обычной Скорости, вдвое больше — на половинной.</div>
               <div v-if="p.cargo" class="muted" style="font-size: 0.74rem">Груз до {{ p.cargo }} монет.</div>
@@ -176,3 +220,28 @@ function dropShield() { removeItem(ch, 'shield', 0); emit('changed') }
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Название предмета — кнопка, но выглядит как текст: щелчок открывает карточку. */
+.item-open {
+  all: unset;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--line);
+}
+.item-open:hover b { color: var(--gold); }
+.item-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Пометка, что значение не книжное — Рефери должен это видеть. */
+.mark {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  vertical-align: middle;
+}
+</style>

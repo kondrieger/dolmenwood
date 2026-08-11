@@ -36,11 +36,17 @@ export function emptyDraft() {
     knack: '',
     symbiotic: [],
     spellBook: '',
+    /* Выученные тайные заклинания — для тех, у кого есть слоты, но нет
+       стартовой книги (бреггл-род-класс с 4 уровня, стр. 181). */
+    arcaneSpells: [],
     holyOrder: '',
     combatTalents: [],
     liege: null,
-    /* Внешность и прочее */
-    details: { head: '', face: '', body: '', speech: '', demeanour: '', dress: '', desires: '', beliefs: '' },
+    /* Внешность и прочее.
+       fur нужен брегглам и гримолкинам: у них вместо таблицы «Тело» таблица «Шерсть». */
+    details: { head: '', face: '', body: '', fur: '', speech: '', demeanour: '', dress: '', desires: '', beliefs: '' },
+    /* Безделушка рода — при генерации бросается по d100 (стр. 34) */
+    trinket: { ru: '', en: '', roll: null },
     physical: { age: null, lifespan: null, heightCm: null, weightKg: null },
     moonSign: '',
     extraLanguages: [],
@@ -109,6 +115,40 @@ export function languageQuota(draft) {
 
 /* ================== Проверки по книге ================== */
 
+/**
+ * Есть ли у персонажа слоты тайных заклинаний без стартовой книги.
+ * Так устроен бреггл-род-класс: с 4 уровня слоты появляются, но книга не даётся —
+ * заклинания он учит у наставника, из найденных книг или исследованием (стр. 181).
+ * У мага наоборот: книга есть, и заклинания берутся из неё.
+ */
+export function arcaneKnownAllowed(draft) {
+  const prof = profileFor(draft)
+  if (prof.magicType !== 'arcane' || prof.grantsSpellBook || !prof.spellsPerDay) return 0
+  const row = prof.spellsPerDay[Math.min(15, Math.max(1, draft.level)) - 1]
+  return row ? row[0] : 0
+}
+
+/**
+ * Какие блоки выбора должна показать форма для этого персонажа.
+ * Один список на форму и на проверку: если правила что-то дают, а блока тут нет —
+ * значит игроку негде это указать.
+ */
+export function giftBlocks(draft) {
+  const prof = profileFor(draft)
+  const kin = D.KINDREDS[draft.kindred]
+  return [
+    glamourQuota(draft) > 0 && 'glamours',
+    prof.grantsLesserRune && 'runes',
+    (prof.grantsKnack || (prof.mode === 'class' && kin.id === 'mossling')) && 'knack',
+    symbioticQuota(draft) > 0 && 'symbiotic',
+    talentQuota(draft) > 0 && 'talents',
+    prof.grantsSpellBook && 'spellbook',
+    arcaneKnownAllowed(draft) > 0 && 'arcane',
+    prof.id === 'cleric' && draft.level >= 2 && 'holyorder',
+    prof.needsLiege && 'liege'
+  ].filter(Boolean)
+}
+
 export function checkDraft(draft) {
   const issues = []
   const prof = profileFor(draft)
@@ -147,6 +187,14 @@ export function checkDraft(draft) {
   }
   if (prof.needsLiege && !draft.liege) {
     add('warn', 'Не выбран сюзерен', 'Рыцарь служит одному из младших благородных домов (стр. 70).')
+  }
+
+  /* Безделушка есть у каждого персонажа при создании (стр. 34), но за игру её
+     могли потерять, продать или проесть — потому замечание, а не ошибка. */
+  if (!draft.trinket || !String(draft.trinket.ru || '').trim()) {
+    add('info', 'Не указана безделушка',
+      'При создании персонаж получает безделушку рода по броску d100 (стр. 34). ' +
+      'Если она была потеряна или продана — так и оставь.')
   }
 
   const hp = hpRange(draft)
@@ -243,18 +291,16 @@ export function buildCharacter(draft, takenIds = []) {
     if (l && !languages.some((x) => x.en === l.en)) languages.push({ ru: l.ru, en: l.en })
   })
 
+  /* Набор таблиц примет у родов разный: у бреггла и гримолкина вместо «Тела»
+     идёт «Шерсть». Поэтому идём по таблицам самого рода, а не по общему списку,
+     и подписи берём оттуда же. */
   const details = {}
-  const LABELS = {
-    head: ['Голова', 'Head'], face: ['Лицо', 'Face'], body: ['Тело', 'Body'],
-    speech: ['Речь', 'Speech'], demeanour: ['Нрав', 'Demeanour'], dress: ['Одежда', 'Dress'],
-    desires: ['Желание', 'Desires'], beliefs: ['Убеждение', 'Beliefs']
-  }
-  Object.keys(LABELS).forEach((k) => {
-    const table = kin.details[k] || kin.details.fur
+  Object.keys(kin.details).forEach((k) => {
+    const table = kin.details[k]
     const chosenEn = draft.details[k]
     if (!chosenEn) return
-    const item = table ? table.items.find((x) => x.en === chosenEn) : null
-    details[k] = { label: LABELS[k][0], labelEn: LABELS[k][1], ru: item ? item.ru : chosenEn, en: chosenEn }
+    const item = table.items.find((x) => x.en === chosenEn)
+    details[k] = { label: table.ru, labelEn: table.en, ru: item ? item.ru : chosenEn, en: chosenEn }
   })
 
   const align = Generator.ALIGNMENTS[draft.alignment] || Generator.ALIGNMENTS.Neutral
@@ -281,6 +327,14 @@ export function buildCharacter(draft, takenIds = []) {
         })
       }
     }
+  }
+  if (draft.arcaneSpells && draft.arcaneSpells.length) {
+    magic.arcaneSpells = draft.arcaneSpells
+      .map((id) => {
+        const s = D.ARCANE_R1[id]
+        return s ? { id, ru: s.ru, en: s.en, rank: 1, dur: s.dur, range: s.range, d: s.d } : null
+      })
+      .filter(Boolean)
   }
   if (draft.holyOrder) magic.holyOrder = D.HOLY_ORDERS.find((o) => o.id === draft.holyOrder)
   if (prof.spellsPerDay) magic.spellsPerDay = prof.spellsPerDay[level - 1]
@@ -344,7 +398,13 @@ export function buildCharacter(draft, takenIds = []) {
 
     gold: Number(draft.gold) || 0,
     coins: { copper: 0, silver: 0, gold: Number(draft.gold) || 0, pellucidium: 0 },
-    trinket: { ru: '—', en: '—', roll: null },
+    /* Безделушка рода (стр. 34). Прочерк значит, что игрок её не указал —
+       персонаж мог её потерять, продать или просто не помнить. */
+    trinket: {
+      ru: (draft.trinket && draft.trinket.ru) || '—',
+      en: (draft.trinket && draft.trinket.en) || '—',
+      roll: (draft.trinket && draft.trinket.roll) || null
+    },
 
     equipment: {
       armour: { id: 'none', kind: 'armour', ru: D.ARMOUR.none.ru, en: D.ARMOUR.none.en, ac: 10, bulk: 'none', bulkRu: '—', slots: 0, weight: 0, cost: 0 },

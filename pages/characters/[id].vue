@@ -27,6 +27,8 @@ await reloadFromDisk()
 
 const showItems = ref(false)
 const showLevelUp = ref(false)
+/** Открытая карточка предмета: где он лежит и под каким номером. 'new' — создание своего. */
+const openItem = ref<{ where: string; index: number } | null>(null)
 
 function onChanged() {
   if (!character.value) return
@@ -149,6 +151,8 @@ const attacks = computed(() => {
       @changed="onChanged"
       @levelup="showLevelUp = true"
       @items="showItems = true"
+      @custom="openItem = { where: 'new', index: 0 }"
+      @open="(where, index) => (openItem = { where, index })"
     />
 
     <div class="card">
@@ -202,6 +206,16 @@ const attacks = computed(() => {
       v-if="showItems"
       :character="character"
       @close="showItems = false"
+      @changed="onChanged"
+    />
+
+    <CharacterItemDialog
+      v-if="openItem"
+      :key="openItem.where + ':' + openItem.index"
+      :character="character"
+      :where="openItem.where"
+      :index="openItem.index"
+      @close="openItem = null"
       @changed="onChanged"
     />
 

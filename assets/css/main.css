@@ -187,7 +187,9 @@ html[data-theme="light"] .chip.on { background: var(--moss); color: #fff; }
 .die.d20 { clip-path: polygon(50% 2%, 94% 27%, 94% 73%, 50% 98%, 6% 73%, 6% 27%); }
 .die.d100 { clip-path: polygon(50% 0%, 92% 33%, 78% 96%, 22% 96%, 8% 33%); }
 
-.die.rolling { animation: tumble .42s linear infinite; }
+/* --spin задаёт компонент для каждой кости отдельно: в унисон они кувыркаются
+   неживо, вразнобой — как настоящие. */
+.die.rolling { animation: tumble var(--spin, .42s) linear infinite; }
 @keyframes tumble {
   0%   { transform: rotate(0deg)    scale(1); }
   25%  { transform: rotate(-14deg)  scale(1.09) translateY(-4px); }
@@ -202,6 +204,15 @@ html[data-theme="light"] .chip.on { background: var(--moss); color: #fff; }
 }
 .die.crit  { background: linear-gradient(150deg, #f0d590, #d5a94a 60%, #a87a24); box-shadow: 0 0 16px rgba(213,169,74,.6), inset 0 1px 0 rgba(255,255,255,.5); }
 .die.fumble{ background: linear-gradient(150deg, #d59a8a, #b4553f 60%, #7d3524); color: #fdeee9; }
+
+/* Отброшенная кость при «4d6, отбросить худшую»: видно, что она выпала,
+   но в сумму не пошла. */
+.die.dropped { opacity: .38; filter: grayscale(.7); }
+
+/* Кому анимации мешают — сразу показываем выпавшее. */
+@media (prefers-reduced-motion: reduce) {
+  .die.rolling, .die.settled { animation: none; }
+}
 
 .die-sum {
   align-self: center; font-family: var(--font-ui); font-weight: 700;
