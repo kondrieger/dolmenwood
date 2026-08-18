@@ -23,6 +23,10 @@ import * as D from '../data/index.js'
 function txt(v) { return v == null ? '' : String(v).trim(); }
 function trimDot(s) { return txt(s).replace(/[.\s]+$/, ''); }
 function lc(s) { return trimDot(s).toLowerCase(); }
+/** Первая буква заглавной — фразы из наборов начинаются со строчной. */
+function cap(s) { var v = txt(s); return v ? v.charAt(0).toUpperCase() + v.slice(1) : v; }
+/** a или an перед словом — иначе выходит «a impertinent voice». */
+function an(word) { return (/^[aeiou]/i.test(trimDot(word)) ? 'an ' : 'a ') + word; }
 
 /** Склеивает непустые куски через разделитель. */
 function join(parts, sep) {
@@ -370,7 +374,7 @@ function build(ch) {
     var immortal = typeof p.lifespan !== 'number';
     if (immortal && p.lifespan) {
       en.push(p.age + ' years old and untouched by time');
-      ru.push(p.age + ' лет, и время его не трогает');
+      ru.push(p.age + ' лет, и годы не оставляют следов');
     } else if (p.lifespan) {
       en.push(p.age + ' years old of a lifespan of about ' + p.lifespan);
       ru.push(p.age + ' лет при сроке жизни около ' + p.lifespan);
@@ -424,8 +428,8 @@ function bearing(ch) {
   var en = [], ru = [];
   if (d.demeanour) { en.push(lc(d.demeanour.en)); ru.push(lc(d.demeanour.ru)); }
   if (d.speech) {
-    en.push('a ' + lc(d.speech.en) + ' voice');
-    ru.push(lc(d.speech.ru) + ' речь');
+    en.push(an(lc(d.speech.en) + ' voice'));
+    ru.push('речь — ' + lc(d.speech.ru));
   }
   if (ch.alignment) {
     en.push(lc(ch.alignment.en) + ' by alignment');
@@ -492,7 +496,9 @@ function carried(ch) {
   });
   if (eq.container) { en.push(lc(eq.container.en)); ru.push(lc(eq.container.ru)); }
 
-  return { en: join(en), ru: join(ru) };
+  /* Через точку с запятой: в названиях предметов есть запятые
+     («Одежда, обычная»), и через запятую они читались бы как два предмета. */
+  return { en: join(en, '; '), ru: join(ru, '; ') };
 }
 
 /** Лошади, гончие, повозки: их персонаж не несёт, но на картинке они рядом. */
@@ -569,8 +575,8 @@ function assemble(ch, lang) {
 
   var lines = [];
   lines.push(L
-    ? 'Портрет персонажа для настольной игры. ' + shot + '.'
-    : 'Character portrait for a tabletop roleplaying game. ' + shot + '.');
+    ? 'Портрет персонажа для настольной игры. ' + cap(shot) + '.'
+    : 'Character portrait for a tabletop roleplaying game. ' + cap(shot) + '.');
 
   lines.push(row(L ? 'Кто' : 'Subject',
     join([look && look[lang], type && type[lang]], '. ')));

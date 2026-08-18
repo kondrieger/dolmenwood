@@ -74,10 +74,14 @@ function downloadJson() {
 onMounted(() => {
   const ch = character.value
   if (!ch) return
-  const before = JSON.stringify({ ac: ch.ac, speed: ch.speed, mods: ch.mods, xpNext: ch.xpForNextLevel })
+  // Промпт тоже сравниваем: иначе в файле остаётся старый текст, а на странице
+  // виден новый — и Рефери в выгруженном JSON увидит не то, что показано.
+  const snapshot = () => JSON.stringify({
+    ac: ch.ac, speed: ch.speed, mods: ch.mods, xpNext: ch.xpForNextLevel, portrait: ch.portraitPrompt
+  })
+  const before = snapshot()
   recompute(ch)
-  const after = JSON.stringify({ ac: ch.ac, speed: ch.speed, mods: ch.mods, xpNext: ch.xpForNextLevel })
-  if (before !== after) save(ch)
+  if (before !== snapshot()) save(ch)
 })
 
 const fm = Generator.fmtMod
