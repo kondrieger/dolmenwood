@@ -64,18 +64,6 @@ function pick(ch, salt, options) {
 
 var STYLE = {
   mortal: {
-    palette: [
-      { en: 'muted earthy palette — moss green, bark brown, ochre, faded gold',
-        ru: 'приглушённая земляная палитра: мох, кора, охра, потускневшее золото' },
-      { en: 'wet autumn palette — rust, sodden slate grey, barley yellow',
-        ru: 'сырая осенняя палитра: ржавчина, мокрый сланец, ячменная желтизна' },
-      { en: 'peat-dark palette — umber, ox-blood red, tallow white',
-        ru: 'торфяная темнота: умбра, бычья кровь, сальная белизна' },
-      { en: 'overcast palette — grey-green, oat, dull iron, a single warm accent',
-        ru: 'пасмурная палитра: серо-зелёный, овсяный, тусклое железо и одно тёплое пятно' },
-      { en: 'harvest palette — russet, smoke, dusty cream, deep bottle green',
-        ru: 'палитра урожая: багрец, дым, пыльные сливки, густой бутылочный зелёный' }
-    ],
     light: [
       { en: 'flat overcast daylight under a heavy sky', ru: 'ровный пасмурный день под тяжёлым небом' },
       { en: 'low afternoon sun raking between wet trunks', ru: 'низкое послеполуденное солнце скользит между мокрых стволов' },
@@ -91,33 +79,10 @@ var STYLE = {
       { en: 'close portrait, head and shoulders, looking straight at the viewer',
         ru: 'крупный портрет, голова и плечи, смотрит прямо на зрителя' },
       { en: 'full figure mid-stride, wind in the clothing', ru: 'в полный рост, на ходу, ветер в одежде' }
-    ],
-    manner: [
-      { en: 'painterly old-school fantasy illustration, fine ink linework, detailed but not glossy',
-        ru: 'живописная старошкольная фэнтези-иллюстрация, тонкая тушевая линия, подробно, но без глянца' },
-      { en: 'woodcut-like hatching, heavy blacks, storybook plate',
-        ru: 'гравюрная штриховка, тяжёлые чёрные пятна, вклейка из книги сказок' },
-      { en: 'muted oil study, visible brushwork, soft edges',
-        ru: 'приглушённый масляный этюд, видимый мазок, мягкие края' },
-      { en: 'pen-and-wash chapbook illustration, dry brown ink',
-        ru: 'перо и отмывка, лубочная манера, сухая бурая тушь' },
-      { en: 'thick matte gouache, folk-art flatness', ru: 'плотная матовая гуашь, плоскостность народной картинки' }
     ]
   },
 
   fairy: {
-    palette: [
-      { en: 'cold moonlit palette — silver, bone white, midnight blue',
-        ru: 'холодная лунная палитра: серебро, костяная белизна, полуночная синь' },
-      { en: 'iridescent palette — dragonfly green, violet, pearl',
-        ru: 'переливчатая палитра: стрекозиная зелень, фиалка, перламутр' },
-      { en: 'frost palette — pale blue, hoarfrost white, a thread of thin gold',
-        ru: 'морозная палитра: бледная лазурь, изморозь и нитка тонкого золота' },
-      { en: 'twilight palette — heather purple, black, cold rose',
-        ru: 'сумеречная палитра: вересковый пурпур, чернота, холодная роза' },
-      { en: 'illuminated-manuscript palette — candlelit gold, deep green, vermilion',
-        ru: 'палитра рукописной миниатюры: свечное золото, густая зелень, киноварь' }
-    ],
     light: [
       { en: 'a faint inner glow lighting the face from within', ru: 'слабое внутреннее свечение подсвечивает лицо изнутри' },
       { en: 'moonlight and nothing else', ru: 'только лунный свет и больше ничего' },
@@ -135,33 +100,10 @@ var STYLE = {
       { en: 'full figure glimpsed through a gap in the trees', ru: 'в полный рост, замечен в просвете между деревьями' },
       { en: 'full figure, symmetrical and heraldic, facing the viewer',
         ru: 'в полный рост, симметрично и геральдично, лицом к зрителю' }
-    ],
-    manner: [
-      { en: 'jewel-bright illuminated-manuscript style, gold-leaf accents, flattened space',
-        ru: 'самоцветная манера рукописной миниатюры, сусальные акценты, плоское пространство' },
-      { en: 'delicate ink and watercolour, luminous washes', ru: 'тонкая тушь и акварель, светящиеся заливки' },
-      { en: 'pre-Raphaelite oil, obsessive detail, decorative border',
-        ru: 'прерафаэлитское масло, одержимая детализация, орнаментальная рама' },
-      { en: 'silverpoint drawing, silvery-grey line on tinted ground',
-        ru: 'серебряный карандаш, серо-серебристая линия по тонированному грунту' },
-      { en: 'art-nouveau line and pattern, ornamental flatness',
-        ru: 'модерновая линия и узор, орнаментальная плоскость' }
     ]
   },
 
   'demi-fey': {
-    palette: [
-      { en: 'earth shot through with iridescence — bark brown with beetle green',
-        ru: 'земля с переливом: кора, пробитая жучиной зеленью' },
-      { en: 'mushroom palette — buff, bruise purple, dirty cream',
-        ru: 'грибная палитра: буроватый, синячный пурпур, грязные сливки' },
-      { en: 'lamp-black and ember orange with a cold blue rim',
-        ru: 'ламповая чернь и угольный оранжевый с холодной синей каймой' },
-      { en: 'lichen palette — grey-green, sulphur yellow, rust',
-        ru: 'лишайниковая палитра: серо-зелёный, сера, ржавчина' },
-      { en: 'night-fair palette — tarnished brass, wine red, moth grey',
-        ru: 'палитра ночной ярмарки: потемневшая латунь, винный красный, мотыльковый серый' }
-    ],
     light: [
       { en: 'moonlight over embers, two lights fighting', ru: 'луна поверх углей, два света спорят' },
       { en: 'a guttering campfire in a hollow, deep night beyond', ru: 'чадящий костерок в лощине, дальше — глухая ночь' },
@@ -179,20 +121,207 @@ var STYLE = {
         ru: 'в полный рост, крошечный на фоне огромных деревьев — чтобы видеть размер' },
       { en: 'full figure, three-quarter view, low horizon and a lot of sky',
         ru: 'в полный рост, три четверти, низкий горизонт и много неба' }
-    ],
-    manner: [
-      { en: 'painterly folk-horror illustration, ink line over dirty washes',
-        ru: 'живописный фольк-хоррор, тушевая линия по грязноватым заливкам' },
-      { en: 'etching-like crosshatch printed on rough paper',
-        ru: 'офортная перекрёстная штриховка на шершавой бумаге' },
-      { en: 'gouache with the tooth of the paper showing, storybook plate',
-        ru: 'гуашь с проступающей фактурой бумаги, вклейка из книжки' },
-      { en: 'ink line with limited flat colour, chapbook woodcut feel',
-        ru: 'тушевой контур и скупой плоский цвет, лубочная гравюра' },
-      { en: 'loose oil sketch, heavy impasto in the lights',
-        ru: 'свободный масляный эскиз, густая пастозность в светах' }
     ]
   }
+};
+
+/* Манера рисунка и палитра — СВОИ У КАЖДОГО РОДА.
+   Раньше они выбирались по типу (смертный / фея / полуфейский), и два смертных —
+   человек и мослинг — тянули из одного набора: выходила одинаковая сепия с тушью.
+   Теперь у каждого рода своя изобразительная традиция, чтобы человек не был похож
+   на мослинга, а бреггл — на вудгрю. Это оформление, а не правила: сочиняется свободно. */
+var KINDRED_ART = {
+  /* Человек: обиходная книжная иллюстрация — та самая «старая школа». */
+  human: {
+    manner: [
+      { en: 'pen-and-wash chapbook illustration, dry brown ink over thin washes',
+        ru: 'перо и отмывка, лубочная манера, сухая бурая тушь по жидкой заливке' },
+      { en: 'muted oil study on canvas, visible brushwork, soft edges',
+        ru: 'приглушённый масляный этюд на холсте, видимый мазок, мягкие края' },
+      { en: 'charcoal and chalk on toned paper, smudged and reworked',
+        ru: 'уголь и мел по тонированной бумаге, растёрто и переписано' },
+      { en: 'engraved frontispiece, fine burin lines, cream plate paper',
+        ru: 'гравированный фронтиспис, тонкий резец, кремовая бумага' },
+      { en: 'sober tempera panel, matte surface, plain background',
+        ru: 'сдержанная темперная доска, матовая поверхность, глухой фон' }
+    ],
+    palette: [
+      { en: 'muted earthy palette — moss green, bark brown, ochre, faded gold',
+        ru: 'приглушённая земляная палитра: мох, кора, охра, потускневшее золото' },
+      { en: 'wet autumn palette — rust, sodden slate grey, barley yellow',
+        ru: 'сырая осенняя палитра: ржавчина, мокрый сланец, ячменная желтизна' },
+      { en: 'peat-dark palette — umber, ox-blood red, tallow white',
+        ru: 'торфяная темнота: умбра, бычья кровь, сальная белизна' },
+      { en: 'harvest palette — russet, smoke, dusty cream, deep bottle green',
+        ru: 'палитра урожая: багрец, дым, пыльные сливки, густой бутылочный зелёный' }
+    ]
+  },
+
+  /* Бреггл: знать Высокого Волда и касты по рогам — геральдика и церковная доска. */
+  breggle: {
+    manner: [
+      { en: 'heraldic panel painting, egg tempera and gold leaf, flat patterned ground',
+        ru: 'геральдическая доска, яичная темпера и сусальное золото, плоский узорный фон' },
+      { en: 'medieval tapestry weave, flattened perspective, millefleurs background',
+        ru: 'средневековый шпалерный ткацкий стиль, плоская перспектива, фон-миллефлёр' },
+      { en: 'stained-glass composition, heavy black leading between flat colours',
+        ru: 'витражная композиция, тяжёлая чёрная свинцовая обводка между плоскими цветами' },
+      { en: 'formal state portrait in oil, dark varnished ground, stiff dignity',
+        ru: 'парадный портрет маслом, тёмный лакированный фон, чопорное достоинство' },
+      { en: 'carved altarpiece relief rendered in paint, gilded edges',
+        ru: 'резной алтарный рельеф, переданный краской, золочёные кромки' }
+    ],
+    palette: [
+      { en: 'heraldic palette — deep crimson, azure, beaten gold, wool cream',
+        ru: 'геральдическая палитра: густой багрянец, лазурь, кованое золото, шерстяные сливки' },
+      { en: 'high-table palette — burgundy, pewter, candle gold, oat white',
+        ru: 'палитра пиршественного стола: бургундский, олово, свечное золото, овсяная белизна' },
+      { en: 'chapel palette — indigo, madder red, verdigris, bone',
+        ru: 'часовенная палитра: индиго, марена, ярь-медянка, кость' },
+      { en: 'wold pasture palette — chalk white, gorse yellow, hoof brown, slate',
+        ru: 'палитра волдских пастбищ: меловая белизна, жёлтый дрок, копытный бурый, сланец' }
+    ]
+  },
+
+  /* Эльф: холодная нездешняя красота — миниатюра и прерафаэлиты. */
+  elf: {
+    manner: [
+      { en: 'jewel-bright illuminated-manuscript style, gold-leaf accents, flattened space',
+        ru: 'самоцветная манера рукописной миниатюры, сусальные акценты, плоское пространство' },
+      { en: 'pre-Raphaelite oil, obsessive detail, decorative border',
+        ru: 'прерафаэлитское масло, одержимая детализация, орнаментальная рама' },
+      { en: 'silverpoint drawing, silvery-grey line on tinted ground',
+        ru: 'серебряный карандаш, серо-серебристая линия по тонированному грунту' },
+      { en: 'art-nouveau line and pattern, whiplash contour, ornamental flatness',
+        ru: 'модерновая линия и узор, хлёсткий контур, орнаментальная плоскость' },
+      { en: 'porcelain-smooth glazed painting, invisible brushwork, enamel finish',
+        ru: 'фарфорово-гладкая лессировка, невидимый мазок, эмалевый блеск' }
+    ],
+    palette: [
+      { en: 'cold moonlit palette — silver, bone white, midnight blue',
+        ru: 'холодная лунная палитра: серебро, костяная белизна, полуночная синь' },
+      { en: 'frost palette — pale blue, hoarfrost white, a thread of thin gold',
+        ru: 'морозная палитра: бледная лазурь, изморозь и нитка тонкого золота' },
+      { en: 'twilight palette — heather purple, black, cold rose',
+        ru: 'сумеречная палитра: вересковый пурпур, чернота, холодная роза' },
+      { en: 'pale-flame palette — ash grey, oyster, faint aquamarine, white gold',
+        ru: 'палитра бледного пламени: пепельно-серый, устричный, слабый аквамарин, белое золото' }
+    ]
+  },
+
+  /* Гримолкин: кошачья причуда и щегольство — викторианская звериная гравюра. */
+  grimalkin: {
+    manner: [
+      { en: 'victorian anthropomorphic-animal engraving, hand-tinted, whimsical and precise',
+        ru: 'викторианская гравюра о зверях в одежде, подкрашенная от руки, причудливо и точно' },
+      { en: 'nursery-book watercolour, clean ink outline, bright flat fills',
+        ru: 'акварель из детской книжки, чистый тушевой контур, яркие плоские заливки' },
+      { en: 'painted playing-card or tarot plate, symmetrical border, bold symbols',
+        ru: 'расписная игральная карта или таронный лист, симметричная рамка, крупные символы' },
+      { en: 'dandy’s calling-card lithograph, elegant line, decorative flourish',
+        ru: 'литография с визитной карточки щёголя, изящная линия, декоративный росчерк' },
+      { en: 'lacquered miniature on a dark ground, fine gold hatching',
+        ru: 'лаковая миниатюра по тёмному фону, тонкая золотая штриховка' }
+    ],
+    palette: [
+      { en: 'iridescent palette — dragonfly green, violet, pearl',
+        ru: 'переливчатая палитра: стрекозиная зелень, фиалка, перламутр' },
+      { en: 'sweetshop palette — cream, rose pink, pistachio, cherry red',
+        ru: 'кондитерская палитра: сливки, розовая роза, фисташка, вишнёвый' },
+      { en: 'tomcat palette — ginger, soot black, milk white, brass',
+        ru: 'котовья палитра: рыжина, копотная чернь, молочная белизна, латунь' },
+      { en: 'gaming-table palette — green baize, claret, ivory, tarnished silver',
+        ru: 'палитра ломберного стола: зелёное сукно, кларет, слоновая кость, потускневшее серебро' }
+    ]
+  },
+
+  /* Мослинг: кора, плесень и грибы — ботанический атлас и гербарий. */
+  mossling: {
+    manner: [
+      { en: 'botanical plate from a natural-history folio, precise stipple, specimen labels feel',
+        ru: 'ботаническая таблица из естественнонаучного атласа, точный пунктир, ощущение подписанного образца' },
+      { en: 'mycological watercolour study, wet-in-wet blooms, damp paper',
+        ru: 'микологический акварельный этюд, заливки по-сырому, отсыревшая бумага' },
+      { en: 'herbarium sheet — pressed, faded, foxed paper with pinholes',
+        ru: 'гербарный лист: приплюснуто, выцвело, бумага в пятнах и следах булавок' },
+      { en: 'thick matte gouache, folk-art flatness, earth pigments',
+        ru: 'плотная матовая гуашь, плоскостность народной картинки, земляные пигменты' },
+      { en: 'woodcut on coarse paper, heavy blacks, visible wood grain',
+        ru: 'ксилография по грубой бумаге, тяжёлые чёрные пятна, видная древесная фактура' }
+    ],
+    palette: [
+      { en: 'lichen palette — grey-green, sulphur yellow, rust, bark brown',
+        ru: 'лишайниковая палитра: серо-зелёный, сера, ржавчина, кора' },
+      { en: 'mushroom palette — buff, bruise purple, dirty cream, spore brown',
+        ru: 'грибная палитра: буроватый, синячный пурпур, грязные сливки, споровый бурый' },
+      { en: 'bog palette — peat black, sphagnum green, tannin amber',
+        ru: 'болотная палитра: торфяная чернь, зелень сфагнума, дубильный янтарь' },
+      { en: 'cellar palette — mould white, damp ochre, cheese yellow, root grey',
+        ru: 'погребная палитра: плесневая белизна, сырая охра, сырный жёлтый, корневой серый' }
+    ]
+  },
+
+  /* Вудгрю: ночная гулянка, поджоги и хохот — гротеск на полях и балаган. */
+  woodgrue: {
+    manner: [
+      { en: 'grotesque marginalia from a medieval manuscript, spindly ink figures, absurd detail',
+        ru: 'гротескные маргиналии средневековой рукописи, тонконогие тушевые фигурки, нелепые подробности' },
+      { en: 'etching-like crosshatch printed on rough paper, harsh contrast',
+        ru: 'офортная перекрёстная штриховка на шершавой бумаге, резкий контраст' },
+      { en: 'painted carnival banner, crude bold shapes, cheap bright colour',
+        ru: 'расписной балаганный транспарант, грубые крупные формы, дешёвый яркий цвет' },
+      { en: 'shadow-puppet silhouette lit from behind, ragged cut edges',
+        ru: 'силуэт теневого театра на просвет, рваные вырезанные края' },
+      { en: 'loose ink sketch with smeared lamp-black, blots left where they fell',
+        ru: 'вольный тушевой набросок с размазанной ламповой чернью, кляксы оставлены как легли' }
+    ],
+    palette: [
+      { en: 'night-fair palette — tarnished brass, wine red, moth grey',
+        ru: 'палитра ночной ярмарки: потемневшая латунь, винный красный, мотыльковый серый' },
+      { en: 'lamp-black and ember orange with a cold blue rim',
+        ru: 'ламповая чернь и угольный оранжевый с холодной синей каймой' },
+      { en: 'jester palette — pied black and white with sour green and hot pink',
+        ru: 'шутовская палитра: пегие чёрный и белый с кислой зеленью и ядовитым розовым' },
+      { en: 'bonfire palette — soot, ash grey, flame yellow, scorched red',
+        ru: 'палитра костра: сажа, пепельный, пламенный жёлтый, обожжённый красный' }
+    ]
+  }
+};
+
+/* Почерк рисовки от класса — поверх традиции рода.
+   Род задаёт материал и школу, класс — как именно этот материал положен.
+   Для род-классов ключ берётся по роду. */
+var CLASS_ACCENT = {
+  bard: { en: 'flowing decorative line, the composition carrying a musical rhythm',
+          ru: 'текучая декоративная линия, композиция держит музыкальный ритм' },
+  cleric: { en: 'icon-like frontality and stillness, solemn symmetry',
+            ru: 'иконная фронтальность и неподвижность, торжественная симметрия' },
+  enchanter: { en: 'iridescent glazes, contours dissolving where the magic touches them',
+               ru: 'переливчатые лессировки, контур растворяется там, где его касается магия' },
+  fighter: { en: 'heavy solid forms, blunt shadow, weight in every limb',
+             ru: 'тяжёлые плотные формы, грубая тень, вес в каждой конечности' },
+  friar: { en: 'austere and restrained, bare ground, nothing decorative',
+           ru: 'аскетично и сдержанно, голый фон, ничего декоративного' },
+  hunter: { en: 'naturalist’s field-sketch precision on fur, feather and track',
+            ru: 'точность полевого зарисовщика в шерсти, перьях и следах' },
+  knight: { en: 'formal heraldic framing, metal rendered with hard polished precision',
+            ru: 'парадное геральдическое обрамление, металл выписан твёрдо и до блеска' },
+  magician: { en: 'arcane diagrams and marginal notation drawn around the figure',
+              ru: 'вокруг фигуры вычерчены тайные диаграммы и пометки на полях' },
+  thief: { en: 'high-contrast shadow, half the figure lost in the dark',
+           ru: 'резкая контрастная тень, половина фигуры утоплена во тьме' },
+
+  /* Род-классы — приложение, стр. 180–189 */
+  breggle_kc: { en: 'formal heraldic framing, horns given the weight of a crest',
+                ru: 'парадное геральдическое обрамление, рога поданы как гербовый нашлемник' },
+  elf_kc: { en: 'ornamental border and cold polish, every edge deliberate',
+            ru: 'орнаментальная рама и холодная отточенность, каждый край намеренный' },
+  grimalkin_kc: { en: 'sly asymmetry and a decorative flourish, the pose theatrical',
+                  ru: 'лукавая асимметрия и декоративный росчерк, поза театральная' },
+  mossling_kc: { en: 'specimen-plate care over every growth and patch of mould',
+                 ru: 'дотошность определителя к каждому наросту и пятну плесени' },
+  woodgrue_kc: { en: 'lopsided energy, lines flung down fast, nothing quite level',
+                 ru: 'кособокая порывистость, линии брошены быстро, ничто не стоит ровно' }
 };
 
 /* Место действия — приметы Дольменвуда из книги, меняется вместе с оформлением. */
@@ -562,10 +691,18 @@ function bornUnder(ch) {
 function assemble(ch, lang) {
   var kin = ch.kindred || {};
   var style = STYLE[kin.type] || STYLE.mortal;
+  /* Манера и палитра — от рода, свет и композиция — от типа рода,
+     почерк рисовки — от класса. Так человек-воин, мослинг-воин и
+     человек-вор выглядят тремя разными картинками. */
+  var art = KINDRED_ART[kin.id] || KINDRED_ART.human;
+  var prof = ch.profile || {};
+  var accentKey = prof.mode === 'kindredclass' ? kin.id + '_kc' : prof.id;
+  var accent = CLASS_ACCENT[accentKey];
+
   var shot = pick(ch, 'shot', style.shot)[lang];
-  var palette = pick(ch, 'palette', style.palette)[lang];
   var light = pick(ch, 'light', style.light)[lang];
-  var manner = pick(ch, 'manner', style.manner)[lang];
+  var palette = pick(ch, 'palette', art.palette)[lang];
+  var manner = pick(ch, 'manner', art.manner)[lang];
   var scene = pick(ch, 'scene', SCENES)[lang];
 
   var look = KINDRED_LOOK[kin.id];
@@ -602,7 +739,8 @@ function assemble(ch, lang) {
   lines.push(row(L ? 'Рождён под знаком' : 'Born under', bornUnder(ch)[lang]));
 
   lines.push(row(L ? 'Место' : 'Setting', scene));
-  lines.push(row(L ? 'Стиль' : 'Style', join([manner, palette, light], '; ')));
+  lines.push(row(L ? 'Стиль' : 'Style',
+    join([manner, accent && accent[lang], palette, light], '; ')));
   lines.push(L
     ? 'Без текста, подписей и водяных знаков. Ничего современного.'
     : 'No text, no lettering, no watermark. Nothing modern.');
